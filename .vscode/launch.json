@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "app",
+            "request": "launch",
+            "mainClass": "com.grupo6.app",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
+            "name": "ConexaoBD",
+            "request": "launch",
+            "mainClass": "com.grupo6.ConexaoBD",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
+            "name": "Menu",
+            "request": "launch",
+            "mainClass": "com.grupo6.Menu",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}

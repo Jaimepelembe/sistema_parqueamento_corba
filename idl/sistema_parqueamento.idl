@@ -1,0 +1,239 @@
+module ParqueamentoApp {
+
+    enum EstadoVaga { //0: Livre e 1: Reservada
+        0, 
+        1
+    };
+
+    enum TipoUsuario { //0: Comum e 1: Admin
+        0,
+        1
+    };
+
+    enum Cobertura {
+        COBERTO,
+        NAO_COBERTO
+    };
+
+
+    struct Usuario {
+        long id_usuario;
+        string nome;
+        string telefone;
+        string senha;
+        TipoUsuario tipo;
+    };
+
+
+    struct Viatura {
+        long id_viatura;
+        string marca;
+        string modelo;
+        string matricula;
+        long id_usuario;
+    };
+
+
+    struct ParqueEstacionamento {
+        long id_parque;
+        string nome;
+        string provincia;
+        string localizacao;
+        string telefone;
+        string horario;
+        Cobertura cobertura;
+        float precoHora;
+        string fotoUrl;
+    };
+
+
+    struct VagaEstacionamento {
+        long id_vaga;
+        string numero_vaga;
+        EstadoVaga estado;
+        long id_parque;
+        long id_usuario;
+    };
+
+
+    struct Reserva {
+        long id_reserva;
+        string data_entrada;
+        string hora_entrada;
+        string data_saida;
+        string hora_saida;
+        float preco_total;
+        long id_vaga;
+        long id_usuario;
+        long id_viatura;
+    };
+
+
+    exception UsuarioNaoEncontrado {
+        string mensagem;
+    };
+
+    exception ParqueNaoEncontrado {
+        string mensagem;
+    };
+
+    exception VagaNaoEncontrada {
+        string mensagem;
+    };
+
+    exception ViaturaNaoEncontrada {
+        string mensagem;
+    };
+
+    exception ReservaNaoEncontrada {
+        string mensagem;
+    };
+
+    exception VagaOcupada {
+        string mensagem;
+    };
+
+    exception OperacaoInvalida {
+        string mensagem;
+    };
+
+
+    interface SistemaParqueamento {
+
+        // ==========================
+        // USUÁRIO
+        // ==========================
+
+        Usuario login(
+            in string nome,
+            in string senha
+        ) raises (
+            UsuarioNaoEncontrado
+        );
+
+
+        // ==========================
+        // PARQUES
+        // ==========================
+
+        ParqueEstacionamento[] listarParques();
+
+        ParqueEstacionamento[] pesquisarPorProvincia(
+            in string provincia
+        );
+
+        ParqueEstacionamento[] pesquisarPorNome(
+            in string nome
+        );
+
+        ParqueEstacionamento[] pesquisarPorPreco(
+            in double precoMaximo
+        );
+
+
+        void adicionarParque(
+            in ParqueEstacionamento parque
+        ) raises (
+            OperacaoInvalida
+        );
+
+
+        void editarParque(
+            in ParqueEstacionamento parque
+        ) raises (
+            ParqueNaoEncontrado,
+            OperacaoInvalida
+        );
+
+
+        void removerParque(
+            in long id_parque
+        ) raises (
+            ParqueNaoEncontrado
+        );
+
+
+        // ==========================
+        // VAGAS
+        // ==========================
+
+        VagaEstacionamento[] listarVagas(
+            in long id_parque
+        );
+
+
+        VagaEstacionamento[] listarVagasDisponiveis(
+            in long id_parque
+        );
+
+
+        // ==========================
+        // VIATURAS
+        // ==========================
+
+        Viatura adicionarViatura(
+            in string marca,
+            in string modelo,
+            in string matricula,
+            in long id_usuario
+        ) raises (
+            UsuarioNaoEncontrado,
+            OperacaoInvalida
+        );
+
+
+        Viatura[] listarViaturas(
+            in long id_usuario
+        );
+
+
+        void removerViatura(
+            in long id_viatura
+        ) raises (
+            ViaturaNaoEncontrada
+        );
+
+
+        // ==========================
+        // RESERVAS
+        // ==========================
+
+        Reserva criarReserva(
+            in string dataEntrada,
+            in string horaEntrada,
+            in string dataSaida,
+            in string horaSaida,
+            in float preco_total
+            in long idVaga,
+            in long idUsuario,
+            in long idViatura
+
+        ) raises (
+            UsuarioNaoEncontrado,
+            VagaNaoEncontrada,
+            ViaturaNaoEncontrada,
+            VagaOcupada,
+            OperacaoInvalida
+        );
+
+
+        Reserva obterReserva(
+            in long idReserva
+        ) raises (
+            ReservaNaoEncontrada
+        );
+
+
+        Reserva[] listarReservas(
+            in long idUsuario
+        );
+
+
+        void cancelarReserva(
+            in long idReserva
+        ) raises (
+            ReservaNaoEncontrada,
+            OperacaoInvalida
+        );
+    };
+};

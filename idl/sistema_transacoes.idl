@@ -1,0 +1,114 @@
+module TransacaoApp {
+
+    enum EstadoTransacao {
+        CONCLUIDA,
+       CANCELADA
+    };
+
+    enum tipoTransacao {
+        DEPOSITO,
+       PAGAMENTO,
+       ESTORNO
+    };
+
+    struct Transacao {
+        long id_transacao;
+        string tipo;
+        float valor;
+        string estado;
+        string data;
+        string hora;
+        long id_conta;
+    };
+
+    struct Conta {
+        long id_conta;
+        float saldo;
+        long id_usuario;
+    };
+
+    exception UsuarioNaoEncontrado {
+        string mensagem;
+    };
+
+    exception ContaNaoEncontrada {
+        string mensagem;
+    };
+
+    exception SaldoInsuficiente {
+        string mensagem;
+    };
+
+    exception TransacaoNaoEncontrada {
+        string mensagem;
+    };
+
+    exception ValorInvalido {
+        string mensagem;
+    };
+
+
+    interface SistemaTransacao {
+
+        // Consultar saldo
+        float consultarSaldo(
+            in long id_usuario
+        ) raises (
+            UsuarioNaoEncontrado
+        );
+
+
+        // Depositar dinheiro
+        Conta depositar(
+            in long id_usuario,
+            in float valor
+        ) raises (
+            UsuarioNaoEncontrado,
+            ValorInvalido
+        );
+
+
+        // Verificar se existe saldo suficiente
+        boolean verificarSaldo(
+            in long id_usuario,
+            in double valor
+        ) raises (
+            UsuarioNaoEncontrado,
+            SaldoInsuficiente
+        );
+
+
+        // Efetuar Transacao
+        Transacao transacao(
+            in string tipo,
+            in float valor,
+            in string estado,
+            in string data,
+            in string hora,
+            long id_conta;
+        
+        ) raises (
+            UsuarioNaoEncontrado,
+            SaldoInsuficiente,
+            ValorInvalido
+        );
+
+
+        // Consultar transacao
+        Transacao obterTransacao(
+            in long id_transacao
+        ) raises (
+            TransacaoNaoEncontrada
+        );
+
+
+        // Listar transacoes de um usuário
+        Transacao[] listarTransacoes(
+            in long id_conta
+        ) raises(
+            ContaNaoEncontrada
+        );
+        
+        ;
+    };
+};
