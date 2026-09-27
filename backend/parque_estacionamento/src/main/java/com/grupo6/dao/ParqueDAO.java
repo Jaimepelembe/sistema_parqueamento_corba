@@ -1,9 +1,9 @@
 package com.grupo6.dao;
 
-import com.grupo6.ConexaoBD;
 import com.grupo6.ParqueamentoApp.ParqueEstacionamento;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;

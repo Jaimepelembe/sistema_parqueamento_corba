@@ -1,5 +1,6 @@
 package com.grupo6;
 import com.grupo6.dao.ParqueDAO;
+import com.grupo6.dao.InicializarTabelas;
 
 import com.grupo6.ParqueamentoApp.*;
 
@@ -11,7 +12,9 @@ public class ParqueamentoImpl
     
     private ParqueDAO parqueDAO;
 
+
     public ParqueamentoImpl() {
+
         
     }
 

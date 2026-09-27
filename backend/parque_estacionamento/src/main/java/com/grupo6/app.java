@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.SQLException;
 
-import com.grupo6.ConexaoBD;
+import com.grupo6.dao.ConexaoBD;
+
+import java.sql.SQLException;
 
 public class app {
     public static void main(String[] args) {

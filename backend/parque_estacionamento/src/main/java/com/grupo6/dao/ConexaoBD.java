@@ -1,4 +1,5 @@
-package com.grupo6;
+package com.grupo6.dao;
+
 
 
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.sql.Statement;
 
 public class ConexaoBD {
     // Caminho onde o arquivo do banco de dados será salvo
-    private static final String URL = "jdbc:sqlite:backend/base_dados/banco_dados.db";
+    private static final String URL = "jdbc:sqlite:backend/base_dados/parqueamentoBD.db";
 
     public static Connection conectar() {
         Connection conexao = null;
