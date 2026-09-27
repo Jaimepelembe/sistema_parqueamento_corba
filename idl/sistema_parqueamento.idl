@@ -23,7 +23,7 @@ module ParqueamentoApp {
 
 
         Usuario login(
-            in string nome,
+            in string telefone,
             in string senha
         );
 
