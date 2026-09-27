@@ -16,13 +16,11 @@ public class app {
         try{
         Connection conn = ConexaoBD.conectar();
         if (conn != null){
-              String sql = """
-            CREATE TABLE IF NOT EXISTS vagas (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                numero TEXT NOT NULL UNIQUE,
-                ocupada INTEGER NOT NULL DEFAULT 0
-            );
-            """;
+              String sql = "CREATE TABLE IF NOT EXISTS vagas ( "+
+               " id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "numero TEXT NOT NULL UNIQUE,"+
+                "ocupada INTEGER NOT NULL DEFAULT 0"+
+           " );";
             
             Statement stmt = conn.createStatement();
             stmt.execute(sql.trim());

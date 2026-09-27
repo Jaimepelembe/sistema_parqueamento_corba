@@ -1,239 +1,236 @@
 module ParqueamentoApp {
 
-    enum EstadoVaga { //0: Livre e 1: Reservada
-        0, 
-        1
-    };
-
-    enum TipoUsuario { //0: Comum e 1: Admin
-        0,
-        1
-    };
-
-    enum Cobertura {
-        COBERTO,
-        NAO_COBERTO
-    };
 
 
-    struct Usuario {
-        long id_usuario;
-        string nome;
-        string telefone;
-        string senha;
-        TipoUsuario tipo;
-    };
+//Sequencia de elementos: Sintaxe: typedef sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
 
 
-    struct Viatura {
-        long id_viatura;
-        string marca;
-        string modelo;
-        string matricula;
-        long id_usuario;
-    };
 
 
-    struct ParqueEstacionamento {
-        long id_parque;
-        string nome;
-        string provincia;
-        string localizacao;
-        string telefone;
-        string horario;
-        Cobertura cobertura;
-        float precoHora;
-        string fotoUrl;
-    };
+//Interfaces
 
-
-    struct VagaEstacionamento {
-        long id_vaga;
-        string numero_vaga;
-        EstadoVaga estado;
-        long id_parque;
-        long id_usuario;
-    };
-
-
-    struct Reserva {
-        long id_reserva;
-        string data_entrada;
-        string hora_entrada;
-        string data_saida;
-        string hora_saida;
-        float preco_total;
-        long id_vaga;
-        long id_usuario;
-        long id_viatura;
-    };
-
-
-    exception UsuarioNaoEncontrado {
-        string mensagem;
-    };
-
-    exception ParqueNaoEncontrado {
-        string mensagem;
-    };
-
-    exception VagaNaoEncontrada {
-        string mensagem;
-    };
-
-    exception ViaturaNaoEncontrada {
-        string mensagem;
-    };
-
-    exception ReservaNaoEncontrada {
-        string mensagem;
-    };
-
-    exception VagaOcupada {
-        string mensagem;
-    };
-
-    exception OperacaoInvalida {
-        string mensagem;
-    };
-
-
-    interface SistemaParqueamento {
-
+    interface Usuario{
         // ==========================
         // USUÁRIO
         // ==========================
 
+        //Definicao dos atributos da classe
+        readonly attribute long id_usuario;
+        attribute string nome;
+        attribute string telefone;
+        attribute string senha;
+        attribute long tipo;
+
+
         Usuario login(
             in string nome,
             in string senha
-        ) raises (
-            UsuarioNaoEncontrado
         );
 
+        void cadastrar(
+        in string nome,
+        in string telefone,
+        in string senha,
+        in long tipo
+        );
 
+        Usuario actualizarDados(
+        in string nome,
+        in string telefone,
+        in string senha  
+        );
+
+    };
+
+
+
+
+    interface Parque{
+        
         // ==========================
         // PARQUES
         // ==========================
+        
+        typedef sequence<Parque> listaDeParques;
 
-        ParqueEstacionamento[] listarParques();
 
-        ParqueEstacionamento[] pesquisarPorProvincia(
-            in string provincia
-        );
 
-        ParqueEstacionamento[] pesquisarPorNome(
-            in string nome
-        );
 
-        ParqueEstacionamento[] pesquisarPorPreco(
-            in double precoMaximo
-        );
+        //Definicao dos atributos da classe
+        readonly attribute long id_parque;
+        attribute string nome;
+        attribute string provincia;
+        attribute string localizacao;
+        attribute string telefone;
+        attribute string horario;
+        attribute string cobertura; //COBERTO ou NAO_COBERTO
+        attribute float precoHora;
+        attribute string fotoUrl;
+
 
 
         void adicionarParque(
-            in ParqueEstacionamento parque
-        ) raises (
-            OperacaoInvalida
+        in string nome,
+        in string provincia,
+        in string localizacao,
+        in string telefone,
+        in string horario,
+        in string cobertura, //COBERTO ou NAO_COBERTO
+        in float precoHora,
+        in string fotoUrl
         );
 
 
         void editarParque(
-            in ParqueEstacionamento parque
-        ) raises (
-            ParqueNaoEncontrado,
-            OperacaoInvalida
+        in string nome,
+        in string provincia,
+        in string localizacao,
+        in string telefone,
+        in string horario,
+        in string cobertura, //COBERTO ou NAO_COBERTO
+        in float precoHora,
+        in string fotoUrl
         );
 
 
         void removerParque(
             in long id_parque
-        ) raises (
-            ParqueNaoEncontrado
         );
+
+        listaDeParques listarParques();
+
+        listaDeParques pesquisarPorProvincia(
+            in string provincia
+        );
+
+        listaDeParques pesquisarPorNome(
+            in string nome
+        );
+
+        listaDeParques pesquisarPorPreco(
+            in float precoMaximo
+        );
+
+
+    };
+
+
+    interface Vaga{
+
+         //Definicao dos atributos da classe
+        readonly attribute long id_vaga;
+        attribute string numero_vaga;
+        attribute long estado; //Pode ser 0:livre ou 1:reservada
+        readonly attribute long id_parque;
+
+        typedef sequence<Vaga> listaDeVagas;
 
 
         // ==========================
         // VAGAS
         // ==========================
 
-        VagaEstacionamento[] listarVagas(
+        void adicionarVaga(
+            in long id_parque,
+            in long numero_vagas // O numero de vagas que queres adicionar ao parque. Por exemplo 50, 100, 200
+        );
+
+        listaDeVagas listarVagas(
             in long id_parque
         );
 
 
-        VagaEstacionamento[] listarVagasDisponiveis(
+        listaDeVagas listarVagasDisponiveis(
             in long id_parque
         );
 
+
+    };
+
+    interface Viatura{
+        //Definicao dos atributos da classe
+        readonly attribute long id_viatura;
+        attribute string marca;
+        attribute string modelo;
+        attribute string matricula;
+        readonly attribute long id_usuario;
 
         // ==========================
         // VIATURAS
         // ==========================
 
-        Viatura adicionarViatura(
+        typedef sequence<Viatura> listaDeViaturas;
+
+
+        void adicionarViatura(
             in string marca,
             in string modelo,
             in string matricula,
             in long id_usuario
-        ) raises (
-            UsuarioNaoEncontrado,
-            OperacaoInvalida
         );
 
 
-        Viatura[] listarViaturas(
+        listaDeViaturas listarViaturas(
             in long id_usuario
         );
 
 
         void removerViatura(
             in long id_viatura
-        ) raises (
-            ViaturaNaoEncontrada
         );
+
+    };   
+
+
+    interface Reserva{
+
+    //Definicao dos atributos da classe
+        readonly attribute long id_reserva;
+        attribute string data_entrada;
+        attribute string hora_entrada;
+        attribute string data_saida;
+        attribute string hora_saida;
+        readonly attribute float preco_total;
+        readonly attribute long id_vaga;
+        readonly attribute long id_usuario;
+        readonly attribute long id_viatura;
 
 
         // ==========================
         // RESERVAS
         // ==========================
 
-        Reserva criarReserva(
-            in string dataEntrada,
-            in string horaEntrada,
-            in string dataSaida,
-            in string horaSaida,
-            in float preco_total
-            in long idVaga,
-            in long idUsuario,
-            in long idViatura
+    typedef sequence<Reserva> listaDeReservas;
 
-        ) raises (
-            UsuarioNaoEncontrado,
-            VagaNaoEncontrada,
-            ViaturaNaoEncontrada,
-            VagaOcupada,
-            OperacaoInvalida
+
+        void criarReserva(
+            in string data_entrada,
+            in string hora_entrada,
+            in string data_saida,
+            in string hora_saida,
+            in long id_vaga,
+            in long id_usuario,
+            in long id_viatura
+
         );
 
 
         Reserva obterReserva(
-            in long idReserva
-        ) raises (
-            ReservaNaoEncontrada
+            in long id_reserva
         );
 
 
-        Reserva[] listarReservas(
-            in long idUsuario
+        listaDeReservas listarReservas(
+            in long id_usuario
         );
 
 
         void cancelarReserva(
-            in long idReserva
-        ) raises (
-            ReservaNaoEncontrada,
-            OperacaoInvalida
+            in long id_reserva
         );
+
     };
+
+
+
 };

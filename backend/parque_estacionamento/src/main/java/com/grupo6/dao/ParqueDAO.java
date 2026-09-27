@@ -1,5 +1,5 @@
 package com.grupo6.dao;
-
+/**
 import com.grupo6.ParqueamentoApp.ParqueEstacionamento;
 
 import java.sql.Connection;
@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+import org.omg.CORBA.Object; 
+import org.omg.CORBA.portable.IDLEntity;
+
+
 
 public class ParqueDAO {
 
@@ -65,3 +69,5 @@ public class ParqueDAO {
         return parques;
     }
 }
+
+* */

@@ -27,4 +27,8 @@ public class ConexaoBD {
         }
         return conexao;
     }
+
+    public static void main(String[] args) {
+        ConexaoBD.conectar();
+    }
 }

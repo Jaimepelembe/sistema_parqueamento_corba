@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "InicializarTabelas",
+            "request": "launch",
+            "mainClass": "com.grupo6.dao.InicializarTabelas",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
+            "name": "ConexaoBD",
+            "request": "launch",
+            "mainClass": "com.grupo6.dao.ConexaoBD",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
             "name": "app",
             "request": "launch",
             "mainClass": "com.grupo6.app",

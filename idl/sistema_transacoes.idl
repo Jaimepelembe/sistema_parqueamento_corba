@@ -27,6 +27,10 @@ module TransacaoApp {
         long id_usuario;
     };
 
+//Sequencia de elementos: Sintaxe:  sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
+sequence<Transacao> TransacaoSeq;
+
+
     exception UsuarioNaoEncontrado {
         string mensagem;
     };
@@ -103,7 +107,7 @@ module TransacaoApp {
 
 
         // Listar transacoes de um usuário
-        Transacao[] listarTransacoes(
+        TransacaoSeq listarTransacoes(
             in long id_conta
         ) raises(
             ContaNaoEncontrada
