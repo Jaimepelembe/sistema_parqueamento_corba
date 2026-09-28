@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UsuarioImpl",
+            "request": "launch",
+            "mainClass": "com.grupo6.UsuarioImpl",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
             "name": "InicializarTabelas",
             "request": "launch",
             "mainClass": "com.grupo6.dao.InicializarTabelas",

@@ -9,7 +9,9 @@ import java.sql.Statement;
 
 public class ConexaoBD {
     // Caminho onde o arquivo do banco de dados será salvo
-    private static final String URL = "jdbc:sqlite:backend/base_dados/parqueamentoBD.db";
+    // O modo WAL permite que leituras e escritas ocorram simultaneamente sem bloquear o banco de dados.
+    // Define o tempo limite de espera para 5000ms (5 segundos) antes de lançar SQLITE_BUSY
+    private static final String URL = "jdbc:sqlite:backend/base_dados/parqueamentoBD.db?journal_mode=WAL"; 
 
     public static Connection conectar() {
         Connection conexao = null;

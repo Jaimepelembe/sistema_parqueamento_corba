@@ -2,8 +2,18 @@ module ParqueamentoApp {
 
 
 
-//Sequencia de elementos: Sintaxe: typedef sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
+    struct UsuarioDTO {
+        long id_usuario;
+        string nome;
+        string telefone;
+        long tipo;
+        // senha NÃO é incluída no DTO devolvido ao cliente,
+        // por boas práticas de segurança (nunca devolvas a senha de volta)
+    };
 
+
+//Sequencia de elementos: Sintaxe: typedef sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
+ typedef sequence<UsuarioDTO> listaUsuarioDTO;
 
 
 
@@ -15,14 +25,14 @@ module ParqueamentoApp {
         // ==========================
 
         //Definicao dos atributos da classe
-        readonly attribute long id_usuario;
-        attribute string nome;
-        attribute string telefone;
-        attribute string senha;
-        attribute long tipo;
+       // readonly attribute long id_usuario;
+        //attribute string nome;
+        //attribute string telefone;
+        //attribute string senha;
+        //attribute long tipo;
 
 
-        Usuario login(
+        UsuarioDTO login(
             in string telefone,
             in string senha
         );
@@ -34,7 +44,8 @@ module ParqueamentoApp {
         in long tipo
         );
 
-        Usuario actualizarDados(
+        UsuarioDTO actualizarDados(
+        in long id_usuario,
         in string nome,
         in string telefone,
         in string senha  

@@ -211,7 +211,8 @@ public static void inserirDadosExemplo(Connection conn){
 
     }
     System.out.println("Dados de teste inseridos com sucesso!");
-    }
+   
+}
     catch (SQLException e){
 
     System.err.println("Erro ao inserir dados de exemplo: " + e.getMessage());
