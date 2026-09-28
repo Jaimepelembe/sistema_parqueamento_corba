@@ -1,7 +1,5 @@
 module ParqueamentoApp {
 
-
-
     struct UsuarioDTO {
         long id_usuario;
         string nome;
@@ -12,8 +10,53 @@ module ParqueamentoApp {
     };
 
 
+    struct ParqueDTO{
+        long id_parque,
+        string nome,
+        string provincia,
+        string localizacao,
+        string telefone,
+        string horario,
+        string cobertura, //COBERTO ou NAO_COBERTO
+        float precoHora,
+        string fotoUrl
+
+    }
+
+        struct VagaDTO {
+        long id_vaga;
+        string numero_vaga;
+        long estado;
+        long id_parque;
+        };
+
+
+        struct ViaturaDTO{
+            id_viatura,
+            string marca,
+            string modelo,
+            string matricula,
+            long id_usuario
+        }
+
+    struct ReservaDTO{
+        long id_reserva,
+        string data_entrada,
+        string hora_entrada,
+        string data_saida,
+        string hora_saida,
+        long id_vaga,
+        long id_usuario,
+        long id_viatura
+
+    }
+
 //Sequencia de elementos: Sintaxe: typedef sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
- typedef sequence<UsuarioDTO> listaUsuarioDTO;
+ //typedef sequence<UsuarioDTO> listaUsuarioDTO;
+ typedef sequence<ParqueDTO> listaParqueDTO;
+ typedef sequence<VagaDTO> listaVagaDTO;
+ typedef sequence<ViaturaDTO> listaViaturaDTO;
+typedef sequence<ReservaDTO> listaReservaDTO;
 
 
 
@@ -23,13 +66,6 @@ module ParqueamentoApp {
         // ==========================
         // USUÁRIO
         // ==========================
-
-        //Definicao dos atributos da classe
-       // readonly attribute long id_usuario;
-        //attribute string nome;
-        //attribute string telefone;
-        //attribute string senha;
-        //attribute long tipo;
 
 
         UsuarioDTO login(
@@ -61,24 +97,6 @@ module ParqueamentoApp {
         // ==========================
         // PARQUES
         // ==========================
-        
-        typedef sequence<Parque> listaDeParques;
-
-
-
-
-        //Definicao dos atributos da classe
-        readonly attribute long id_parque;
-        attribute string nome;
-        attribute string provincia;
-        attribute string localizacao;
-        attribute string telefone;
-        attribute string horario;
-        attribute string cobertura; //COBERTO ou NAO_COBERTO
-        attribute float precoHora;
-        attribute string fotoUrl;
-
-
 
         void adicionarParque(
         in string nome,
@@ -93,6 +111,7 @@ module ParqueamentoApp {
 
 
         void editarParque(
+        in long id_parque
         in string nome,
         in string provincia,
         in string localizacao,
@@ -108,34 +127,16 @@ module ParqueamentoApp {
             in long id_parque
         );
 
-        listaDeParques listarParques();
 
-        listaDeParques pesquisarPorProvincia(
-            in string provincia
-        );
-
-        listaDeParques pesquisarPorNome(
-            in string nome
-        );
-
-        listaDeParques pesquisarPorPreco(
-            in float precoMaximo
-        );
+        listaParqueDTO pesquisarPorCategoria(
+            in string categoria
+        ); //Categoria pode ser província, nome ou preço. 
 
 
     };
 
 
     interface Vaga{
-
-         //Definicao dos atributos da classe
-        readonly attribute long id_vaga;
-        attribute string numero_vaga;
-        attribute long estado; //Pode ser 0:livre ou 1:reservada
-        readonly attribute long id_parque;
-
-        typedef sequence<Vaga> listaDeVagas;
-
 
         // ==========================
         // VAGAS
@@ -146,12 +147,16 @@ module ParqueamentoApp {
             in long numero_vagas // O numero de vagas que queres adicionar ao parque. Por exemplo 50, 100, 200
         );
 
-        listaDeVagas listarVagas(
+        listaVagaDTO listarVagas(
             in long id_parque
         );
 
+        long numeroTotalVagas(
+            in long id_parque  //Numero total de vagas num determinado parque
+        );
 
-        listaDeVagas listarVagasDisponiveis(
+
+        listaVagaDTO listarVagasDisponiveis(
             in long id_parque
         );
 
@@ -159,19 +164,10 @@ module ParqueamentoApp {
     };
 
     interface Viatura{
-        //Definicao dos atributos da classe
-        readonly attribute long id_viatura;
-        attribute string marca;
-        attribute string modelo;
-        attribute string matricula;
-        readonly attribute long id_usuario;
 
         // ==========================
         // VIATURAS
         // ==========================
-
-        typedef sequence<Viatura> listaDeViaturas;
-
 
         void adicionarViatura(
             in string marca,
@@ -181,7 +177,7 @@ module ParqueamentoApp {
         );
 
 
-        listaDeViaturas listarViaturas(
+        listaViaturaDTO listarViaturas(
             in long id_usuario
         );
 
@@ -195,24 +191,9 @@ module ParqueamentoApp {
 
     interface Reserva{
 
-    //Definicao dos atributos da classe
-        readonly attribute long id_reserva;
-        attribute string data_entrada;
-        attribute string hora_entrada;
-        attribute string data_saida;
-        attribute string hora_saida;
-        readonly attribute float preco_total;
-        readonly attribute long id_vaga;
-        readonly attribute long id_usuario;
-        readonly attribute long id_viatura;
-
-
         // ==========================
         // RESERVAS
         // ==========================
-
-    typedef sequence<Reserva> listaDeReservas;
-
 
         void criarReserva(
             in string data_entrada,
@@ -226,12 +207,12 @@ module ParqueamentoApp {
         );
 
 
-        Reserva obterReserva(
+        ReservaDTO obterReserva(
             in long id_reserva
         );
 
 
-        listaDeReservas listarReservas(
+        listaReservaDTO listarReservas(
             in long id_usuario
         );
 
