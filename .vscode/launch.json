@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ParqueImpl",
+            "request": "launch",
+            "mainClass": "com.grupo6.ParqueImpl",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
+            "name": "ParqueDAO",
+            "request": "launch",
+            "mainClass": "com.grupo6.dao.ParqueDAO",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
             "name": "UsuarioImpl",
             "request": "launch",
             "mainClass": "com.grupo6.UsuarioImpl",

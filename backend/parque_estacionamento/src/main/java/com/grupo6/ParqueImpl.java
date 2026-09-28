@@ -20,14 +20,14 @@ public class ParqueImpl
     @Override
     public void adicionarParque(String nome, String provincia, String localizacao, String telefone, String horario, String cobertura, float preco_hora, String foto_url){
         parqueDAO = new ParqueDAO();
-        parqueDAO.adicionarParque(String nome, String provincia, String localizacao, String telefone, String horario, String cobertura, float preco_hora, String foto_url);
+        parqueDAO.adicionarParque( nome,  provincia,  localizacao,  telefone,  horario,  cobertura,  preco_hora,  foto_url);
     }
 
     @Override
     public void editarParque( int id_parque, String nome, String provincia, String localizacao, String telefone, String horario, String cobertura, float preco_hora, String foto_url) {
 
         parqueDAO = new ParqueDAO();
-        parqueDAO.editarParque(int id_parque, String nome, String provincia, String localizacao, String telefone, String horario, String cobertura, float preco_hora, String foto_url);
+        parqueDAO.editarParque(id_parque, nome, provincia, localizacao, telefone, horario, cobertura, preco_hora, foto_url);
         }
 
 
@@ -49,7 +49,7 @@ public class ParqueImpl
 
    
 
-      
+      /**
 public static void main(String[] args) {
 
     ParqueDAO park = new ParqueDAO();
@@ -86,7 +86,7 @@ public static void main(String[] args) {
 
 
 
-}
+}* */
   
 
 

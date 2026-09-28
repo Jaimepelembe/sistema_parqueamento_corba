@@ -5,25 +5,23 @@ module ParqueamentoApp {
         string nome;
         string telefone;
         long tipo;
-        // senha NÃO é incluída no DTO devolvido ao cliente,
-        // por boas práticas de segurança (nunca devolvas a senha de volta)
+        // senha NÃO é incluída no DTO devolvido ao cliente
     };
 
 
     struct ParqueDTO{
-        long id_parque,
-        string nome,
-        string provincia,
-        string localizacao,
-        string telefone,
-        string horario,
-        string cobertura, //COBERTO ou NAO_COBERTO
-        float precoHora,
-        string fotoUrl
+        long id_parque;
+        string nome;
+        string provincia;
+        string localizacao;
+        string telefone;
+        string horario;
+        string cobertura; //COBERTO ou NAO_COBERTO
+        float preco;
+        string foto_url;
+    };
 
-    }
-
-        struct VagaDTO {
+    struct VagaDTO {
         long id_vaga;
         string numero_vaga;
         long estado;
@@ -32,30 +30,29 @@ module ParqueamentoApp {
 
 
         struct ViaturaDTO{
-            id_viatura,
-            string marca,
-            string modelo,
-            string matricula,
-            long id_usuario
-        }
+            long id_viatura;
+            string marca;
+            string modelo;
+            string matricula;
+            long id_usuario;
+        };
 
     struct ReservaDTO{
-        long id_reserva,
-        string data_entrada,
-        string hora_entrada,
-        string data_saida,
-        string hora_saida,
-        long id_vaga,
-        long id_usuario,
-        long id_viatura
+        long id_reserva;
+        string data_entrada;
+        string hora_entrada;
+        string data_saida;
+        string hora_saida;
+        long id_vaga;
+        long id_usuario;
+        long id_viatura;
 
-    }
+    };
 
 //Sequencia de elementos: Sintaxe: typedef sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
- //typedef sequence<UsuarioDTO> listaUsuarioDTO;
- typedef sequence<ParqueDTO> listaParqueDTO;
- typedef sequence<VagaDTO> listaVagaDTO;
- typedef sequence<ViaturaDTO> listaViaturaDTO;
+typedef sequence<ParqueDTO> listaParqueDTO;
+typedef sequence<VagaDTO> listaVagaDTO;
+typedef sequence<ViaturaDTO> listaViaturaDTO;
 typedef sequence<ReservaDTO> listaReservaDTO;
 
 
@@ -111,7 +108,7 @@ typedef sequence<ReservaDTO> listaReservaDTO;
 
 
         void editarParque(
-        in long id_parque
+        in long id_parque,
         in string nome,
         in string provincia,
         in string localizacao,
