@@ -42,8 +42,8 @@ public class UsuarioImpl
             return user;
             
         }
-
-   /** 
+        /**
+   
         public static void main(String[] args){
         //Inicializar as tabelas caso elas nao existam
         UsuarioDTO us = null;
@@ -51,6 +51,7 @@ public class UsuarioImpl
         us=user.login("841234567", "senha123");
         System.out.println("Login: "+us.nome);
         
+
         //Cadastrar um usuario
         user.cadastrar("Gabriel", "840000003", "senha123", 0);
         us=user.login("840000003", "senha123");
@@ -64,7 +65,7 @@ public class UsuarioImpl
         System.out.println("Dado actualizado: "+us.nome);
 
 
-    }**/
+    }* */
 
         }
     

@@ -45,7 +45,7 @@ public static void criarTabelas(Connection conn){
             + "nome TEXT NOT NULL, "
             + "provincia TEXT NOT NULL, "
             + "localizacao TEXT NOT NULL, "
-            + "telefone TEXT, "
+            + "telefone TEXT NOT NULL UNIQUE, "
             + "horario TEXT, "
             + "cobertura TEXT, "
             + "preco REAL NOT NULL, "
