@@ -69,18 +69,7 @@ public static void criarTabelas(Connection conn){
         stmt.execute(sql);
 
 
-        //Criar tabela  conta
-
-        sql= "CREATE TABLE IF NOT EXISTS conta (id_conta INTEGER PRIMARY KEY AUTOINCREMENT,  "
-                +"saldo REAL NOT NULL DEFAULT 0,  "
-                +"id_usuario INTEGER NOT NULL UNIQUE,  "
-
-                +"FOREIGN KEY (id_usuario)  "
-                    +"REFERENCES usuario(id_usuario)  "
-                    +"ON DELETE CASCADE  "
-                    +"ON UPDATE CASCADE);";
-
-            stmt.execute(sql);
+  
 
             //Criar tabela vaga_estacionamento
 
@@ -126,6 +115,7 @@ public static void criarTabelas(Connection conn){
                 +"ON UPDATE CASCADE);";
         stmt.execute(sql);
 
+        /**
   
         //Criar tabela  transacao
         sql = "CREATE TABLE IF NOT EXISTS transacao (id_transacao INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -143,7 +133,26 @@ public static void criarTabelas(Connection conn){
                 +"ON UPDATE CASCADE);";
         stmt.execute(sql);
 
-        }
+
+
+              //Criar tabela  conta
+
+        sql= "CREATE TABLE IF NOT EXISTS conta (id_conta INTEGER PRIMARY KEY AUTOINCREMENT,  "
+                +"saldo REAL NOT NULL DEFAULT 0,  "
+                +"id_usuario INTEGER NOT NULL UNIQUE,  "
+
+                +"FOREIGN KEY (id_usuario)  "
+                    +"REFERENCES usuario(id_usuario)  "
+                    +"ON DELETE CASCADE  "
+                    +"ON UPDATE CASCADE);";
+
+            stmt.execute(sql);
+
+                    * */
+
+       
+    
+    }
     } 
     catch (SQLException e){
 

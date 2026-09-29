@@ -28,44 +28,44 @@ public class UsuarioImpl
         }
 
         @Override 
-        public void cadastrar (String nome, String telefone, String senha, int tipo){
+        public void cadastrar (UsuarioDTO usuario){
             usuarioDAO= new UsuarioDAO();
-            usuarioDAO.cadastrar(nome, telefone,senha,tipo);
+            usuarioDAO.cadastrar(usuario);
 
         }
 
 
-        public UsuarioDTO actualizarDados(int id_usuario, String nome, String telefone, String senha){
+        public boolean actualizarDados(UsuarioDTO usuario){
             usuarioDAO= new UsuarioDAO();
-            UsuarioDTO user= usuarioDAO.actualizarDados(id_usuario,nome, telefone,senha);
-            
-            return user;
+             
+            return usuarioDAO.actualizarDados(usuario);
             
         }
-        /**
+    
    
         public static void main(String[] args){
-        //Inicializar as tabelas caso elas nao existam
         UsuarioDTO us = null;
         UsuarioImpl user = new UsuarioImpl();
         us=user.login("841234567", "senha123");
         System.out.println("Login: "+us.nome);
-        
+        us = new UsuarioDTO(-1,"Tomas", "840000004", "senha123", 0);
 
         //Cadastrar um usuario
-        user.cadastrar("Gabriel", "840000003", "senha123", 0);
-        us=user.login("840000003", "senha123");
+        user.cadastrar(us);
+        us=user.login("840000004", "senha123");
         
         System.out.println("Novo usuario: "+us.nome);
-        Integer id=us.idUsuario;
-        System.out.println("Novo usuario: "+id);
-        
+        Integer id=us.id_usuario;
+        System.out.println("Id do novo usuario: "+id);
+        us=new UsuarioDTO(id, "Tomas Vieira Mario", "840000004", "senha123",-1);
         //Actualizar dados
-        us= user.actualizarDados(id, "Matheus Jesus", "840000003", "senha123");
-        System.out.println("Dado actualizado: "+us.nome);
+        boolean resultado= user.actualizarDados(us);
+        System.out.println("Resultado: "+resultado);
 
 
-    }* */
+    }
+        /**
+    * */
 
         }
     

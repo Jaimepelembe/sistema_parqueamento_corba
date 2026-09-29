@@ -18,17 +18,18 @@ public class ParqueImpl
 
 
     @Override
-    public void adicionarParque(String nome, String provincia, String localizacao, String telefone, String horario, String cobertura, float preco_hora, String foto_url){
+    public void adicionarParque(ParqueDTO parque){
         parqueDAO = new ParqueDAO();
-        parqueDAO.adicionarParque( nome,  provincia,  localizacao,  telefone,  horario,  cobertura,  preco_hora,  foto_url);
+        parqueDAO.adicionarParque(parque);
     }
 
     @Override
-    public void editarParque( int id_parque, String nome, String provincia, String localizacao, String telefone, String horario, String cobertura, float preco_hora, String foto_url) {
+    public boolean editarParque(ParqueDTO parque) {
 
         parqueDAO = new ParqueDAO();
-        parqueDAO.editarParque(id_parque, nome, provincia, localizacao, telefone, horario, cobertura, preco_hora, foto_url);
-        }
+        
+    return parqueDAO.editarParque(parque);    
+    }
 
 
         @Override
@@ -61,7 +62,9 @@ public static void main(String[] args) {
     }
 
     //Adicionar um parque
-    //park.adicionarParque("Machava Km15", "Maputo Provincia", "Machava", "845566871", "24h", "NAO_COBERTO", 10, "imagens/parque_machavakm15.png");
+    ParqueDTO par= new ParqueDTO(-1,"Machava Km18", "Maputo Provincia", "Machava", "845566871", "24h", "NAO_COBERTO", 10, "imagens/parque_machavakm18.png");
+
+    park.adicionarParque(par);
     
        // park.removerParque(5);
 
@@ -74,9 +77,9 @@ public static void main(String[] args) {
 
     //Remover um parque
 
-
+    par = new ParqueDTO(1,"Machava Socimol 25", "Maputo Provincia", "Machava", "845566871", "24h", "NAO_COBERTO", 10, "imagens/parque_machavasocimol.png");
     //Editar o parque
-    park.editarParque( 1,"Machava Socimol2", "Maputo Provincia", "Machava", "845566871", "24h", "NAO_COBERTO", 10, "imagens/parque_machavasocimol.png");
+    park.editarParque(par);
     
     lista = park.pesquisarPorCategoria("nome");
 
@@ -86,7 +89,9 @@ public static void main(String[] args) {
 
 
 
-}* */
+}
+
+* */
   
 
 

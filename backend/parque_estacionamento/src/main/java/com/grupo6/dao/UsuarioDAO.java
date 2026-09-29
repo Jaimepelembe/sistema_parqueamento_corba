@@ -11,16 +11,16 @@ public class UsuarioDAO {
     
     public UsuarioDAO(){}
 
-    public void cadastrar(String nome, String telefone,String senha,Integer tipo){
+    public void cadastrar(UsuarioDTO usuario){
         String sql="INSERT INTO usuario (nome, telefone, senha, tipo) VALUES (?, ?, ?, ?)";
 
            try{
         Connection conn = ConexaoBD.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1,nome);
-        stmt.setString(2,telefone);
-        stmt.setString(3,senha);
-        stmt.setInt(4,tipo);
+        stmt.setString(1,usuario.nome);
+        stmt.setString(2,usuario.telefone);
+        stmt.setString(3,usuario.senha);
+        stmt.setInt(4,usuario.tipo);
         
         stmt.executeUpdate();
 
@@ -57,6 +57,7 @@ public class UsuarioDAO {
                     rs.getInt("id_usuario"),
                     rs.getString("nome"),
                     rs.getString("telefone"),
+                    null,
                     rs.getInt("tipo"));
             
     
@@ -75,21 +76,21 @@ public class UsuarioDAO {
         }
         
 
-    public UsuarioDTO actualizarDados(Integer id_usuario,String nome, String telefone, String senha){
-        UsuarioDTO usuario =null;
+    public boolean actualizarDados(UsuarioDTO usuarioDTO){
+        boolean resultado =false;
 
              String sql="UPDATE usuario SET nome=?,telefone=?,senha=? WHERE id_usuario=?";
         try{
             Connection conn = ConexaoBD.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1,nome);
-            stmt.setString(2,telefone);
-            stmt.setString(3,senha);
-            stmt.setInt(4,id_usuario);
+            stmt.setString(1,usuarioDTO.nome);
+            stmt.setString(2,usuarioDTO.telefone);
+            stmt.setString(3,usuarioDTO.senha);
+            stmt.setInt(4,usuarioDTO.id_usuario);
             
-            Integer linhasAfectadas = stmt.executeUpdate();
+            int linhasAfectadas = stmt.executeUpdate();
             if (linhasAfectadas>0){
-                usuario = new UsuarioDTO(id_usuario,nome,telefone,0);
+                resultado = true;
             }
 
             if (!conn.isClosed()) {
@@ -104,7 +105,7 @@ public class UsuarioDAO {
             System.out.println("Erro: "+e);
 
         }
-         return usuario;// Garante que o método sempre retorne algo (o objeto montado ou null)
+         return resultado;// Garante que o método sempre retorne algo (o objeto montado ou null)
 
     }
 

@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ReservaImpl",
+            "request": "launch",
+            "mainClass": "com.grupo6.ReservaImpl",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
+            "name": "ViaturaImpl",
+            "request": "launch",
+            "mainClass": "com.grupo6.ViaturaImpl",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
+            "name": "VagaImpl",
+            "request": "launch",
+            "mainClass": "com.grupo6.VagaImpl",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
             "name": "ParqueImpl",
             "request": "launch",
             "mainClass": "com.grupo6.ParqueImpl",

@@ -4,8 +4,8 @@ module ParqueamentoApp {
         long id_usuario;
         string nome;
         string telefone;
+        string senha;
         long tipo;
-        // senha NÃO é incluída no DTO devolvido ao cliente
     };
 
 
@@ -43,6 +43,7 @@ module ParqueamentoApp {
         string hora_entrada;
         string data_saida;
         string hora_saida;
+        float preco_total;
         long id_vaga;
         long id_usuario;
         long id_viatura;
@@ -70,20 +71,15 @@ typedef sequence<ReservaDTO> listaReservaDTO;
             in string senha
         );
 
-        void cadastrar(
-        in string nome,
-        in string telefone,
-        in string senha,
-        in long tipo
-        );
+        void cadastrar (in UsuarioDTO usuarioDTO);
 
-        UsuarioDTO actualizarDados(
-        in long id_usuario,
-        in string nome,
-        in string telefone,
-        in string senha  
-        );
+        boolean actualizarDados(in UsuarioDTO usuarioDTO); 
 
+        //in id_usuario,
+        //in string nome,
+        //in string telefone,
+        //in string senha  
+       
     };
 
 
@@ -96,27 +92,11 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         // ==========================
 
         void adicionarParque(
-        in string nome,
-        in string provincia,
-        in string localizacao,
-        in string telefone,
-        in string horario,
-        in string cobertura, //COBERTO ou NAO_COBERTO
-        in float precoHora,
-        in string fotoUrl
+            in ParqueDTO parque
         );
 
-
-        void editarParque(
-        in long id_parque,
-        in string nome,
-        in string provincia,
-        in string localizacao,
-        in string telefone,
-        in string horario,
-        in string cobertura, //COBERTO ou NAO_COBERTO
-        in float precoHora,
-        in string fotoUrl
+        boolean editarParque(
+            in ParqueDTO parque
         );
 
 
@@ -141,7 +121,7 @@ typedef sequence<ReservaDTO> listaReservaDTO;
 
         void adicionarVaga(
             in long id_parque,
-            in long numero_vagas // O numero de vagas que queres adicionar ao parque. Por exemplo 50, 100, 200
+            in long numero_de_vagas
         );
 
         listaVagaDTO listarVagas(
@@ -167,10 +147,7 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         // ==========================
 
         void adicionarViatura(
-            in string marca,
-            in string modelo,
-            in string matricula,
-            in long id_usuario
+           in ViaturaDTO viatura
         );
 
 
@@ -193,13 +170,7 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         // ==========================
 
         void criarReserva(
-            in string data_entrada,
-            in string hora_entrada,
-            in string data_saida,
-            in string hora_saida,
-            in long id_vaga,
-            in long id_usuario,
-            in long id_viatura
+            in ReservaDTO reserva
 
         );
 
@@ -213,10 +184,6 @@ typedef sequence<ReservaDTO> listaReservaDTO;
             in long id_usuario
         );
 
-
-        void cancelarReserva(
-            in long id_reserva
-        );
 
     };
 
