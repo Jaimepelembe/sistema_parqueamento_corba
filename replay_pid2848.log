@@ -1,0 +1,490 @@
+version 2
+JvmtiExport can_access_local_variables 0
+JvmtiExport can_hotswap_or_post_breakpoint 1
+JvmtiExport can_post_on_exceptions 0
+# 692 ciObject found
+instanceKlass lombok/eclipse/TransformEclipseAST
+ciInstanceKlass java/lang/Cloneable 1 0 7 100 1 100 1 1 1
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter processTt (Lorg/jsoup/nodes/Element;Lcom/vladsch/flexmark/html2md/converter/HtmlNodeConverterContext;Lcom/vladsch/flexmark/html2md/converter/HtmlMarkdownWriter;)V 38 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$$Lambda+0x0000015a2b84dd50
+instanceKlass org/eclipse/jdt/core/util/IBootstrapMethodsEntry
+instanceKlass org/eclipse/jdt/core/util/IBootstrapMethodsAttribute
+instanceKlass org/eclipse/jdt/internal/core/SourceMapper$1
+instanceKlass org/eclipse/jdt/internal/core/util/BindingKeyParser$Scanner
+instanceKlass org/eclipse/jdt/internal/core/util/BindingKeyParser
+instanceKlass  @bci org/eclipse/jdt/core/dom/CompilationUnitResolver resolve ([Lorg/eclipse/jdt/core/ICompilationUnit;[Ljava/lang/String;Lorg/eclipse/jdt/core/dom/ASTRequestor;ILjava/util/Map;Lorg/eclipse/jdt/core/WorkingCopyOwner;I)V 2 <appendix> member <vmtarget> ; # org/eclipse/jdt/core/dom/CompilationUnitResolver$$Lambda+0x0000015a2b85a288
+instanceKlass org/eclipse/jdt/internal/core/ClassFileInfo$1
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b860400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b860000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b85e400
+instanceKlass  @bci org/eclipse/jdt/internal/core/search/matching/JavaSearchNameEnvironment findClass (Ljava/lang/String;[CLorg/eclipse/jdt/internal/compiler/env/IModuleAwareNameEnvironment$LookupStrategy;Ljava/lang/String;)Lorg/eclipse/jdt/internal/compiler/env/NameEnvironmentAnswer; 87 <appendix> argL0 ; # org/eclipse/jdt/internal/core/search/matching/JavaSearchNameEnvironment$$Lambda+0x0000015a2b859de8
+instanceKlass  @bci org/eclipse/jdt/internal/core/search/matching/JavaSearchNameEnvironment <init> (Lorg/eclipse/jdt/core/IJavaProject;[Lorg/eclipse/jdt/core/ICompilationUnit;)V 153 <appendix> member <vmtarget> ; # org/eclipse/jdt/internal/core/search/matching/JavaSearchNameEnvironment$$Lambda+0x0000015a2b859b90
+instanceKlass org/eclipse/jdt/internal/core/search/matching/JavaSearchNameEnvironment
+instanceKlass org/eclipse/jdt/internal/codeassist/CompletionEngine$AcceptedConstructor
+instanceKlass org/eclipse/jdt/internal/core/SearchableEnvironment$7
+instanceKlass org/eclipse/jdt/internal/core/SearchableEnvironment$6
+instanceKlass org/eclipse/jdt/internal/core/SearchableEnvironment$5
+instanceKlass lombok/permit/Permit$Fake
+instanceKlass lombok/permit/Permit
+instanceKlass lombok/core/FieldAugment
+instanceKlass lombok/eclipse/EcjAugments
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b85e000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b85dc00
+instanceKlass  @bci org/eclipse/jdt/internal/codeassist/complete/CompletionParser checkAndCreateModuleSingleAssistTypeReference ([CJ)Lorg/eclipse/jdt/internal/compiler/ast/TypeReference; 85 <appendix> argL0 ; # org/eclipse/jdt/internal/codeassist/complete/CompletionParser$$Lambda+0x0000015a2b858978
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b85d800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b85d400
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b85d000
+instanceKlass org/eclipse/jdt/internal/core/InternalNamingConventions
+instanceKlass org/eclipse/jdt/internal/codeassist/CompletionEngine$12
+instanceKlass org/eclipse/jdt/internal/codeassist/CompletionEngine$11
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer processSub (Lorg/jsoup/nodes/Element;Lcom/vladsch/flexmark/html2md/converter/HtmlNodeConverterContext;Lcom/vladsch/flexmark/html2md/converter/HtmlMarkdownWriter;)V 13 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b849b90
+instanceKlass com/vladsch/flexmark/html/renderer/LinkStatus
+instanceKlass com/vladsch/flexmark/html/renderer/ResolvedLink
+instanceKlass com/vladsch/flexmark/html/renderer/LinkType
+instanceKlass org/eclipse/jdt/core/util/ISignatureAttribute
+instanceKlass  @bci org/eclipse/jdt/internal/compiler/parser/RecoveryScanner filterTokens ([Lorg/eclipse/jdt/internal/compiler/parser/TerminalToken;)[Lorg/eclipse/jdt/internal/compiler/parser/TerminalToken; 14 <appendix> argL0 ; # org/eclipse/jdt/internal/compiler/parser/RecoveryScanner$$Lambda+0x0000015a2b79bdd8
+instanceKlass  @bci org/eclipse/jdt/internal/compiler/parser/RecoveryScanner filterTokens ([Lorg/eclipse/jdt/internal/compiler/parser/TerminalToken;)[Lorg/eclipse/jdt/internal/compiler/parser/TerminalToken; 4 <appendix> argL0 ; # org/eclipse/jdt/internal/compiler/parser/RecoveryScanner$$Lambda+0x0000015a2b79bb88
+instanceKlass org/eclipse/jdt/internal/core/util/HashSetOfCharArrayArray
+instanceKlass org/eclipse/jdt/internal/core/NamedMember$1TypeResolveRequestor
+instanceKlass org/eclipse/jdt/internal/ui/viewsupport/CoreJavaElementLinks
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal getGenericSnippets (Lorg/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$SnippetCompletionContext;Lorg/eclipse/lsp4j/CompletionItemDefaults;)Ljava/util/List; 418 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$$Lambda+0x0000015a2b84db30
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal getGenericSnippets (Lorg/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$SnippetCompletionContext;Lorg/eclipse/lsp4j/CompletionItemDefaults;)Ljava/util/List; 408 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$$Lambda+0x0000015a2b84d8d8
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal getGenericSnippets (Lorg/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$SnippetCompletionContext;Lorg/eclipse/lsp4j/CompletionItemDefaults;)Ljava/util/List; 386 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$$Lambda+0x0000015a2b84d6b8
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal getGenericSnippets (Lorg/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$SnippetCompletionContext;Lorg/eclipse/lsp4j/CompletionItemDefaults;)Ljava/util/List; 376 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$$Lambda+0x0000015a2b84d460
+instanceKlass org/eclipse/jdt/internal/codeassist/CompletionEngine$9
+instanceKlass org/eclipse/jdt/internal/codeassist/CompletionEngine$10
+instanceKlass  @bci org/eclipse/jdt/internal/codeassist/complete/CompletionOnSingleNameReference resolveType (Lorg/eclipse/jdt/internal/compiler/lookup/BlockScope;)Lorg/eclipse/jdt/internal/compiler/lookup/TypeBinding; 39 <appendix> member <vmtarget> ; # org/eclipse/jdt/internal/codeassist/complete/CompletionOnSingleNameReference$$Lambda+0x0000015a2b7e26f8
+instanceKlass  @bci org/eclipse/jdt/internal/codeassist/complete/CompletionParser createSingleAssistNameReference ([CJ)Lorg/eclipse/jdt/internal/compiler/ast/NameReference; 249 <appendix> argL0 ; # org/eclipse/jdt/internal/codeassist/complete/CompletionParser$$Lambda+0x0000015a2b7e24d8
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b855800
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b855400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b855000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b854c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b854800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b854400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b854000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b853c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b853800
+instanceKlass org/eclipse/jdt/internal/compiler/parser/diagnose/DiagnoseParser$SecondaryRepairInfo
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b853400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b853000
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b852c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b852800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b852400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b852000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b851c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b851800
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b851400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b851000
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b850c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b850800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b850400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b850000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b84cc00
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b84c800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b84c400
+instanceKlass org/eclipse/jdt/ls/core/internal/contentassist/SnippetUtils
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal isTypeExists (Ljava/lang/String;)Ljava/util/function/Predicate; 1 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$$Lambda+0x0000015a2b84d000
+instanceKlass org/eclipse/jdt/internal/corext/dom/TokenScanner
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer processStrong (Lorg/jsoup/nodes/Element;Lcom/vladsch/flexmark/html2md/converter/HtmlNodeConverterContext;Lcom/vladsch/flexmark/html2md/converter/HtmlMarkdownWriter;)V 13 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b849968
+instanceKlass com/vladsch/flexmark/html2md/converter/ListState
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer lambda$processCode$2 (Lorg/jsoup/nodes/Element;Lcom/vladsch/flexmark/html2md/converter/HtmlNodeConverterContext;)V 37 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b849530
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer processCode (Lorg/jsoup/nodes/Element;Lcom/vladsch/flexmark/html2md/converter/HtmlNodeConverterContext;Lcom/vladsch/flexmark/html2md/converter/HtmlMarkdownWriter;)V 12 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b849308
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer processEmphasis (Lorg/jsoup/nodes/Element;Lcom/vladsch/flexmark/html2md/converter/HtmlNodeConverterContext;Lcom/vladsch/flexmark/html2md/converter/HtmlMarkdownWriter;)V 13 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8490e0
+instanceKlass com/vladsch/flexmark/util/sequence/RepeatedSequence
+instanceKlass org/jsoup/nodes/Entities$1
+instanceKlass org/jsoup/select/NodeTraversor
+instanceKlass org/jsoup/nodes/Node$OuterHtmlVisitor
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate negate ()Lcom/vladsch/flexmark/util/misc/CharPredicate; 27 <appendix> member <vmtarget> ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7fad98
+instanceKlass  @cpi com/vladsch/flexmark/util/misc/CharPredicate 258 form vmentry <vmtarget> ; # java/lang/invoke/LambdaForm$DMH+0x0000015a2b84c000
+instanceKlass com/vladsch/flexmark/util/sequence/LineInfo
+instanceKlass com/vladsch/flexmark/util/sequence/Range
+instanceKlass com/vladsch/flexmark/util/misc/Pair
+instanceKlass com/vladsch/flexmark/util/misc/Paired
+instanceKlass com/vladsch/flexmark/util/html/Attribute
+instanceKlass com/vladsch/flexmark/util/misc/Immutable
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlConverterState
+instanceKlass com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$1
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1 getHtmlNodeRendererHandlers ()Ljava/util/Set; 72 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1$$Lambda+0x0000015a2b7e7d18
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1 getHtmlNodeRendererHandlers ()Ljava/util/Set; 52 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1$$Lambda+0x0000015a2b7e7af0
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1 getHtmlNodeRendererHandlers ()Ljava/util/Set; 32 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1$$Lambda+0x0000015a2b7e78c8
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1 getHtmlNodeRendererHandlers ()Ljava/util/Set; 12 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1$$Lambda+0x0000015a2b7e76a0
+instanceKlass org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$1
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 962 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b848450
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 897 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b848228
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 834 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b848000
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 813 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b847c60
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 792 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b847a38
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 771 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b847810
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 750 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8475e8
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 729 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8473c0
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 708 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b847198
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 687 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b846f70
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 666 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b846d48
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 645 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b846b20
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 624 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8468f8
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 603 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8466d0
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 582 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8464a8
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 561 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b846280
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 540 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b846058
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 519 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b845e30
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 498 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b845c08
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 477 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8459e0
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 456 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8457b8
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 435 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b845590
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 414 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b845368
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 393 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b845140
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 372 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b844f18
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 351 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b844cf0
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 330 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b844ac8
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 309 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8448a0
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 288 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b844678
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 267 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b844450
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 246 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b844228
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 225 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b844000
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 204 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b833d08
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 183 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b833ae0
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 162 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8338b8
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 141 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b833690
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 120 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b833468
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 100 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b833240
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 80 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b833018
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 60 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b832df0
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 40 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b832bc8
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer getHtmlNodeRendererHandlers ()Ljava/util/Set; 20 <appendix> member <vmtarget> ; # com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer$$Lambda+0x0000015a2b8329a0
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlNodeRendererHandler
+instanceKlass com/vladsch/flexmark/html2md/converter/CustomHtmlNodeRenderer
+instanceKlass com/vladsch/flexmark/util/format/RomanNumeral
+instanceKlass com/vladsch/flexmark/html2md/converter/internal/HtmlConverterCoreNodeRenderer
+instanceKlass com/vladsch/flexmark/html2md/converter/PhasedHtmlNodeRenderer
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlLinkResolver
+instanceKlass com/vladsch/flexmark/util/sequence/builder/IBasedSegmentBuilder
+instanceKlass com/vladsch/flexmark/util/sequence/builder/ISegmentBuilder
+instanceKlass com/vladsch/flexmark/util/sequence/IRichSequenceBase
+instanceKlass com/vladsch/flexmark/util/sequence/BasedSequence
+instanceKlass com/vladsch/flexmark/util/sequence/BasedOptionsHolder
+instanceKlass com/vladsch/flexmark/util/sequence/IRichSequence
+instanceKlass com/vladsch/flexmark/util/sequence/builder/StringSequenceBuilder
+instanceKlass com/vladsch/flexmark/util/sequence/builder/ISequenceBuilder
+instanceKlass com/vladsch/flexmark/util/sequence/LineAppendableImpl
+instanceKlass com/vladsch/flexmark/util/format/MarkdownWriterBase
+instanceKlass com/vladsch/flexmark/util/ast/Content
+instanceKlass com/vladsch/flexmark/util/html/Attributes
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlNodeConverterSubContext
+instanceKlass  @bci org/jsoup/select/CombiningEvaluator updateEvaluators ()V 86 <appendix> argL0 ; # org/jsoup/select/CombiningEvaluator$$Lambda+0x0000015a2b82dbe8
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter sanitize (Lorg/jsoup/nodes/Document;)V 6 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$$Lambda+0x0000015a2b7e7240
+instanceKlass org/eclipse/jdt/ls/core/internal/javadoc/TableHelper
+instanceKlass  @bci org/jsoup/select/Collector collect (Lorg/jsoup/select/Evaluator;Lorg/jsoup/nodes/Element;)Lorg/jsoup/select/Elements; 5 <appendix> argL0 ; # org/jsoup/select/Collector$$Lambda+0x0000015a2b82d9c8
+instanceKlass  @bci org/jsoup/select/Evaluator asPredicate (Lorg/jsoup/nodes/Element;)Ljava/util/function/Predicate; 2 <appendix> member <vmtarget> ; # org/jsoup/select/Evaluator$$Lambda+0x0000015a2b82cf78
+instanceKlass org/jsoup/nodes/NodeIterator
+instanceKlass org/jsoup/nodes/NodeUtils
+instanceKlass org/jsoup/select/Collector
+instanceKlass org/jsoup/parser/TokenQueue
+instanceKlass org/jsoup/select/QueryParser
+instanceKlass org/jsoup/select/Selector
+instanceKlass org/jsoup/parser/HtmlTreeBuilderState$Constants
+instanceKlass org/jsoup/parser/HtmlTreeBuilderState$25
+instanceKlass  @bci org/jsoup/internal/StringUtil <clinit> ()V 179 <appendix> argL0 ; # org/jsoup/internal/StringUtil$$Lambda+0x0000015a2b826dd0
+instanceKlass org/jsoup/internal/StringUtil
+instanceKlass org/jsoup/parser/Tokeniser
+instanceKlass org/jsoup/helper/DataUtil
+instanceKlass  @bci org/jsoup/nodes/Entities$EscapeMode <clinit> ()V 76 <appendix> argL0 ; # org/jsoup/nodes/Entities$EscapeMode$$Lambda+0x0000015a2b816778
+instanceKlass  @bci org/jsoup/parser/CharacterReader <clinit> ()V 19 <appendix> argL0 ; # org/jsoup/parser/CharacterReader$$Lambda+0x0000015a2b816360
+instanceKlass  @bci org/jsoup/internal/SoftPool <init> (Ljava/util/function/Supplier;)V 10 <appendix> argL0 ; # org/jsoup/internal/SoftPool$$Lambda+0x0000015a2b816140
+instanceKlass  @bci org/jsoup/parser/CharacterReader <clinit> ()V 4 <appendix> argL0 ; # org/jsoup/parser/CharacterReader$$Lambda+0x0000015a2b815f20
+instanceKlass org/jsoup/internal/SoftPool
+instanceKlass org/jsoup/parser/CharacterReader
+instanceKlass  @bci org/jsoup/nodes/Entities <clinit> ()V 38 <appendix> argL0 ; # org/jsoup/nodes/Entities$$Lambda+0x0000015a2b8158c8
+instanceKlass org/jsoup/nodes/Entities
+instanceKlass org/jsoup/nodes/EntitiesData
+instanceKlass org/jsoup/nodes/Document$OutputSettings
+instanceKlass org/jsoup/internal/Normalizer
+instanceKlass  @bci org/jsoup/parser/Tag <clinit> ()V 1537 <appendix> member <vmtarget> ; # org/jsoup/parser/Tag$$Lambda+0x0000015a2b814ba0
+instanceKlass  @bci org/jsoup/parser/Tag <clinit> ()V 1486 <appendix> argL0 ; # org/jsoup/parser/Tag$$Lambda+0x0000015a2b814970
+instanceKlass  @bci org/jsoup/parser/Tag <clinit> ()V 1475 <appendix> argL0 ; # org/jsoup/parser/Tag$$Lambda+0x0000015a2b814740
+instanceKlass  @bci org/jsoup/parser/Tag <clinit> ()V 1464 <appendix> argL0 ; # org/jsoup/parser/Tag$$Lambda+0x0000015a2b814510
+instanceKlass  @bci org/jsoup/parser/Tag <clinit> ()V 1453 <appendix> argL0 ; # org/jsoup/parser/Tag$$Lambda+0x0000015a2b8142e0
+instanceKlass  @bci org/jsoup/parser/Tag <clinit> ()V 1442 <appendix> argL0 ; # org/jsoup/parser/Tag$$Lambda+0x0000015a2b8140b0
+instanceKlass  @bci org/jsoup/parser/Tag <clinit> ()V 1431 <appendix> argL0 ; # org/jsoup/parser/Tag$$Lambda+0x0000015a2b813e80
+instanceKlass  @bci org/jsoup/parser/Tag <clinit> ()V 1420 <appendix> argL0 ; # org/jsoup/parser/Tag$$Lambda+0x0000015a2b813c50
+instanceKlass org/jsoup/internal/SharedConstants
+instanceKlass org/jsoup/parser/Tag
+instanceKlass org/jsoup/nodes/Attributes
+instanceKlass org/jsoup/select/Evaluator
+instanceKlass org/jsoup/select/NodeVisitor
+instanceKlass org/jsoup/helper/Validate
+instanceKlass org/jsoup/parser/ParseSettings
+instanceKlass org/jsoup/parser/Token
+instanceKlass org/jsoup/parser/TreeBuilder
+instanceKlass org/jsoup/parser/Parser
+instanceKlass org/jsoup/Connection
+instanceKlass org/jsoup/Jsoup
+instanceKlass com/vladsch/flexmark/util/collection/OrderedMap$3
+instanceKlass com/vladsch/flexmark/util/collection/MapEntry
+instanceKlass com/vladsch/flexmark/util/collection/iteration/BitSetIterator
+instanceKlass com/vladsch/flexmark/util/collection/OrderedMap$2
+instanceKlass com/vladsch/flexmark/util/collection/iteration/IndexedIterator
+instanceKlass com/vladsch/flexmark/util/dependency/DependentItem
+instanceKlass com/vladsch/flexmark/util/collection/OrderedMap$1
+instanceKlass com/vladsch/flexmark/util/collection/OrderedSet
+instanceKlass com/vladsch/flexmark/util/collection/iteration/ReversibleIterable
+instanceKlass com/vladsch/flexmark/util/collection/iteration/Indexed
+instanceKlass com/vladsch/flexmark/util/collection/iteration/ReversibleIndexedIterator
+instanceKlass com/vladsch/flexmark/util/collection/iteration/ReversibleIterator
+instanceKlass com/vladsch/flexmark/util/collection/CollectionHost
+instanceKlass com/vladsch/flexmark/util/collection/OrderedMap
+instanceKlass com/vladsch/flexmark/util/dependency/DependencyResolver
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter <init> (Lcom/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter$Builder;)V 151 <appendix> argL0 ; # com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter$$Lambda+0x0000015a2b807b58
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlConverterCoreNodeRendererFactory
+instanceKlass com/vladsch/flexmark/html2md/converter/DelegatingNodeRendererFactoryWrapper
+instanceKlass com/vladsch/flexmark/html2md/converter/DelegatingNodeRendererFactory
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter initConverter (Lcom/vladsch/flexmark/util/data/DataHolder;)Lcom/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter; 5 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/javadoc/JavaDoc2MarkdownConverter$$Lambda+0x0000015a2b7e6dd0
+instanceKlass  @bci com/vladsch/flexmark/util/data/SharedDataKeys <clinit> ()V 542 <appendix> member <vmtarget> ; # com/vladsch/flexmark/util/data/SharedDataKeys$$Lambda+0x0000015a2b800d80
+instanceKlass  @bci com/vladsch/flexmark/util/data/SharedDataKeys <clinit> ()V 513 <appendix> member <vmtarget> ; # com/vladsch/flexmark/util/data/SharedDataKeys$$Lambda+0x0000015a2b800af0
+instanceKlass  @bci com/vladsch/flexmark/util/data/SharedDataKeys <clinit> ()V 484 <appendix> member <vmtarget> ; # com/vladsch/flexmark/util/data/SharedDataKeys$$Lambda+0x0000015a2b800860
+instanceKlass  @bci com/vladsch/flexmark/util/data/SharedDataKeys <clinit> ()V 49 <appendix> member <vmtarget> ; # com/vladsch/flexmark/util/data/SharedDataKeys$$Lambda+0x0000015a2b8005d0
+instanceKlass com/vladsch/flexmark/util/data/SharedDataKeys
+instanceKlass com/vladsch/flexmark/util/misc/Utils
+instanceKlass  @bci com/vladsch/flexmark/util/data/DataKeyBase get (Lcom/vladsch/flexmark/util/data/DataHolder;)Ljava/lang/Object; 14 <appendix> member <vmtarget> ; # com/vladsch/flexmark/util/data/DataKeyBase$$Lambda+0x0000015a2b7ffce0
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlConverterOptions
+instanceKlass com/vladsch/flexmark/html/renderer/NodeRendererFactory
+instanceKlass com/vladsch/flexmark/formatter/NodeFormatterFactory
+instanceKlass com/vladsch/flexmark/util/dependency/Dependent
+instanceKlass com/vladsch/flexmark/ext/tables/TablesExtension
+instanceKlass com/vladsch/flexmark/formatter/Formatter$FormatterExtension
+instanceKlass com/vladsch/flexmark/html/HtmlRenderer$HtmlRendererExtension
+instanceKlass com/vladsch/flexmark/parser/Parser$ParserExtension
+instanceKlass com/vladsch/flexmark/util/misc/Extension
+instanceKlass com/vladsch/flexmark/util/data/DataSet
+instanceKlass com/vladsch/flexmark/util/data/MutableDataHolder
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter <clinit> ()V 1616 <appendix> argL0 ; # com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter$$Lambda+0x0000015a2b7feae0
+instanceKlass com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter$1
+instanceKlass com/vladsch/flexmark/util/misc/Ref
+instanceKlass com/vladsch/flexmark/util/format/CharWidthProvider$1
+instanceKlass com/vladsch/flexmark/util/format/CharWidthProvider
+instanceKlass  @bci com/vladsch/flexmark/util/format/TableManipulator <clinit> ()V 0 <appendix> argL0 ; # com/vladsch/flexmark/util/format/TableManipulator$$Lambda+0x0000015a2b7fd800
+instanceKlass com/vladsch/flexmark/util/ast/Node
+instanceKlass com/vladsch/flexmark/util/format/MarkdownTable
+instanceKlass com/vladsch/flexmark/util/format/TableManipulator
+instanceKlass  @bci com/vladsch/flexmark/util/data/NullableDataKey <init> (Ljava/lang/String;Ljava/lang/Object;)V 4 <appendix> member <vmtarget> ; # com/vladsch/flexmark/util/data/NullableDataKey$$Lambda+0x0000015a2b7f3ce8
+instanceKlass  @bci com/vladsch/flexmark/util/format/TableFormatOptions <clinit> ()V 6 <appendix> argL0 ; # com/vladsch/flexmark/util/format/TableFormatOptions$$Lambda+0x0000015a2b7f1c30
+instanceKlass  @bci com/vladsch/flexmark/util/sequence/SequenceUtils <clinit> ()V 119 <appendix> argL0 ; # com/vladsch/flexmark/util/sequence/SequenceUtils$$Lambda+0x0000015a2b7f4a00
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 230 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7fa040
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 222 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f9d90
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 214 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f9ae0
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 206 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f9830
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 198 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f9580
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 190 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f92d0
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 182 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f9020
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 174 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f8d70
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 166 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f8ac0
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 158 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f8810
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 150 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f8560
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 142 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f82b0
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 134 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f8000
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 126 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f7ae0
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 118 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f7830
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 110 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f7580
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 102 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f72d0
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 94 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f7020
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 86 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f6d70
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 78 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f6ac0
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 70 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f6810
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 62 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f6560
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 54 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f62b0
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 46 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f6000
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 38 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f5cc8
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 30 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f5a18
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 22 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f5768
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 14 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f54b8
+instanceKlass  @bci com/vladsch/flexmark/util/misc/CharPredicate <clinit> ()V 6 <appendix> argL0 ; # com/vladsch/flexmark/util/misc/CharPredicate$$Lambda+0x0000015a2b7f5208
+instanceKlass  @cpi com/vladsch/flexmark/util/misc/CharPredicate 305 form vmentry <vmtarget> ; # java/lang/invoke/LambdaForm$DMH+0x0000015a2b7f4400
+instanceKlass com/vladsch/flexmark/util/misc/CharPredicate$1
+instanceKlass com/vladsch/flexmark/util/misc/CharPredicate
+instanceKlass java/util/function/IntPredicate
+instanceKlass com/vladsch/flexmark/util/sequence/SequenceUtils
+instanceKlass com/vladsch/flexmark/util/format/TableFormatOptions
+instanceKlass  @bci com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter <clinit> ()V 432 <appendix> argL0 ; # com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter$$Lambda+0x0000015a2b7f1440
+instanceKlass  @cpi com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter 928 form vmentry <vmtarget> ; # java/lang/invoke/LambdaForm$DMH+0x0000015a2b7f4000
+instanceKlass  @bci com/vladsch/flexmark/util/data/DataKey <init> (Ljava/lang/String;Ljava/lang/Object;)V 4 <appendix> member <vmtarget> ; # com/vladsch/flexmark/util/data/DataKey$$Lambda+0x0000015a2b7f3800
+instanceKlass com/vladsch/flexmark/util/data/DataNotNullValueFactory
+instanceKlass com/vladsch/flexmark/util/misc/BitField
+instanceKlass com/vladsch/flexmark/util/misc/BitFieldSet$UniverseLoader
+instanceKlass com/vladsch/flexmark/util/data/DataValueFactory
+instanceKlass com/vladsch/flexmark/util/data/DataKeyBase
+instanceKlass com/vladsch/flexmark/util/data/MutableDataValueSetter
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlNodeConverterContext
+instanceKlass com/vladsch/flexmark/util/format/NodeContext
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlNodeRendererFactory
+instanceKlass com/vladsch/flexmark/html2md/converter/FlexmarkHtmlConverter
+instanceKlass com/vladsch/flexmark/util/sequence/LineAppendable
+instanceKlass com/vladsch/flexmark/util/data/DataHolder
+instanceKlass com/vladsch/flexmark/util/data/MutableDataSetter
+instanceKlass com/vladsch/flexmark/html2md/converter/HtmlNodeRenderer
+instanceKlass org/jsoup/nodes/Node
+instanceKlass org/eclipse/jdt/ls/core/internal/javadoc/AbstractJavaDocConverter
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7ed000
+instanceKlass lombok/eclipse/agent/PatchJavadoc
+instanceKlass lombok/core/LombokNode
+instanceKlass lombok/core/DiagnosticsReceiver
+instanceKlass lombok/launch/PatchFixesHider$Util
+instanceKlass lombok/launch/PatchFixesHider$Javadoc
+instanceKlass  @bci java/util/regex/Pattern and (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;Z)Ljava/util/regex/Pattern$CharPredicate; 6 <appendix> member <vmtarget> ; # java/util/regex/Pattern$$Lambda+0x0000015a2b4dbc48
+instanceKlass org/eclipse/jdt/ls/core/internal/javadoc/JavaDocHTMLPathHandler
+instanceKlass org/eclipse/jdt/core/manipulation/internal/javadoc/JavadocLookup$1
+instanceKlass org/eclipse/jdt/core/manipulation/internal/javadoc/JavadocLookup
+instanceKlass org/eclipse/jdt/core/manipulation/internal/javadoc/CoreJavadocAccessImpl
+instanceKlass org/eclipse/jdt/core/manipulation/internal/javadoc/CoreJavadocContentAccessUtility
+instanceKlass org/eclipse/jdt/core/manipulation/internal/javadoc/IJavadocContentFactory$IJavadocAccess
+instanceKlass org/eclipse/jdt/ls/core/internal/javadoc/JavadocContentAccess2$1
+instanceKlass org/eclipse/jdt/core/manipulation/internal/javadoc/CoreJavadocAccess
+instanceKlass org/eclipse/jdt/core/manipulation/internal/javadoc/CoreJavaDocSnippetStringEvaluator
+instanceKlass org/eclipse/jdt/core/manipulation/internal/javadoc/IJavadocContentFactory
+instanceKlass org/eclipse/jdt/ls/core/internal/javadoc/JavadocContentAccess2
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/handlers/CompletionResolveHandler resolve (Lorg/eclipse/lsp4j/CompletionItem;Lorg/eclipse/core/runtime/IProgressMonitor;)Lorg/eclipse/lsp4j/CompletionItem; 1203 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/handlers/CompletionResolveHandler$$Lambda+0x0000015a2b7e5460
+instanceKlass com/google/common/util/concurrent/SimpleTimeLimiter
+instanceKlass com/google/common/util/concurrent/TimeLimiter
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/handlers/BaseDocumentLifeCycleHandler didOpen (Lorg/eclipse/lsp4j/DidOpenTextDocumentParams;)V 69 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/handlers/BaseDocumentLifeCycleHandler$$Lambda+0x0000015a2b7e5220
+instanceKlass org/eclipse/jdt/ls/core/internal/DecompilerResult
+instanceKlass org/eclipse/jdt/ls/core/internal/SourceContentProvider
+instanceKlass org/eclipse/jdt/ls/core/internal/IDecompiler
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager findMatchingProviders (Ljava/net/URI;)Ljava/util/List; 79 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager$$Lambda+0x0000015a2b7e48f0
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager findMatchingProviders (Ljava/net/URI;)Ljava/util/List; 69 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager$$Lambda+0x0000015a2b7e46b8
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager findMatchingProviders (Ljava/net/URI;)Ljava/util/List; 58 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager$$Lambda+0x0000015a2b7e4460
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager getDescriptors (Ljava/util/List;)Ljava/util/Set; 23 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager$$Lambda+0x0000015a2b7e4220
+instanceKlass org/eclipse/jdt/ls/core/internal/managers/ContentProviderManager$ContentProviderDescriptor
+instanceKlass org/eclipse/jdt/ls/core/internal/IContentProvider
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/handlers/JDTLanguageServer textDocumentContent (Lorg/eclipse/lsp4j/TextDocumentContentParams;)Ljava/util/concurrent/CompletableFuture; 21 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/handlers/JDTLanguageServer$$Lambda+0x0000015a2b7bfab0
+instanceKlass org/eclipse/jdt/core/util/IInnerClassesAttributeEntry
+instanceKlass org/eclipse/jdt/core/util/IAttributeNamesConstants
+instanceKlass org/eclipse/jdt/core/util/IConstantPoolEntry3
+instanceKlass org/eclipse/jdt/core/util/IConstantPoolEntry2
+instanceKlass org/eclipse/jdt/internal/core/util/ConstantPoolEntry
+instanceKlass org/eclipse/jdt/core/util/IConstantPoolEntry
+instanceKlass org/eclipse/jdt/core/util/IPermittedSubclassesAttribute
+instanceKlass org/eclipse/jdt/core/util/IRecordAttribute
+instanceKlass org/eclipse/jdt/core/util/INestMembersAttribute
+instanceKlass org/eclipse/jdt/core/util/ISourceAttribute
+instanceKlass org/eclipse/jdt/core/util/IInnerClassesAttribute
+instanceKlass org/eclipse/jdt/core/util/IClassFileAttribute
+instanceKlass org/eclipse/jdt/core/util/IMethodInfo
+instanceKlass org/eclipse/jdt/core/util/IFieldInfo
+instanceKlass org/eclipse/jdt/core/util/IConstantPool
+instanceKlass org/eclipse/jdt/internal/core/util/ClassFileStruct
+instanceKlass org/eclipse/jdt/ls/core/internal/SourceFileAttributeReader
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7dcc00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7dc800
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b7dc400
+instanceKlass org/eclipse/jdt/internal/core/hierarchy/ChangeCollector
+instanceKlass org/eclipse/jdt/internal/core/DeltaProcessor$4
+instanceKlass org/eclipse/jdt/internal/core/manipulation/ProjectTemplateStore
+instanceKlass org/eclipse/jdt/internal/core/manipulation/StubUtility
+instanceKlass org/eclipse/jdt/core/manipulation/CodeGeneration
+instanceKlass org/eclipse/jdt/internal/corext/util/MethodOverrideTester
+instanceKlass org/eclipse/jdt/internal/corext/util/SuperTypeHierarchyCache$HierarchyCacheEntry
+instanceKlass org/eclipse/jdt/core/ITypeHierarchyChangedListener
+instanceKlass  @bci org/eclipse/jdt/internal/core/hierarchy/TypeHierarchy getAllInterfaces ()[Lorg/eclipse/jdt/core/IType; 4 <appendix> argL0 ; # org/eclipse/jdt/internal/core/hierarchy/TypeHierarchy$$Lambda+0x0000015a2b7d6a60
+instanceKlass  @bci org/eclipse/jdt/internal/core/hierarchy/TypeHierarchy getAllClasses ()[Lorg/eclipse/jdt/core/IType; 29 <appendix> argL0 ; # org/eclipse/jdt/internal/core/hierarchy/TypeHierarchy$$Lambda+0x0000015a2b7d6840
+instanceKlass org/eclipse/jdt/internal/core/hierarchy/HierarchyType
+instanceKlass org/eclipse/jdt/internal/core/hierarchy/HierarchyBinaryType
+instanceKlass org/eclipse/jdt/internal/core/Region$Node
+instanceKlass org/eclipse/jdt/internal/core/Region
+instanceKlass org/eclipse/jdt/internal/core/hierarchy/BindingMap
+instanceKlass org/eclipse/jdt/internal/core/hierarchy/HierarchyResolver
+instanceKlass org/eclipse/jdt/internal/core/IPathRequestor
+instanceKlass org/eclipse/jdt/internal/corext/util/SuperTypeHierarchyCache
+instanceKlass  @bci org/eclipse/jdt/internal/compiler/ast/Javadoc resolveParamTags (Lorg/eclipse/jdt/internal/compiler/lookup/MethodScope;ZZ)V 82 <appendix> member <vmtarget> ; # org/eclipse/jdt/internal/compiler/ast/Javadoc$$Lambda+0x0000015a2b79a688
+instanceKlass  @bci org/eclipse/jdt/internal/compiler/ast/Javadoc resolveParamTags (Lorg/eclipse/jdt/internal/compiler/lookup/MethodScope;ZZ)V 74 <appendix> member <vmtarget> ; # org/eclipse/jdt/internal/compiler/ast/Javadoc$$Lambda+0x0000015a2b79a440
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7dc000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7dbc00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7db800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7db400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7db000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7dac00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7da800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7da400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7da000
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b7d9c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7d9800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7d9400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7d9000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7d8c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7d8800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7d8400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7d8000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7cbc00
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/ChangeUtil hasChanges (Ljava/util/List;)Z 12 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/ChangeUtil$$Lambda+0x0000015a2b7bf658
+instanceKlass org/eclipse/jdt/ls/core/internal/ChangeUtil
+instanceKlass org/eclipse/text/edits/TextEditVisitor
+instanceKlass org/eclipse/jdt/ls/core/internal/handlers/CompletionResolveHandler
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/corext/template/java/PostfixTemplateEngine complete (Lorg/eclipse/jface/text/IDocument;ILorg/eclipse/jdt/core/ICompilationUnit;Lorg/eclipse/lsp4j/CompletionItemDefaults;)Ljava/util/List; 130 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/corext/template/java/PostfixTemplateEngine$$Lambda+0x0000015a2b7bed80
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/corext/template/java/PostfixTemplateEngine complete (Lorg/eclipse/jface/text/IDocument;ILorg/eclipse/jdt/core/ICompilationUnit;Lorg/eclipse/lsp4j/CompletionItemDefaults;)Ljava/util/List; 120 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/corext/template/java/PostfixTemplateEngine$$Lambda+0x0000015a2b7beb28
+instanceKlass org/eclipse/jdt/ls/core/internal/corext/template/java/PostfixTemplateEngine
+instanceKlass org/eclipse/jdt/ls/core/internal/corext/template/java/PostfixCompletionProposalComputer
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal canResolvePostfix (Lorg/eclipse/jdt/core/CompletionContext;Lorg/eclipse/jface/text/IDocument;)Z 91 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/contentassist/SnippetCompletionProposal$$Lambda+0x0000015a2b7bd1d8
+instanceKlass org/eclipse/jdt/internal/corext/util/JavaModelUtil
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7cb800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7cb400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7cb000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7cac00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7ca800
+instanceKlass org/eclipse/jdt/ls/core/internal/handlers/SignatureHelpContext
+instanceKlass org/eclipse/jdt/ls/core/internal/handlers/SignatureHelpUtils
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/handlers/JDTLanguageServer signatureHelp (Lorg/eclipse/lsp4j/SignatureHelpParams;)Ljava/util/concurrent/CompletableFuture; 21 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/handlers/JDTLanguageServer$$Lambda+0x0000015a2b7bc6d8
+instanceKlass org/eclipse/lsp4j/ParameterInformation
+instanceKlass org/eclipse/lsp4j/SignatureInformation
+instanceKlass org/eclipse/lsp4j/SignatureHelpContext
+instanceKlass org/eclipse/jdt/internal/codeassist/impl/Keywords
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7ca400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7ca000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c9c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c9800
+# instanceKlass java/lang/invoke/LambdaForm$DMH+0x0000015a2b7c9400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c9000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c8c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c8800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c8400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c8000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c7c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c7800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c7400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c7000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c6c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c6800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c6400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c6000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c5c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c5800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c5400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c5000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c4c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c4800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c4400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c4000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c3c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c3800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c3400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c3000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c2c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c2800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c2400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c2000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c1c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c1800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c1400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c1000
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c0c00
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c0800
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c0400
+# instanceKlass java/lang/invoke/LambdaForm$MH+0x0000015a2b7c0000
+instanceKlass org/eclipse/lsp4j/adapters/CompletionItemDefaultsEditRangeTypeAdapter
+instanceKlass org/eclipse/lsp4j/adapters/CompletionItemTextEditTypeAdapter
+instanceKlass org/eclipse/lsp4j/CompletionApplyKind
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/handlers/CompletionHandler computeContentAssist (Lorg/eclipse/jdt/core/ICompilationUnit;Lorg/eclipse/lsp4j/CompletionParams;Lorg/eclipse/core/runtime/IProgressMonitor;)Lorg/eclipse/lsp4j/CompletionList; 632 <appendix> member <vmtarget> ; # org/eclipse/jdt/ls/core/internal/handlers/CompletionHandler$$Lambda+0x0000015a2b7bc4a0
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/handlers/CompletionHandler computeContentAssist (Lorg/eclipse/jdt/core/ICompilationUnit;Lorg/eclipse/lsp4j/CompletionParams;Lorg/eclipse/core/runtime/IProgressMonitor;)Lorg/eclipse/lsp4j/CompletionList; 620 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/handlers/CompletionHandler$$Lambda+0x0000015a2b7bc250
+instanceKlass  @bci org/eclipse/jdt/ls/core/internal/handlers/CompletionHandler computeContentAssist (Lorg/eclipse/jdt/core/ICompilationUnit;Lorg/eclipse/lsp4j/CompletionParams;Lorg/eclipse/core/runtime/IProgressMonitor;)Lorg/eclipse/lsp4j/CompletionList; 444 <appendix> argL0 ; # org/eclipse/jdt/ls/core/internal/handlers/CompletionHandler$$Lambda+0x0000015a2b7bc000
+instanceKlass org/eclipse/jface/text/Region
+instanceKlass org/eclipse/jdt/ls/core/internal/contentassist/JavadocCompletionProposal
+instanceKlass  @bci org/eclipse/jface/text/templates/TemplateTranslator lambda$1 (Lorg/eclipse/jface/text/templates/TemplateVariable;Ljava/util/Collection;)V 7 <appendix> argL0 ; # org/eclipse/jface/text/templates/TemplateTranslator$$Lambda+0x0000015a2b7b0400
+instanceKlass  @bci org/eclipse/jface/text/templates/TemplateTranslator fixOffsetsAndBuffer (Ljava/lang/StringBuilder;[Lorg/eclipse/jface/text/templates/TemplateVariable;)V 167 <appendix> argL0 ; # org/eclipse/jface/text/templates/TemplateTranslator$$Lambda+0x0000015a2b7b0c18
+instanceKlass org/eclipse/jface/text/TextUtilities
+instanceKlass org/eclipse/jface/text/templates/TemplateVariableType
+instanceKlass org/eclipse/jface/text/templates/TemplateTranslator$VariableDescription

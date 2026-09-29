@@ -84,7 +84,7 @@ public class ReservaImpl
     }
    
 
-
+   /**
 public static void main(String[] args) {
     ReservaDAO reservaDAO = new ReservaDAO();
 
@@ -103,52 +103,6 @@ public static void main(String[] args) {
     System.out.println(reservas[i].id_reserva);
    }
 
-
-}
-
-
-    /**
-    ViaturaImpl viatura = new ViaturaImpl();
-    //Listar os parques disponiveis
-    ViaturaDTO[] lista = viatura.listarViaturas(1);
-
-    for( ViaturaDTO p: lista){
-        System.out.println(p.marca);
-        System.out.println(p.modelo);
-    }
-System.out.println("-------------------");
-
-    //Adicionar uma viatura
-    ViaturaDTO v1= new ViaturaDTO(-1,"Porche","Panamera","ABC-102",1);
-    viatura.adicionarViatura(v1);
-    
-       // park.removerParque(5);
-
-        //Listar as viaturas disponiveis
-     lista = viatura.listarViaturas(1);
-
-    for( ViaturaDTO p: lista){
-        System.out.println(p.marca);
-        System.out.println(p.modelo);
-        System.out.println(p.id_viatura);
-        
-    }
-
-    System.out.println("-------------------");
-    //Remover uma viatura
-
-    viatura.removerViatura(1);
-
-    for( ViaturaDTO p: lista){
-        System.out.println(p.marca);
-        System.out.println(p.modelo);
-        System.out.println(p.id_viatura);
-    }
-
-
-
-
-}
 
 
 * */
