@@ -172,7 +172,7 @@ public static void inserirDadosExemplo(Connection conn){
         String[] inserts = {
         "INSERT INTO usuario (nome, telefone, senha, tipo) VALUES ('Carlos Mucavele', '841234567', 'senha123', 1), ('Anabela Sitoe', '829876543', 'senha123', 0), ('Mateus Langa', '855554433', 'senha123', 0);",
         
-        "INSERT INTO parque_estacionamento (nome, provincia, localizacao, telefone, horario, cobertura, preco, foto_url) VALUES ('Parque Central', 'Maputo', 'Av. 25 de Setembro', '840001122', '07:00-22:00', 'COBERTO', 50.0, 'https://fotos.com/p1.jpg'), ('Parque Matola Plaza', 'Maputo', 'Av. das Indústrias', '820003344', '08:00-20:00', 'NAO_COBERTO', 30.0, 'https://fotos.com/p2.jpg'), ('Parque Beira Mar', 'Sofala', 'Av. das Mambas', '850005566', '24 Horas', 'COBERTO', 40.0, 'https://fotos.com/p3.jpg');",
+        "INSERT INTO parque_estacionamento (nome, provincia, localizacao, telefone, horario, cobertura, preco, foto_url) VALUES ('Parque Central', 'Maputo', 'Av. 25 de Setembro', '840001122', '07:00-22:00', 'COBERTO', 50.0, 'https://fotos.com/p1.jpg'), ('Parque Matola Plaza', 'Maputo', 'Av. das Industrias', '820003344', '08:00-20:00', 'NAO_COBERTO', 30.0, 'https://fotos.com/p2.jpg'), ('Parque Beira Mar', 'Sofala', 'Av. das Mambas', '850005566', '24 Horas', 'COBERTO', 40.0, 'https://fotos.com/p3.jpg');",
         
         "INSERT INTO viatura (marca, modelo, matricula, id_usuario) VALUES ('Toyota', 'Corolla', 'ABC-123-MC', 1), ('Nissan', 'Hardbody', 'AFG-456-MC', 2), ('Hyundai', 'Elantra', 'AIA-789-MC', 3);",
     

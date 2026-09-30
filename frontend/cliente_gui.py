@@ -393,7 +393,7 @@ class ClienteCorbaApp:
                         except Exception as e:
                             sg.popup_error(f"Erro ao cadastrar: {e}")
                     else:
-                        sg.popup_warning("Preencha todos os campos do cadastro.")
+                        sg.popup("Preencha todos os campos do cadastro.")
 
             # ----------------------------------------------------
             # EVENTOS: TELA PRINCIPAL (DASHBOARD)

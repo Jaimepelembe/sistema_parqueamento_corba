@@ -42,7 +42,7 @@ public class UsuarioDAO {
     public UsuarioDTO login(String telefone, String senha){
         UsuarioDTO usuario =null;
  
-     String sql="SELECT id_usuario,nome,telefone,tipo FROM usuario WHERE telefone=? AND senha=?";
+     String sql="SELECT id_usuario,nome,telefone,senha,tipo FROM usuario WHERE telefone=? AND senha=?";
         try{
             Connection conn = ConexaoBD.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class UsuarioDAO {
                     rs.getInt("id_usuario"),
                     rs.getString("nome"),
                     rs.getString("telefone"),
-                    null,
+                    rs.getString("senha"),
                     rs.getInt("tipo"));
             
     
