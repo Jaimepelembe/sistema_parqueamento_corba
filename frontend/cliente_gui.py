@@ -1,6 +1,7 @@
 import sys
 import PySimpleGUI as sg
 from omniORB import CORBA
+import CosNaming
 
 # Importar o módulo gerado pelo omniidl a partir do IDL
 import ParqueamentoApp
@@ -8,44 +9,43 @@ import ParqueamentoApp
 
 class ClienteCorbaApp:
 
-    def __init__(self):
-        # 1. Inicializar o ORB CORBA
-        self.orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+    def __init__(self,initial_host="localhost",initial_port="1050"):
+        
+        # Monta o argumento no formato padrão CORBA
+        # Exemplo resultante: -ORBInitRef NameService=corbaloc:iiop:192.168.1.50:1050/NameService
+        init_ref_arg = f"NameService=corbaname:iiop:{initial_host}:{initial_port}/NameService"
 
-        # Usar corbaloc para obter a referência do NameService
-        # Altere o IP e a Porta conforme a configuração do seu Naming Service
-        corbaloc = "corbaloc:iiop:127.0.0.1:1050/NameService"
-        obj = self.orb.string_to_object(corbaloc)
+        # Adiciona aos argumentos do sistema que serão lidos pelo ORB
+        orb_args = sys.argv + ["-ORBInitRef", init_ref_arg]
+        orb = CORBA.ORB_init(orb_args)
+        
+        naming_service = orb.resolve_initial_references("NameService")
+        self.root_context = naming_service._narrow(CosNaming.NamingContext)
 
-        import CosNaming
 
-        self.ncRef = obj._narrow(CosNaming.NamingContext)
-
-        # 2. Resolver as referências das interfaces no NameService
-        self.servico_usuario = self._obter_servico(
-            "UsuarioService", ParqueamentoApp.Usuario
+        # Resolver as referências das interfaces no NameService
+        self.servico_usuario = self.obter_servico(
+            "Usuario", ParqueamentoApp.Usuario
         )
-        self.servico_parque = self._obter_servico(
-            "ParqueService", ParqueamentoApp.Parque
+        self.servico_parque = self.obter_servico(
+            "Parque", ParqueamentoApp.Parque
         )
-        self.servico_vaga = self._obter_servico(
-            "VagaService", ParqueamentoApp.Vaga
+        self.servico_vaga = self.obter_servico(
+            "Vaga", ParqueamentoApp.Vaga
         )
-        self.servico_viatura = self._obter_servico(
-            "ViaturaService", ParqueamentoApp.Viatura
+        self.servico_viatura = self.obter_servico(
+            "Viatura", ParqueamentoApp.Viatura
         )
-        self.servico_reserva = self._obter_servico(
-            "ReservaService", ParqueamentoApp.Reserva
+        self.servico_reserva = self.obter_servico(
+            "Reserva", ParqueamentoApp.Reserva
         )
 
         # Guarda o utilizador autenticado após o login
         self.usuario_logado = None
 
-    def _obter_servico(self, nome_servico, interface_class):
-        import CosNaming
-
-        path = [CosNaming.NameComponent(nome_servico, "")]
-        obj = self.ncRef.resolve(path)
+    def obter_servico(self, nome_servico, interface_class):
+        name = [CosNaming.NameComponent(nome_servico, "")]
+        obj = self.root_context.resolve(name)
         return obj._narrow(interface_class)
 
     # ==========================================

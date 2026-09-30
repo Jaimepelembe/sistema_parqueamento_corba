@@ -24,7 +24,7 @@ import com.grupo6.ParqueamentoApp.VagaHelper;
 import com.grupo6.ParqueamentoApp.Viatura;
 import com.grupo6.ParqueamentoApp.ViaturaHelper;
 
-
+import java.util.Properties;
 
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;
@@ -44,10 +44,26 @@ import org.omg.PortableServer.POAHelper;
  */
 public class servidorParqueamento {
 
+    public servidorParqueamento(){}
+    public servidorParqueamento(String Host,String Port){}
+
     public static void main(String[] args) {
         try{
             //Criar e inicializa o ORB
-            ORB orb = ORB.init(args,null);
+           // ORB orb = ORB.init(args,null);
+           String Host="localhost";
+           String Port ="1050";
+
+            //Propreidades
+            Properties props= new Properties();
+            // Define o IP ou Hostname do servidor CORBA
+            props.put("org.omg.CORBA.ORBInitialHost", Host); 
+            // Define a porta (geralmente obrigatório em conjunto com o host)
+            props.put("org.omg.CORBA.ORBInitialPort", Port); 
+
+            //Criar e inicializa o ORB
+            ORB orb = ORB.init(args,props);
+
 
             //Obter o  RootPOA (Portable Object Adapter) e ativa o gerenciador POA
             POA rootpoa =POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
@@ -111,7 +127,7 @@ public class servidorParqueamento {
 
 
 
-            System.out.println("Servidor pronto e aguardando pedidos!");
+            System.out.println("Servidor pronto e aguardando pedidos!" +"\nIP: "+Host+"\nPorta: "+Port);
 
             //Aguarda pela invocação dos clientes
             orb.run();

@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "servidorParqueamento",
+            "request": "launch",
+            "mainClass": "com.grupo6.servidorParqueamento",
+            "projectName": "parque_estacionamento"
+        },
+        {
+            "type": "java",
             "name": "ReservaImpl",
             "request": "launch",
             "mainClass": "com.grupo6.ReservaImpl",
