@@ -71,9 +71,9 @@ typedef sequence<ReservaDTO> listaReservaDTO;
             in string senha
         );
 
-        void cadastrar (in UsuarioDTO usuarioDTO);
+        void cadastrar (in UsuarioDTO usuario);
 
-        boolean actualizarDados(in UsuarioDTO usuarioDTO); 
+        boolean actualizarDados(in UsuarioDTO usuario); 
 
         //in id_usuario,
         //in string nome,
