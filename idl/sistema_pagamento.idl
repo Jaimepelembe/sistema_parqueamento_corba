@@ -1,0 +1,67 @@
+module PagamentoApp {
+
+
+    struct TransacaoDTO {
+        long id_transacao;
+        string tipo;
+        float valor;
+        string estado;
+        string data;
+        string hora;
+        long id_conta;
+    };
+
+    struct ContaDTO {
+        long id_conta;
+        float saldo;
+        long id_usuario;
+    };
+
+//Sequencia de elementos: Sintaxe:  sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
+typedef sequence<Transacao> listaTransacaoDTO;
+
+interface Conta{
+    // Consultar saldo
+    float consultarSaldo(
+            in long id_usuario
+        );
+
+
+    // Depositar dinheiro
+    boolean depositar(
+            in long id_usuario,
+            in float valor
+        );
+
+
+}
+
+
+interface Transacao {
+
+        // Efetuar Transacao
+        boolean EfetuarTransacao(
+            in string tipo,
+            in float valor,
+            in string estado,
+            in string data,
+            in string hora,
+            long id_conta;
+        
+        );
+
+
+        // Consultar transacao
+        //Transacao obterTransacao(
+        //    in long id_transacao
+       // ) raises (
+        //    TransacaoNaoEncontrada
+        //);
+
+
+        // Listar transacoes de um usuário
+        listaTransacaoDTO listarTransacoes(
+            in long id_conta
+        );
+    };
+};
