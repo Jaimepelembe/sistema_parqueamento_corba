@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ConexaoBD",
+            "request": "launch",
+            "mainClass": "com.grupo6.dao.ConexaoBD",
+            "projectName": "pagamento"
+        },
+        {
+            "type": "java",
             "name": "servidorParqueamento",
             "request": "launch",
             "mainClass": "com.grupo6.servidorParqueamento",
