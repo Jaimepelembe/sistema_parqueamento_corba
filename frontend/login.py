@@ -29,7 +29,23 @@ def main():
         
         naming_service = orb.resolve_initial_references("NameService")
         root_context = naming_service._narrow(CosNaming.NamingContext)
-   
+        
+        
+        name = [CosNaming.NameComponent("Viatura", "")]
+        obj = root_context.resolve(name)
+
+        # 5. Faz o "narrow" para converter o objeto no tipo específico da sua Interface IDL
+        viatura_service = obj._narrow(ParqueamentoApp.Viatura)
+
+        if viatura_service is None:
+            print("Erro: O objeto remoto não é do tipo UsuarioService")
+            sys.exit(1)
+        
+        resultado =viatura_service.listarViaturas(2)
+        for viatura in resultado:
+            print(viatura.matricula)        
+        
+        """
         name = [CosNaming.NameComponent("Usuario", "")]
         obj = root_context.resolve(name)
 
@@ -41,6 +57,9 @@ def main():
             sys.exit(1)
         
         resultado =usuario_service.login("829876543", "senha123")
+        print(f"ID: {resultado.id_usuario}")
+        print(f"Nome: {resultado.nome}")
+        print(f"Telefone: {resultado.telefone}")"""
             
     except CORBA.Exception as ex:
         print(f"Erro na comunicação CORBA: {ex}")        
