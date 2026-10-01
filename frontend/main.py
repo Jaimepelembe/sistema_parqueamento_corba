@@ -159,6 +159,42 @@ class GerenciadorJanelas:
                     self.tela_cadastro = TelaCadastroUsuario()
                 
             
+            #---Eventos da tela do usuario comum ---
+            elif window ==self.tela_usuario_comum.window:     
+                # Fechar aplicação
+                if event ==sg.WIN_CLOSED:
+                    break
+
+                # 1. EVENTOS DA TAB PARQUES (Seleção na Tabela para Reserva)
+                if event == '-TABELA_PARQUES-':
+                    #Listar as viaturas
+                    
+                    
+                    linhas_selecionadas = values['-TABELA_PARQUES-']
+                    if linhas_selecionadas:
+                        indice = linhas_selecionadas[0]
+                       # parque_selecionado = self.lista_parques[indice]
+                        parqueDTO=self.listaParquesDTO[indice]
+                        print(f"Parque selecionado {parqueDTO}")
+                        #nome_parque = parque_selecionado[0]
+                        #preco_parque = parque_selecionado[6]
+                        print("entrou na reserva")
+                        #minhas_viaturas, parqueSelecioinado,vagasDisponiveis
+                        listaViaturas=[]
+                        for viaturaDTO in self.listaViaturasDTO:
+                            listaViaturas.append([viaturaDTO.marca,viaturaDTO.modelo,viaturaDTO.matricula])
+                            print(viaturaDTO.matricula)
+                        
+                        self.tela_reserva_vaga= TelaReservaVaga(listaViaturas,parqueDTO,[])  
+                        
+                        #sg.popup_error('Erro', ' reservar.')
+                        if not self.listaViaturasDTO:
+                            sg.popup_error('Erro', 'Você precisa cadastrar pelo menos uma viatura antes de reservar.')
+                            #Abrir a tab para dicionar viaturas
+                        else:
+                            self.tela_usuario_comum.ocultar()
+                            self.tela_reserva_vaga= TelaReservaVaga()  
+                    
             #---Eventos da tela de cadastro ---
             elif window == self.tela_cadastro.window:
                 if event ==sg.WIN_CLOSED:
@@ -189,39 +225,6 @@ class GerenciadorJanelas:
                         sg.popup("Preencha todos os campos do cadastro.")
         
             
-            elif window ==self.tela_usuario_comum.window:     
-                # Fechar aplicação
-                if event ==sg.WIN_CLOSED:
-                    break
-
-                # 1. EVENTOS DA TAB PARQUES (Seleção na Tabela para Reserva)
-                if event == '-TABELA_PARQUES-':
-                    #Listar as viaturas
-                    
-                    
-                    linhas_selecionadas = values['-TABELA_PARQUES-']
-                    if linhas_selecionadas:
-                        indice = linhas_selecionadas[0]
-                        parque_selecionado = self.lista_parques[indice]
-                        parqueDTO=self.listaParquesDTO[indice]
-                        nome_parque = parque_selecionado[0]
-                        preco_parque = parque_selecionado[6]
-                        #minhas_viaturas, parqueSelecioinado,vagasDisponiveis
-                        #listaViaturas=[]
-                        #for viaturaDTO in self.listaViaturasDTO:
-                        #    listaViaturas.append([viaturaDTO.marca,viaturaDTO.modelo,viaturaDTO.matricula])
-                        #    print(viaturaDTO.matricula)
-                        
-                        self.tela_reserva_vaga= TelaReservaVaga(listaViaturas,parqueDTO,[])  
-                        
-                        if not self.listaViaturasDTO:
-                            sg.popup_error('Erro', 'Você precisa cadastrar pelo menos uma viatura antes de reservar.')
-                            #Abrir a tab para dicionar viaturas
-                        else:
-                            self.tela_usuario_comum.ocultar()
-                            self.tela_reserva_vaga= TelaReservaVaga()  
-                    
-    
                 
 
             

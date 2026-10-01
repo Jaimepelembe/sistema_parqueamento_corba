@@ -104,3 +104,12 @@ class TelaReservaVaga:
 
     def exibir(self):
         self.window.un_hide()
+
+"""
+import ParqueamentoApp.        
+tela =TelaReservaVaga([],)
+while True:
+    window, event = sg.read_all_windows()
+    pass
+    
+    """
