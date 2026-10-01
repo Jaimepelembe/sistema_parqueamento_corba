@@ -99,6 +99,35 @@ public class ContaDAO {
 
         }
 
+    public int buscarIDConta(int id_usuario){
+        int idConta =-1;
+ 
+     String sql="SELECT id_conta FROM conta WHERE id_usuario=?";
+        try{
+            Connection conn = ConexaoBD.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,id_usuario);
+            
+            ResultSet rs = stmt.executeQuery();
+        
+             if (rs.next()){
+             
+               idConta=rs.getInt("id_conta");
+            
+    
+        }
+
+            if (!conn.isClosed()) {
+                conn.close();}
+
+    }
+        catch (Exception e){
+            System.out.println("Erro: "+e);
+
+        }
+         return idConta;// Garante que o método sempre retorne algo
+
+        }
 
         
 
