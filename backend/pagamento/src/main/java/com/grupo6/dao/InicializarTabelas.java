@@ -12,7 +12,7 @@ public class InicializarTabelas{
         try{
     Connection conn = ConexaoBD.conectar();
     criarTabelas(conn);
-    //inserirDadosExemplo(conn);
+    inserirDadosExemplo(conn);
 
      if (!conn.isClosed()) {
         conn.close();
@@ -78,8 +78,8 @@ public static void inserirDadosExemplo(Connection conn){
 
     try{
         String[] inserts = {
-            "INSERT INTO conta(saldo, id_usuario) VALUES (1500.00, 1), (500.00, 2), (250.50, 3);"//,
-            //"INSERT INTO transacao(tipo, valor, estado, data, hora, id_conta) VALUES ('DEPOSITO', 2000.0, 'CONCLUIDO', '2026-09-26', '14:30', 1), ('PAGAMENTO_RESERVA', 200.0, 'CONCLUIDO', '2026-09-27', '08:05', 1), ('DEPOSITO', 500.0, 'CONCLUIDO', '2026-09-27', '09:15', 2);"
+            "INSERT INTO conta(saldo, id_usuario) VALUES (1500.00, 1), (500.00, 2), (250.50, 3);",
+            "INSERT INTO transacao(tipo, valor, estado, data, hora, id_conta) VALUES ('DEPOSITO', 2000.0, 'CONCLUIDO', '2026-09-26', '14:30', 1), ('PAGAMENTO_RESERVA', 200.0, 'CONCLUIDO', '2026-09-27', '08:05', 1), ('DEPOSITO', 500.0, 'CONCLUIDO', '2026-09-27', '09:15', 2);"
        
         };
 
