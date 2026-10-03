@@ -1,0 +1,367 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 32744 bytes for ChunkPool::allocate
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:272), pid=10052, tid=0x0000000000002808
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_503) (build 1.8.0_503-b01)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.503-b01 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001a596d4f800):  JavaThread "main" [_thread_in_vm, id=10248, stack(0x0000009d5a500000,0x0000009d5a600000)]
+
+Stack: [0x0000009d5a500000,0x0000009d5a600000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x34a099]
+V  [jvm.dll+0x28c602]
+V  [jvm.dll+0x28d1da]
+V  [jvm.dll+0x281155]
+V  [jvm.dll+0xda25d]
+V  [jvm.dll+0xda5ec]
+V  [jvm.dll+0x8b610]
+V  [jvm.dll+0x11b611]
+V  [jvm.dll+0x11b2e0]
+V  [jvm.dll+0x19b004]
+C  0x000001a598aa8f94
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 1427  java.lang.Class.getDeclaredFields0(Z)[Ljava/lang/reflect/Field; (0 bytes) @ 0x000001a598aa8efb [0x000001a598aa8ec0+0x000000000000003b]
+J 1306 C1 java.lang.Class.privateGetDeclaredFields(Z)[Ljava/lang/reflect/Field; (67 bytes) @ 0x000001a598a64044 [0x000001a598a63d40+0x0000000000000304]
+j  java.lang.Class.getField0(Ljava/lang/String;)Ljava/lang/reflect/Field;+2
+j  java.lang.Class.getField(Ljava/lang/String;)Ljava/lang/reflect/Field;+11
+j  com.google.inject.internal.aop.FastClass.lookupInvokerTable(Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;+3
+j  com.google.inject.internal.aop.AbstractGlueGenerator.glue(Ljava/util/NavigableMap;)Ljava/util/function/Function;+24
+j  com.google.inject.internal.aop.ClassBuilding.buildFastClass(Ljava/lang/Class;)Ljava/util/function/Function;+37
+j  com.google.inject.internal.BytecodeGen$1.computeValue(Ljava/lang/Class;)Ljava/util/function/Function;+1
+j  com.google.inject.internal.BytecodeGen$1.computeValue(Ljava/lang/Class;)Ljava/lang/Object;+2
+j  java.lang.ClassValue.getFromHashMap(Ljava/lang/Class;)Ljava/lang/Object;+29
+j  java.lang.ClassValue.getFromBackup([Ljava/lang/ClassValue$Entry;Ljava/lang/Class;)Ljava/lang/Object;+17
+j  java.lang.ClassValue.get(Ljava/lang/Class;)Ljava/lang/Object;+27
+j  com.google.inject.internal.BytecodeGen.fastClass(Ljava/lang/reflect/Executable;)Ljava/util/function/Function;+7
+j  com.google.inject.internal.BytecodeGen.fastConstructor(Ljava/lang/reflect/Constructor;)Ljava/util/function/BiFunction;+8
+j  com.google.inject.internal.DefaultConstructionProxyFactory.create()Lcom/google/inject/internal/ConstructionProxy;+18
+j  com.google.inject.internal.ProxyFactory.create()Lcom/google/inject/internal/ConstructionProxy;+21
+j  com.google.inject.internal.ConstructorInjectorStore.createConstructor(Lcom/google/inject/spi/InjectionPoint;Lcom/google/inject/internal/Errors;)Lcom/google/inject/internal/ConstructorInjector;+127
+j  com.google.inject.internal.ConstructorInjectorStore.access$000(Lcom/google/inject/internal/ConstructorInjectorStore;Lcom/google/inject/spi/InjectionPoint;Lcom/google/inject/internal/Errors;)Lcom/google/inject/internal/ConstructorInjector;+3
+j  com.google.inject.internal.ConstructorInjectorStore$1.create(Lcom/google/inject/spi/InjectionPoint;Lcom/google/inject/internal/Errors;)Lcom/google/inject/internal/ConstructorInjector;+6
+j  com.google.inject.internal.ConstructorInjectorStore$1.create(Ljava/lang/Object;Lcom/google/inject/internal/Errors;)Ljava/lang/Object;+6
+J 1906 C1 com.google.inject.internal.FailableCache$1.load(Ljava/lang/Object;)Ljava/lang/Object; (48 bytes) @ 0x000001a598be322c [0x000001a598be3000+0x000000000000022c]
+J 1865 C1 com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(Ljava/lang/Object;Lcom/google/common/cache/CacheLoader;)Lcom/google/common/util/concurrent/ListenableFuture; (123 bytes) @ 0x000001a598bc6224 [0x000001a598bc5da0+0x0000000000000484]
+J 1701 C1 com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(Ljava/lang/Object;ILcom/google/common/cache/CacheLoader;)Ljava/lang/Object; (447 bytes) @ 0x000001a598b50194 [0x000001a598b4d040+0x0000000000003154]
+J 1584 C1 com.google.common.cache.LocalCache$Segment.get(Ljava/lang/Object;ILcom/google/common/cache/CacheLoader;)Ljava/lang/Object; (210 bytes) @ 0x000001a598b0d0cc [0x000001a598b0bc00+0x00000000000014cc]
+J 1153 C1 com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(Ljava/lang/Object;)Ljava/lang/Object; (19 bytes) @ 0x000001a5989d6364 [0x000001a5989d5c60+0x0000000000000704]
+J 1905 C1 com.google.inject.internal.FailableCache.get(Ljava/lang/Object;Lcom/google/inject/internal/Errors;)Ljava/lang/Object; (38 bytes) @ 0x000001a598be3bcc [0x000001a598be3ac0+0x000000000000010c]
+j  com.google.inject.internal.ConstructorInjectorStore.get(Lcom/google/inject/spi/InjectionPoint;Lcom/google/inject/internal/Errors;)Lcom/google/inject/internal/ConstructorInjector;+6
+j  com.google.inject.internal.ConstructorBindingImpl.initialize(Lcom/google/inject/internal/InjectorImpl;Lcom/google/inject/internal/Errors;)V+13
+j  com.google.inject.internal.InjectorImpl.initializeJitBinding(Lcom/google/inject/internal/BindingImpl;Lcom/google/inject/internal/Errors;)V+34
+j  com.google.inject.internal.InjectorImpl.createJustInTimeBinding(Lcom/google/inject/Key;Lcom/google/inject/internal/Errors;ZLcom/google/inject/internal/InjectorImpl$JitLimitation;)Lcom/google/inject/internal/BindingImpl;+210
+j  com.google.inject.internal.InjectorImpl.createJustInTimeBindingRecursive(Lcom/google/inject/Key;Lcom/google/inject/internal/Errors;ZLcom/google/inject/internal/InjectorImpl$JitLimitation;)Lcom/google/inject/internal/BindingImpl;+124
+j  com.google.inject.internal.InjectorImpl.getJustInTimeBinding(Lcom/google/inject/Key;Lcom/google/inject/internal/Errors;Lcom/google/inject/internal/InjectorImpl$JitLimitation;)Lcom/google/inject/internal/BindingImpl;+160
+J 1948 C1 com.google.inject.internal.InjectorImpl.getBindingOrThrow(Lcom/google/inject/Key;Lcom/google/inject/internal/Errors;Lcom/google/inject/internal/InjectorImpl$JitLimitation;)Lcom/google/inject/internal/BindingImpl; (26 bytes) @ 0x000001a598bf74a4 [0x000001a598bf7380+0x0000000000000124]
+j  com.google.inject.internal.InjectorImpl.getProviderOrThrow(Lcom/google/inject/spi/Dependency;Lcom/google/inject/internal/Errors;)Lcom/google/inject/Provider;+11
+j  com.google.inject.internal.InjectorImpl.getProvider(Lcom/google/inject/Key;)Lcom/google/inject/Provider;+22
+j  com.google.inject.internal.InjectorImpl.getProvider(Ljava/lang/Class;)Lcom/google/inject/Provider;+13
+j  com.google.inject.internal.InjectorImpl.getInstance(Ljava/lang/Class;)Ljava/lang/Object;+2
+j  org.eclipse.sisu.space.AbstractDeferredClass.get()Ljava/lang/Object;+8
+j  com.google.inject.internal.ProviderInternalFactory.provision(Ljavax/inject/Provider;Lcom/google/inject/spi/Dependency;Lcom/google/inject/internal/ConstructionContext;)Ljava/lang/Object;+1
+j  com.google.inject.internal.InternalFactoryToInitializableAdapter.provision(Ljavax/inject/Provider;Lcom/google/inject/spi/Dependency;Lcom/google/inject/internal/ConstructionContext;)Ljava/lang/Object;+4
+j  com.google.inject.internal.ProviderInternalFactory$1.call()Ljava/lang/Object;+16
+J 2073 C1 com.google.inject.internal.ProvisionListenerStackCallback$Provision.provision()Ljava/lang/Object; (140 bytes) @ 0x000001a598c3cbcc [0x000001a598c3ca60+0x000000000000016c]
+J 2181 C1 org.eclipse.sisu.bean.BeanScheduler$CycleActivator.onProvision(Lcom/google/inject/spi/ProvisionListener$ProvisionInvocation;)V (105 bytes) @ 0x000001a598c90564 [0x000001a598c90180+0x00000000000003e4]
+J 2073 C1 com.google.inject.internal.ProvisionListenerStackCallback$Provision.provision()Ljava/lang/Object; (140 bytes) @ 0x000001a598c3cccc [0x000001a598c3ca60+0x000000000000026c]
+J 2180 C1 com.google.inject.internal.ProvisionListenerStackCallback.provision(Lcom/google/inject/internal/InternalContext;Lcom/google/inject/internal/ProvisionListenerStackCallback$ProvisionCallback;)Ljava/lang/Object; (107 bytes) @ 0x000001a598c8f6f4 [0x000001a598c8f600+0x00000000000000f4]
+j  com.google.inject.internal.ProviderInternalFactory.circularGet(Ljavax/inject/Provider;Lcom/google/inject/internal/InternalContext;Lcom/google/inject/spi/Dependency;Lcom/google/inject/internal/ProvisionListenerStackCallback;)Ljava/lang/Object;+91
+j  com.google.inject.internal.InternalFactoryToInitializableAdapter.get(Lcom/google/inject/internal/InternalContext;Lcom/google/inject/spi/Dependency;Z)Ljava/lang/Object;+19
+j  com.google.inject.internal.ProviderToInternalFactoryAdapter.get()Ljava/lang/Object;+18
+J 2115 C1 com.google.inject.internal.SingletonScope$1.get()Ljava/lang/Object; (425 bytes) @ 0x000001a598c5e934 [0x000001a598c5e2a0+0x0000000000000694]
+J 2114 C1 com.google.inject.internal.InternalFactoryToProviderAdapter.get(Lcom/google/inject/internal/InternalContext;Lcom/google/inject/spi/Dependency;Z)Ljava/lang/Object; (54 bytes) @ 0x000001a598c5d734 [0x000001a598c5d540+0x00000000000001f4]
+J 2118 C1 com.google.inject.internal.InjectorImpl$1.get()Ljava/lang/Object; (54 bytes) @ 0x000001a598c655e4 [0x000001a598c65420+0x00000000000001c4]
+j  org.eclipse.sisu.inject.LazyBeanEntry.getValue()Ljava/lang/Object;+4
+j  org.eclipse.sisu.plexus.LazyPlexusBean.getValue()Ljava/lang/Object;+4
+j  java.util.AbstractMap.get(Ljava/lang/Object;)Ljava/lang/Object;+85
+j  org.apache.maven.lifecycle.internal.DefaultLifecyclePluginAnalyzer.getPluginsBoundByDefaultToAllLifecycles(Ljava/lang/String;)Ljava/util/Set;+59
+j  org.apache.maven.model.plugin.DefaultLifecycleBindingsInjector.injectLifecycleBindings(Lorg/apache/maven/model/Model;Lorg/apache/maven/model/building/ModelBuildingRequest;Lorg/apache/maven/model/building/ModelProblemCollector;)V+12
+j  org.apache.maven.model.building.DefaultModelBuilder.build(Lorg/apache/maven/model/building/ModelBuildingRequest;Lorg/apache/maven/model/building/ModelBuildingResult;Ljava/util/Collection;)Lorg/apache/maven/model/building/ModelBuildingResult;+111
+j  org.apache.maven.model.building.DefaultModelBuilder.build(Lorg/apache/maven/model/building/ModelBuildingRequest;Lorg/apache/maven/model/building/ModelBuildingResult;)Lorg/apache/maven/model/building/ModelBuildingResult;+10
+j  org.apache.maven.project.DefaultProjectBuilder.build(Ljava/util/List;Ljava/util/List;Ljava/util/Map;Ljava/util/List;Lorg/apache/maven/project/ProjectBuildingRequest;Ljava/util/Map;Lorg/eclipse/aether/RepositorySystemSession;)Z+58
+j  org.apache.maven.project.DefaultProjectBuilder.build(Ljava/util/List;ZLorg/apache/maven/project/ProjectBuildingRequest;)Ljava/util/List;+146
+j  org.apache.maven.graph.DefaultGraphBuilder.collectProjects(Ljava/util/List;Ljava/util/List;Lorg/apache/maven/execution/MavenExecutionRequest;)V+21
+j  org.apache.maven.graph.DefaultGraphBuilder.getProjectsForMavenReactor(Lorg/apache/maven/execution/MavenSession;)Ljava/util/List;+131
+j  org.apache.maven.graph.DefaultGraphBuilder.build(Lorg/apache/maven/execution/MavenSession;)Lorg/apache/maven/model/building/Result;+12
+j  org.apache.maven.DefaultMaven.buildGraph(Lorg/apache/maven/execution/MavenSession;Lorg/apache/maven/execution/MavenExecutionResult;)Lorg/apache/maven/model/building/Result;+5
+j  org.apache.maven.DefaultMaven.doExecute(Lorg/apache/maven/execution/MavenExecutionRequest;Lorg/apache/maven/execution/MavenSession;Lorg/apache/maven/execution/MavenExecutionResult;Lorg/eclipse/aether/DefaultRepositorySystemSession;)Lorg/apache/maven/execution/MavenExecutionResult;+75
+j  org.apache.maven.DefaultMaven.doExecute(Lorg/apache/maven/execution/MavenExecutionRequest;)Lorg/apache/maven/execution/MavenExecutionResult;+98
+j  org.apache.maven.DefaultMaven.execute(Lorg/apache/maven/execution/MavenExecutionRequest;)Lorg/apache/maven/execution/MavenExecutionResult;+2
+j  org.apache.maven.cli.MavenCli.execute(Lorg/apache/maven/cli/CliRequest;)I+41
+j  org.apache.maven.cli.MavenCli.doMain(Lorg/apache/maven/cli/CliRequest;)I+70
+j  org.apache.maven.cli.MavenCli.main([Ljava/lang/String;Lorg/codehaus/plexus/classworlds/ClassWorld;)I+24
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+100
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+56
+j  org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced([Ljava/lang/String;)V+45
+j  org.codehaus.plexus.classworlds.launcher.Launcher.launch([Ljava/lang/String;)V+2
+j  org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode([Ljava/lang/String;)I+108
+j  org.codehaus.plexus.classworlds.launcher.Launcher.main([Ljava/lang/String;)V+1
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x000001a5aedbf800 JavaThread "Thread-2" daemon [_thread_blocked, id=13264, stack(0x0000009d5b100000,0x0000009d5b200000)]
+  0x000001a5ad0f6800 JavaThread "Service Thread" daemon [_thread_blocked, id=1772, stack(0x0000009d5af00000,0x0000009d5b000000)]
+  0x000001a5ad085800 JavaThread "C1 CompilerThread1" daemon [_thread_blocked, id=10912, stack(0x0000009d5ae00000,0x0000009d5af00000)]
+  0x000001a5ad07e000 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=7144, stack(0x0000009d5ad00000,0x0000009d5ae00000)]
+  0x000001a5ad07c800 JavaThread "Attach Listener" daemon [_thread_blocked, id=12308, stack(0x0000009d5ac00000,0x0000009d5ad00000)]
+  0x000001a5ad07b800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=11384, stack(0x0000009d5ab00000,0x0000009d5ac00000)]
+  0x000001a5acb8c000 JavaThread "Finalizer" daemon [_thread_blocked, id=7804, stack(0x0000009d5aa00000,0x0000009d5ab00000)]
+  0x000001a5ad054000 JavaThread "Reference Handler" daemon [_thread_blocked, id=5720, stack(0x0000009d5a900000,0x0000009d5aa00000)]
+=>0x000001a596d4f800 JavaThread "main" [_thread_in_vm, id=10248, stack(0x0000009d5a500000,0x0000009d5a600000)]
+
+Other Threads:
+  0x000001a5acb80800 VMThread [stack: 0x0000009d5a800000,0x0000009d5a900000] [id=10628]
+  0x000001a5ad170000 WatcherThread [stack: 0x0000009d5b000000,0x0000009d5b100000] [id=12360]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+heap address: 0x0000000082c00000, size: 2004 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x0000000100000000
+
+Heap:
+ PSYoungGen      total 37888K, used 30273K [0x00000000d6400000, 0x00000000d8e00000, 0x0000000100000000)
+  eden space 32768K, 76% used [0x00000000d6400000,0x00000000d7c91910,0x00000000d8400000)
+  from space 5120K, 99% used [0x00000000d8400000,0x00000000d88feba8,0x00000000d8900000)
+  to   space 5120K, 0% used [0x00000000d8900000,0x00000000d8900000,0x00000000d8e00000)
+ ParOldGen       total 86016K, used 3280K [0x0000000082c00000, 0x0000000088000000, 0x00000000d6400000)
+  object space 86016K, 3% used [0x0000000082c00000,0x0000000082f34198,0x0000000088000000)
+ Metaspace       used 18408K, capacity 18948K, committed 19200K, reserved 1067008K
+  class space    used 2343K, capacity 2528K, committed 2560K, reserved 1048576K
+
+Card table byte_map: [0x000001a5a7970000,0x000001a5a7d60000] byte_map_base: 0x000001a5a755a000
+
+Marking Bits: (ParMarkBitMap*) 0x00007ffed4cb2400
+ Begin Bits: [0x000001a5a8000000, 0x000001a5a9f50000)
+ End Bits:   [0x000001a5a9f50000, 0x000001a5abea0000)
+
+Polling page: 0x000001a596c90000
+
+CodeCache: size=245760Kb used=7093Kb max_used=7093Kb free=238666Kb
+ bounds [0x000001a5985b0000, 0x000001a598cb0000, 0x000001a5a75b0000]
+ total_blobs=2585 nmethods=2196 adapters=301
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 9.445 Thread 0x000001a5ad085800 2217       2       org.eclipse.sisu.bean.BeanPropertyField::getAnnotation (9 bytes)
+Event: 9.446 Thread 0x000001a5ad085800 nmethod 2217 0x000001a598c9e910 code [0x000001a598c9eac0, 0x000001a598c9ee70]
+Event: 9.446 Thread 0x000001a5ad085800 2218       2       com.google.inject.internal.aop.ClassBuilding::visitFastMethods (65 bytes)
+Event: 9.447 Thread 0x000001a5ad085800 nmethod 2218 0x000001a598c9f150 code [0x000001a598c9f2e0, 0x000001a598c9f570]
+Event: 9.448 Thread 0x000001a5ad085800 2219       2       sun.reflect.NativeConstructorAccessorImpl::newInstance (89 bytes)
+Event: 9.449 Thread 0x000001a5ad085800 nmethod 2219 0x000001a598c9f7d0 code [0x000001a598c9f9a0, 0x000001a598c9fee0]
+Event: 9.463 Thread 0x000001a5ad085800 2221       2       java.util.regex.Pattern$BmpCharProperty::match (50 bytes)
+Event: 9.463 Thread 0x000001a5ad085800 nmethod 2221 0x000001a598ca0810 code [0x000001a598ca09a0, 0x000001a598ca0bf0]
+Event: 9.463 Thread 0x000001a5ad085800 2222       2       java.util.regex.Pattern$Single::isSatisfiedBy (14 bytes)
+Event: 9.463 Thread 0x000001a5ad085800 nmethod 2222 0x000001a598ca0d10 code [0x000001a598ca0e60, 0x000001a598ca0fd8]
+
+GC Heap History (6 events):
+Event: 6.990 GC heap before
+{Heap before GC invocations=1 (full 0):
+ PSYoungGen      total 37888K, used 32768K [0x00000000d6400000, 0x00000000d8e00000, 0x0000000100000000)
+  eden space 32768K, 100% used [0x00000000d6400000,0x00000000d8400000,0x00000000d8400000)
+  from space 5120K, 0% used [0x00000000d8900000,0x00000000d8900000,0x00000000d8e00000)
+  to   space 5120K, 0% used [0x00000000d8400000,0x00000000d8400000,0x00000000d8900000)
+ ParOldGen       total 86016K, used 0K [0x0000000082c00000, 0x0000000088000000, 0x00000000d6400000)
+  object space 86016K, 0% used [0x0000000082c00000,0x0000000082c00000,0x0000000088000000)
+ Metaspace       used 10133K, capacity 10468K, committed 10624K, reserved 1058816K
+  class space    used 1262K, capacity 1384K, committed 1408K, reserved 1048576K
+Event: 7.004 GC heap after
+Heap after GC invocations=1 (full 0):
+ PSYoungGen      total 37888K, used 5092K [0x00000000d6400000, 0x00000000d8e00000, 0x0000000100000000)
+  eden space 32768K, 0% used [0x00000000d6400000,0x00000000d6400000,0x00000000d8400000)
+  from space 5120K, 99% used [0x00000000d8400000,0x00000000d88f9080,0x00000000d8900000)
+  to   space 5120K, 0% used [0x00000000d8900000,0x00000000d8900000,0x00000000d8e00000)
+ ParOldGen       total 86016K, used 341K [0x0000000082c00000, 0x0000000088000000, 0x00000000d6400000)
+  object space 86016K, 0% used [0x0000000082c00000,0x0000000082c55798,0x0000000088000000)
+ Metaspace       used 10133K, capacity 10468K, committed 10624K, reserved 1058816K
+  class space    used 1262K, capacity 1384K, committed 1408K, reserved 1048576K
+}
+Event: 7.598 GC heap before
+{Heap before GC invocations=2 (full 0):
+ PSYoungGen      total 37888K, used 37860K [0x00000000d6400000, 0x00000000d8e00000, 0x0000000100000000)
+  eden space 32768K, 100% used [0x00000000d6400000,0x00000000d8400000,0x00000000d8400000)
+  from space 5120K, 99% used [0x00000000d8400000,0x00000000d88f9080,0x00000000d8900000)
+  to   space 5120K, 0% used [0x00000000d8900000,0x00000000d8900000,0x00000000d8e00000)
+ ParOldGen       total 86016K, used 341K [0x0000000082c00000, 0x0000000088000000, 0x00000000d6400000)
+  object space 86016K, 0% used [0x0000000082c00000,0x0000000082c55798,0x0000000088000000)
+ Metaspace       used 11819K, capacity 12206K, committed 12416K, reserved 1060864K
+  class space    used 1473K, capacity 1613K, committed 1664K, reserved 1048576K
+Event: 7.607 GC heap after
+Heap after GC invocations=2 (full 0):
+ PSYoungGen      total 37888K, used 5099K [0x00000000d6400000, 0x00000000d8e00000, 0x0000000100000000)
+  eden space 32768K, 0% used [0x00000000d6400000,0x00000000d6400000,0x00000000d8400000)
+  from space 5120K, 99% used [0x00000000d8900000,0x00000000d8dfafa0,0x00000000d8e00000)
+  to   space 5120K, 0% used [0x00000000d8400000,0x00000000d8400000,0x00000000d8900000)
+ ParOldGen       total 86016K, used 1119K [0x0000000082c00000, 0x0000000088000000, 0x00000000d6400000)
+  object space 86016K, 1% used [0x0000000082c00000,0x0000000082d17f40,0x0000000088000000)
+ Metaspace       used 11819K, capacity 12206K, committed 12416K, reserved 1060864K
+  class space    used 1473K, capacity 1613K, committed 1664K, reserved 1048576K
+}
+Event: 8.379 GC heap before
+{Heap before GC invocations=3 (full 0):
+ PSYoungGen      total 37888K, used 37867K [0x00000000d6400000, 0x00000000d8e00000, 0x0000000100000000)
+  eden space 32768K, 100% used [0x00000000d6400000,0x00000000d8400000,0x00000000d8400000)
+  from space 5120K, 99% used [0x00000000d8900000,0x00000000d8dfafa0,0x00000000d8e00000)
+  to   space 5120K, 0% used [0x00000000d8400000,0x00000000d8400000,0x00000000d8900000)
+ ParOldGen       total 86016K, used 1119K [0x0000000082c00000, 0x0000000088000000, 0x00000000d6400000)
+  object space 86016K, 1% used [0x0000000082c00000,0x0000000082d17f40,0x0000000088000000)
+ Metaspace       used 15283K, capacity 15684K, committed 16000K, reserved 1062912K
+  class space    used 1933K, capacity 2095K, committed 2176K, reserved 1048576K
+Event: 8.390 GC heap after
+Heap after GC invocations=3 (full 0):
+ PSYoungGen      total 37888K, used 5114K [0x00000000d6400000, 0x00000000d8e00000, 0x0000000100000000)
+  eden space 32768K, 0% used [0x00000000d6400000,0x00000000d6400000,0x00000000d8400000)
+  from space 5120K, 99% used [0x00000000d8400000,0x00000000d88feba8,0x00000000d8900000)
+  to   space 5120K, 0% used [0x00000000d8900000,0x00000000d8900000,0x00000000d8e00000)
+ ParOldGen       total 86016K, used 3280K [0x0000000082c00000, 0x0000000088000000, 0x00000000d6400000)
+  object space 86016K, 3% used [0x0000000082c00000,0x0000000082f34198,0x0000000088000000)
+ Metaspace       used 15283K, capacity 15684K, committed 16000K, reserved 1062912K
+  class space    used 1933K, capacity 2095K, committed 2176K, reserved 1048576K
+}
+
+Deoptimization events (10 events):
+Event: 8.331 Thread 0x000001a596d4f800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000001a598ab90cc method=java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class; @ 38
+Event: 8.331 Thread 0x000001a596d4f800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000001a598ab90cc method=java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class; @ 38
+Event: 8.650 Thread 0x000001a596d4f800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001a598ba8e10 method=java.lang.reflect.Method.equals(Ljava/lang/Object;)Z @ 49
+Event: 8.742 Thread 0x000001a596d4f800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000001a598ab90cc method=java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class; @ 38
+Event: 9.026 Thread 0x000001a596d4f800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001a598905644 method=sun.nio.cs.StreamDecoder.implRead([CII)I @ 36
+Event: 9.027 Thread 0x000001a596d4f800 Uncommon trap: reason=unloaded action=reinterpret pc=0x000001a598801c94 method=org.codehaus.plexus.util.xml.pull.MXParser.more()C @ 22
+Event: 9.199 Thread 0x000001a596d4f800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000001a59894ca34 method=java.net.URL.<init>(Ljava/net/URL;Ljava/lang/String;Ljava/net/URLStreamHandler;)V @ 504
+Event: 9.199 Thread 0x000001a596d4f800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001a5988b6ff8 method=sun.net.util.IPAddressUtil.scan(Ljava/lang/String;JJ[C)I @ 14
+Event: 9.203 Thread 0x000001a596d4f800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x000001a59894ca34 method=java.net.URL.<init>(Ljava/net/URL;Ljava/lang/String;Ljava/net/URLStreamHandler;)V @ 504
+Event: 9.412 Thread 0x000001a596d4f800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001a598746dc8 method=java.lang.String.replace(CC)Ljava/lang/String; @ 2
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 5.402 Thread 0x000001a596d4f800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d6ca5d68) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u503\2971\hotspot\src\share\vm\prims\jvm.cpp, line 1513]
+Event: 6.034 Thread 0x000001a596d4f800 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.lambda$identity$2(Ljava/lang/Object;)Ljava/lang/Object;> (0x00000000d6ef6198) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u503\2971\hotspot\src\share\vm\interpreter
+Event: 6.045 Thread 0x000001a596d4f800 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.lambda$andThen$1(Ljava/util/function/Function;Ljava/lang/Object;)Ljava/lang/Object;> (0x00000000d6f16680) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u503\2971\hots
+Event: 6.721 Thread 0x000001a596d4f800 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.lambda$comparing$77a9974f$1(Ljava/util/function/Function;Ljava/lang/Object;Ljava/lang/Object;)I> (0x00000000d7bad9c0) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u5
+Event: 6.725 Thread 0x000001a596d4f800 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.lambda$comparing$ea9a8b3a$1(Ljava/util/Comparator;Ljava/util/function/Function;Ljava/lang/Object;Ljava/lang/Object;)I> (0x00000000d7bbf6a0) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-
+Event: 6.727 Thread 0x000001a596d4f800 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.lambda$thenComparing$36697e65$1(Ljava/util/Comparator;Ljava/lang/Object;Ljava/lang/Object;)I> (0x00000000d7bc7650) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u503\
+Event: 6.908 Thread 0x000001a596d4f800 Exception <a 'java/lang/NoClassDefFoundError': javax/enterprise/inject/Typed> (0x00000000d80b9be0) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u503\2971\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 202]
+Event: 8.331 Thread 0x000001a596d4f800 Implicit null exception at 0x000001a59894310c to 0x000001a5989432cd
+Event: 8.761 Thread 0x000001a596d4f800 Exception <a 'java/lang/NoClassDefFoundError': com/google/inject/servlet/ServletModuleTargetVisitor> (0x00000000d6f0b698) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u503\2971\hotspot\src\share\vm\classfile\systemDictionary.c
+Event: 8.761 Thread 0x000001a596d4f800 Exception <a 'java/lang/NoClassDefFoundError'> (0x00000000d6f0b698) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u503\2971\hotspot\src\share\vm\prims\jvm.cpp, line 1517]
+
+Events (10 events):
+Event: 9.457 loading class org/apache/maven/project/DefaultProjectBuilder$InterimResult
+Event: 9.457 loading class org/apache/maven/project/DefaultProjectBuilder$InterimResult done
+Event: 9.458 loading class org/apache/maven/project/ReactorModelPool$CacheKey
+Event: 9.458 loading class org/apache/maven/project/ReactorModelPool$CacheKey done
+Event: 9.461 loading class org/apache/maven/model/building/ModelBuildingEventCatapult$1
+Event: 9.461 loading class org/apache/maven/model/building/ModelBuildingEventCatapult$1 done
+Event: 9.462 loading class org/apache/maven/model/building/DefaultModelBuildingEvent
+Event: 9.462 loading class org/apache/maven/model/building/DefaultModelBuildingEvent done
+Event: 9.465 loading class org/apache/maven/lifecycle/mapping/Lifecycle
+Event: 9.465 loading class org/apache/maven/lifecycle/mapping/Lifecycle done
+
+
+Dynamic libraries:
+0x00007ff76caa0000 - 0x00007ff76caef000 	C:\Program Files\Java\jdk1.8.0_503\bin\java.exe
+0x00007fff3ce70000 - 0x00007fff3d068000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007fff3caf0000 - 0x00007fff3cbb2000 	C:\Windows\System32\KERNEL32.DLL
+0x00007fff3a800000 - 0x00007fff3aaf6000 	C:\Windows\System32\KERNELBASE.dll
+0x00007fff3c390000 - 0x00007fff3c441000 	C:\Windows\System32\ADVAPI32.dll
+0x00007fff3cd50000 - 0x00007fff3cdee000 	C:\Windows\System32\msvcrt.dll
+0x00007fff3b740000 - 0x00007fff3b7df000 	C:\Windows\System32\sechost.dll
+0x00007fff3c0d0000 - 0x00007fff3c1f0000 	C:\Windows\System32\RPCRT4.dll
+0x00007fff3a500000 - 0x00007fff3a527000 	C:\Windows\System32\bcrypt.dll
+0x00007fff3c740000 - 0x00007fff3c8e1000 	C:\Windows\System32\USER32.dll
+0x00007fff3ad00000 - 0x00007fff3ad22000 	C:\Windows\System32\win32u.dll
+0x00007fff3ce00000 - 0x00007fff3ce2b000 	C:\Windows\System32\GDI32.dll
+0x00007fff3abe0000 - 0x00007fff3acf9000 	C:\Windows\System32\gdi32full.dll
+0x00007fff3a5b0000 - 0x00007fff3a64d000 	C:\Windows\System32\msvcp_win.dll
+0x00007fff3a650000 - 0x00007fff3a750000 	C:\Windows\System32\ucrtbase.dll
+0x00007fff22990000 - 0x00007fff22c2b000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.6456_none_60b8a6cb71f64256\COMCTL32.dll
+0x00007fff3ca10000 - 0x00007fff3ca3f000 	C:\Windows\System32\IMM32.DLL
+0x00007fff18850000 - 0x00007fff1886e000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\vcruntime140.dll
+0x00007fff17c40000 - 0x00007fff17c4c000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\vcruntime140_1.dll
+0x00007fff0a7c0000 - 0x00007fff0a84d000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\msvcp140.dll
+0x00007ffed44d0000 - 0x00007ffed4d83000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\server\jvm.dll
+0x00007fff3cdf0000 - 0x00007fff3cdf8000 	C:\Windows\System32\PSAPI.DLL
+0x00007fff34750000 - 0x00007fff34759000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007fff1c9d0000 - 0x00007fff1c9f7000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007fff3c320000 - 0x00007fff3c38b000 	C:\Windows\System32\WS2_32.dll
+0x00007fff2a3b0000 - 0x00007fff2a3ba000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007fff38d60000 - 0x00007fff38d72000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007fff14470000 - 0x00007fff14480000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\verify.dll
+0x00007fff0a790000 - 0x00007fff0a7bc000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\java.dll
+0x00007fff0a640000 - 0x00007fff0a658000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\zip.dll
+0x00007fff3afd0000 - 0x00007fff3b740000 	C:\Windows\System32\SHELL32.dll
+0x00007fff38170000 - 0x00007fff38915000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007fff3bd70000 - 0x00007fff3c0c4000 	C:\Windows\System32\combase.dll
+0x00007fff39f30000 - 0x00007fff39f5b000 	C:\Windows\SYSTEM32\Wldp.dll
+0x00007fff3c460000 - 0x00007fff3c52d000 	C:\Windows\System32\OLEAUT32.dll
+0x00007fff3ca40000 - 0x00007fff3caed000 	C:\Windows\System32\SHCORE.dll
+0x00007fff3cbc0000 - 0x00007fff3cc1b000 	C:\Windows\System32\shlwapi.dll
+0x00007fff3a430000 - 0x00007fff3a454000 	C:\Windows\SYSTEM32\profapi.dll
+0x00007fff092f0000 - 0x00007fff0930d000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\net.dll
+0x00007fff39c20000 - 0x00007fff39c8a000 	C:\Windows\system32\mswsock.dll
+0x00007fff082d0000 - 0x00007fff082e3000 	C:\Program Files\Java\jdk1.8.0_503\jre\bin\nio.dll
+0x00007fff1d390000 - 0x00007fff1d3b4000 	C:\apache-maven-3.9.16\lib\jansi-native\Windows\x86_64\jansi.dll
+0x00007fff389f0000 - 0x00007fff38bf1000 	C:\Windows\SYSTEM32\dbghelp.dll
+0x00007fff3ab50000 - 0x00007fff3abd2000 	C:\Windows\System32\bcryptPrimitives.dll
+
+VM Arguments:
+jvm_args: -Dclassworlds.conf=C:\apache-maven-3.9.16\bin\m2.conf -Dmaven.home=C:\apache-maven-3.9.16 -Dlibrary.jansi.path=C:\apache-maven-3.9.16\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\jaimi\OneDrive\Documentos\programacao\parque_estacionamento_corba 
+java_command: org.codehaus.plexus.classworlds.launcher.Launcher compile -f c:\Users\jaimi\OneDrive\Documentos\programacao\parque_estacionamento_corba\backend\parque_estacionamento\pom.xml
+java_class_path (initial): C:\apache-maven-3.9.16\boot\plexus-classworlds-2.11.0.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_503
+PATH=C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\jaimi\OneDrive\Documentos\programacao\calculatorProject\omniORB\bin;C:\Users\jaimi\AppData\Local\Programs\Python\Python313\;C:\Users\jaimi\AppData\Local\Programs\Python\Launcher\;C:\Users\jaimi\AppData\Local\Microsoft\WindowsApps;C:\Users\jaimi\AppData\Local\Programs\Microsoft VS Code\bin;D:\programs files\PyCharm Community Edition 2024.1.4\bin;;C:\msys64\mingw64\bin;C:\msys64\usr\bin;C:\omniORB\bin\x86_win32;C:\Program Files\Java\jdk1.8.0_503;C:\apache-maven-3.9.16\bin;C:\Program Files\Java\jdk1.8.0_503\bin;c:\Users\jaimi\.vscode\extensions\vscjava.vscode-java-debug-0.59.0\bundled\scripts\noConfigScripts;c:\Users\jaimi\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts
+USERNAME=jaimi
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 122 Stepping 8, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 19041 (10.0.19041.5915)
+
+CPU:total 2 (initial active 2) (2 cores per cpu, 1 threads per core) family 6 model 122 stepping 8, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, aes, clmul, erms, 3dnowpref, tsc, tscinvbit
+
+Memory: 4k page, physical 8200200k(2574492k free), swap 10516608k(3784k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.503-b01) for windows-amd64 JRE (1.8.0_503-b01), built on Jul 23 2026 11:54:00 by "java_re" with MS VC++ 17.13 (VS2022)
+
+time: Sat Oct  3 19:11:56 2026
+timezone: South Africa Standard Time
+elapsed time: 9.672764 seconds (0d 0h 0m 9s)
+
