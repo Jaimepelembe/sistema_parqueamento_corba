@@ -90,8 +90,6 @@ public class servidorPagamento {
             NameComponent transacaoName[] = namingRef.to_name("Tansacao");
             namingRef.rebind(transacaoName,transacao);
 
-
-
             System.out.println("Servidor de pagamento pronto e aguardando pedidos!" +"\nIP: "+Host+"\nPorta: "+Port);
 
             //Aguarda pela invocação dos clientes
