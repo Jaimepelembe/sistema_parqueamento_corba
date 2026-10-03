@@ -16,6 +16,7 @@ import CosNaming
 
 # Importar o módulo gerado pelo omniidl a partir do IDL
 import ParqueamentoApp
+import PagamentoApp
 
 
 
@@ -65,6 +66,9 @@ class GerenciadorJanelas:
         self.servico_reserva = self.obter_servico(
             "Reserva", ParqueamentoApp.Reserva
         )
+        
+        self.servico_conta= self.obter_servico("Conta",PagamentoApp.Conta)
+        self.servico_transacao= self.obter_servico("Transacao",PagamentoApp.Transacao)
 
         # Guarda o utilizador autenticado após o login
         self.usuario_logado = None
@@ -82,8 +86,8 @@ class GerenciadorJanelas:
     def encerrar_aplicacao(self):
         if self.tela_login:
             self.tela_login.fechar()
-        if self.tela_principal:
-            self.tela_principal.fechar()
+        if self.tela_usuario_comum:
+            self.tela_usuario_comum.fechar()
         if self.tela_cadastro:
             self.tela_cadastro.fechar()
    
@@ -96,7 +100,7 @@ class GerenciadorJanelas:
             
 
             # --- EVENTOS DA TELA DE LOGIN ---
-            if window == self.tela_login.window:
+            if self.tela_login !=None  and window == self.tela_login.window:
                 if event ==sg.WIN_CLOSED:
                     break
                 
@@ -116,33 +120,50 @@ class GerenciadorJanelas:
                                 print(user_dto.nome)
                                 self.tela_login.ocultar()
                                 
-                                if self.usuario_logado.tipo==0:
+                                if self.usuario_logado.tipo==0: #Mostra a tela do usuario comum
                                     #self.tela_usuario_comum.usuario_logado=user_dto
+                                    
+                                    #Verificar se ele ja possui uma conta bancaria
+                                    idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
+                                    if idConta>0:
+                                        #print(idConta)
+                                        print("Ja tem conta")
+                                        pass
+                                    else:
+                                        print("Nao tem conta.")
+                                        conta =PagamentoApp.ContaDTO(-1,0,self.usuario_logado.id_usuario)
+                                        resultado=self.servico_conta.criarConta(conta) 
+                                        if resultado:
+                                            print("Conta Criada com sucesso")
+                                    
+                                    self.saldoActual =self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
+                                    self.listaTransacoesDTO= self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)
+                                    listaTransacoes=[]
+                                    for transacaoDTO in self.listaTransacoesDTO:
+                                        listaTransacoes.append([transacaoDTO.id_transacao,transacaoDTO.tipo,transacaoDTO.valor,transacaoDTO.estado,transacaoDTO.data,transacaoDTO.hora])
+                                    
                                     #Pesquisar os dados que o usuario vai precisar
                                     #Viaturas
                                     self.listaViaturasDTO=self.servico_viatura.listarViaturas(self.usuario_logado.id_usuario)
                                     print(self.listaViaturasDTO)
-                                    print("Buscou viaturas")
+    
                                     listaViaturas=[]
                                     for viaturaDTO in self.listaViaturasDTO:
                                         listaViaturas.append([viaturaDTO.marca,viaturaDTO.modelo,viaturaDTO.matricula])
-                                        print(viaturaDTO.matricula)
+                                        #print(viaturaDTO.matricula)
                                     
                                     
                                     self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
                                     listaParques=[]
                                     for parqueDTO in self.listaParquesDTO:
                                         listaParques.append([parqueDTO.nome,parqueDTO.provincia,parqueDTO.localizacao,parqueDTO.telefone,parqueDTO.horario,parqueDTO.cobertura,parqueDTO.preco])
-                                        print(parqueDTO.nome)
+                                        #print(parqueDTO.nome)
                                     
-                                    print("Tela de login")
-                                    #print(listaParques)
-                                    self.tela_usuario_comum= TelaUsuarioComum(user_dto,listaParques,listaViaturas,[])
+                                    self.tela_usuario_comum= TelaUsuarioComum(user_dto,listaParques,listaViaturas,listaTransacoes,self.saldoActual)
                                     listaParques=None
-                                    #listaViaturas=None
+                                    
                                   
                                     
-                                    pass # Mostra a tela normal
                                 else:
                                     pass # Mostra a tela de admin
                                 
@@ -158,11 +179,37 @@ class GerenciadorJanelas:
                     self.tela_login.ocultar()
                     self.tela_cadastro = TelaCadastroUsuario()
                 
+            #--- Eventos da tela de cadastro ---
+            elif self.tela_cadastro!=None and window == self.tela_cadastro.window:
+                if event ==sg.WIN_CLOSED:
+                    break
+                elif event == "-BTN-CAD-USER-":
+
+                    nome = values["-CAD-NOME-"].strip()
+                    telefone = values["-CAD-TEL-"].strip()
+                    senha = values["-CAD-SENHA-"].strip()
+
+                    if validarNome(nome) and validarTelefone(telefone) and validarSenha(senha):
+                        # Tipo 0 = Cliente normal
+                        novo_user = ParqueamentoApp.UsuarioDTO(
+                            -1, nome, telefone, senha, 0)
+                        
+                        try:
+                            self.servico_usuario.cadastrar(novo_user)
+                            
+                            sg.popup("Cadastro efetuado! Já pode realizar o login.")
+                            self.tela_login.exibir()
+
+                        except Exception as e:
+                            sg.popup_error(f"Erro ao cadastrar: {e}")
+                    else:
+                        sg.popup("Preencha todos os campos do cadastro.")
+          
             
             #---Eventos da tela do usuario comum ---
-            elif window ==self.tela_usuario_comum.window:     
+            elif self.tela_usuario_comum !=None  and window==self.tela_usuario_comum.window:     
                 # Fechar aplicação
-                if event ==sg.WIN_CLOSED:
+                if event == sg.WIN_CLOSED:
                     break
 
                 # 1. EVENTOS DA TAB PARQUES (Seleção na Tabela para Reserva)
@@ -195,36 +242,7 @@ class GerenciadorJanelas:
                             self.tela_usuario_comum.ocultar()
                             self.tela_reserva_vaga= TelaReservaVaga()  
                     
-            #---Eventos da tela de cadastro ---
-            elif window == self.tela_cadastro.window:
-                if event ==sg.WIN_CLOSED:
-                    break
-                elif event == "-BTN-CAD-USER-":
-                    print("Cadastrar")
-                        
-                    nome = values["-CAD-NOME-"].strip()
-                    telefone = values["-CAD-TEL-"].strip()
-                    senha = values["-CAD-SENHA-"].strip()
 
-                    if validarNome(nome) and validarTelefone(telefone) and validarSenha(senha):
-                        # Tipo 0 = Cliente normal
-                        print("Validados")
-                        novo_user = ParqueamentoApp.UsuarioDTO(
-                            -1, nome, telefone, senha, 0)
-
-                        print(f"Novo: {novo_user.id_usuario}")
-                        
-                        try:
-                            self.servico_usuario.cadastrar(novo_user)
-                            sg.popup("Cadastro efetuado! Já pode realizar o login.")
-                            self.tela_login.exibir()
-
-                        except Exception as e:
-                            sg.popup_error(f"Erro ao cadastrar: {e}")
-                    else:
-                        sg.popup("Preencha todos os campos do cadastro.")
-        
-            
                 
 
             

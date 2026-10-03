@@ -89,6 +89,7 @@ _0_PagamentoApp._tc_Conta = omniORB.tcInternal.createTypeCode(_0_PagamentoApp._d
 omniORB.registerType(Conta._NP_RepositoryId, _0_PagamentoApp._d_Conta, _0_PagamentoApp._tc_Conta)
 
 # Conta operations and attributes
+Conta._d_criarConta = ((omniORB.typeMapping["IDL:PagamentoApp/ContaDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
 Conta._d_consultarSaldo = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.tv_float, ), None)
 Conta._d_buscarIDConta = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.tv_long, ), None)
 Conta._d_depositar = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.tv_float), (omniORB.tcInternal.tv_boolean, ), None)
@@ -100,6 +101,9 @@ class _objref_Conta (CORBA.Object):
 
     def __init__(self, obj):
         CORBA.Object.__init__(self, obj)
+
+    def criarConta(self, *args):
+        return self._obj.invoke("criarConta", _0_PagamentoApp.Conta._d_criarConta, args)
 
     def consultarSaldo(self, *args):
         return self._obj.invoke("consultarSaldo", _0_PagamentoApp.Conta._d_consultarSaldo, args)
@@ -123,7 +127,7 @@ class Conta (PortableServer.Servant):
     _NP_RepositoryId = _0_PagamentoApp.Conta._NP_RepositoryId
 
 
-    _omni_op_d = {"consultarSaldo": _0_PagamentoApp.Conta._d_consultarSaldo, "buscarIDConta": _0_PagamentoApp.Conta._d_buscarIDConta, "depositar": _0_PagamentoApp.Conta._d_depositar, "debitar": _0_PagamentoApp.Conta._d_debitar}
+    _omni_op_d = {"criarConta": _0_PagamentoApp.Conta._d_criarConta, "consultarSaldo": _0_PagamentoApp.Conta._d_consultarSaldo, "buscarIDConta": _0_PagamentoApp.Conta._d_buscarIDConta, "depositar": _0_PagamentoApp.Conta._d_depositar, "debitar": _0_PagamentoApp.Conta._d_debitar}
 
 Conta._omni_skeleton = Conta
 _0_PagamentoApp__POA.Conta = Conta

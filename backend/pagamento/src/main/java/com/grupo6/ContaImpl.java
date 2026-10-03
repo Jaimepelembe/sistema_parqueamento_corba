@@ -1,5 +1,6 @@
 package com.grupo6;
 
+import com.grupo6.PagamentoApp.ContaDTO;
 import com.grupo6.PagamentoApp.ContaPOA;
 import com.grupo6.dao.ContaDAO;
 
@@ -12,6 +13,17 @@ public class ContaImpl
     public ContaImpl() {
 
         
+    }
+
+
+    @Override
+    public boolean criarConta(ContaDTO conta){
+        boolean resultado=false;
+        if (conta.saldo>=0 && conta.id_usuario>0){
+        contaDAO = new ContaDAO();
+        resultado=contaDAO.criarConta(conta);
+        }
+        return resultado;
     }
 
 
@@ -60,25 +72,30 @@ public class ContaImpl
 
    
 
-/**
+ /**   
 public static void main(String[] args) {
 
     ContaImpl c = new ContaImpl();
-    float saldo= c.consultarSaldo(1);
+    //ContaDTO conta= new ContaDTO(-1,100,11);
+    
+   // c.criarConta(conta);
+    
+    float saldo= c.consultarSaldo(12);
     System.out.println("Saldo 1: " +saldo);
     
-    c.depositar(1, 600);
-    saldo= c.consultarSaldo(1);
+    //c.depositar(11, 600);
+    saldo= c.consultarSaldo(12);
     System.out.println("Novo Saldo: " +saldo);
     
-    c.debitar(1, 150);
-    saldo= c.consultarSaldo(1);
+
+    //c.debitar(1, 150);
+    //saldo= c.consultarSaldo(1);
     System.out.println("Novo Saldo: " +saldo);
 
 
 
 }
-    
+
 
 * */
   

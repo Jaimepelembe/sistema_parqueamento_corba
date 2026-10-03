@@ -6,11 +6,11 @@ sg.theme('DarkBlue3')
 
 
 class TelaUsuarioComum:
-    def __init__(self,usuario_logado,listaParques, listaViaturas,listaTransacoes):
+    def __init__(self,usuario_logado,listaParques, listaViaturas,listaTransacoes,saldoActual):
         self.usuario_logado= usuario_logado
         #listaBaseDados=self.servico_parque.pesquisarPorCategoria("nome")
         
-        self.saldo_atual = 500.00  # Exemplo de saldo inicial em Meticais (MT)
+        self.saldo_atual = saldoActual  # Exemplo de saldo inicial em Meticais (MT)
 
         # Listas de dados para popular a interface (Simulação de Banco de Dados)
         self.lista_parques =listaParques
@@ -105,9 +105,9 @@ class TelaUsuarioComum:
             [
                 sg.Table(
                     values=self.minhas_transacoes,
-                    headings=['Data', 'Descrição', 'Valor'],
+                    headings=['ID','Tipo', 'Valor','Estado','Data', 'Hora'],
                     auto_size_columns=True,
-                    num_rows=5,
+                    num_rows=6,
                     key='-TABELA_TRANSACOES-',
                 )
             ],

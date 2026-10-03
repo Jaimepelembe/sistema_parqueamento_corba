@@ -21,6 +21,10 @@ module PagamentoApp {
 typedef sequence<TransacaoDTO> listaTransacaoDTO;
 
 interface Conta{
+
+    //Criar uma conta
+    boolean criarConta(in ContaDTO conta);
+
     // Consultar saldo
     float consultarSaldo(
             in long id_usuario
