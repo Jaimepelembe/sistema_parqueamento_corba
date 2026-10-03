@@ -125,9 +125,7 @@ public class servidorParqueamento {
             NameComponent viaturaName[] = namingRef.to_name("Viatura");
             namingRef.rebind(viaturaName,viatura);
 
-
-
-            System.out.println("Servidor pronto e aguardando pedidos!" +"\nIP: "+Host+"\nPorta: "+Port);
+            System.out.println("Servidor de parqueamento pronto e aguardando pedidos!" +"\nIP: "+Host+"\nPorta: "+Port);
 
             //Aguarda pela invocação dos clientes
             orb.run();

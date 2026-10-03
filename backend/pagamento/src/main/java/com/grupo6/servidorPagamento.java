@@ -92,7 +92,7 @@ public class servidorPagamento {
 
 
 
-            System.out.println("Servidor pronto e aguardando pedidos!" +"\nIP: "+Host+"\nPorta: "+Port);
+            System.out.println("Servidor de pagamento pronto e aguardando pedidos!" +"\nIP: "+Host+"\nPorta: "+Port);
 
             //Aguarda pela invocação dos clientes
             orb.run();
