@@ -18,7 +18,7 @@ module PagamentoApp {
     };
 
 //Sequencia de elementos: Sintaxe:  sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
-typedef sequence<Transacao> listaTransacaoDTO;
+typedef sequence<TransacaoDTO> listaTransacaoDTO;
 
 interface Conta{
     // Consultar saldo
@@ -26,6 +26,10 @@ interface Conta{
             in long id_usuario
         );
 
+    // Buscar o Id da conta
+    long buscarIDConta(
+            in long id_usuario
+        );
 
     // Depositar dinheiro
     boolean depositar(
@@ -33,23 +37,27 @@ interface Conta{
             in float valor
         );
 
+// Debitar dinheiro
+    boolean debitar(
+            in long id_usuario,
+            in float valor
+        );
 
-}
+
+};
 
 
 interface Transacao {
 
         // Efetuar Transacao
-        boolean EfetuarTransacao(
-            in string tipo,
-            in float valor,
-            in string estado,
-            in string data,
-            in string hora,
-            long id_conta;
-        
+        boolean efetuarTransacao(
+            in TransacaoDTO transacao
         );
 
+        // Listar transacoes de um usuário
+        listaTransacaoDTO listarTransacoes(
+            in long id_conta
+        );
 
         // Consultar transacao
         //Transacao obterTransacao(
@@ -59,9 +67,6 @@ interface Transacao {
         //);
 
 
-        // Listar transacoes de um usuário
-        listaTransacaoDTO listarTransacoes(
-            in long id_conta
-        );
+
     };
 };

@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ContaImpl",
+            "request": "launch",
+            "mainClass": "com.grupo6.ContaImpl",
+            "projectName": "pagamento"
+        },
+        {
+            "type": "java",
+            "name": "ContaDAO",
+            "request": "launch",
+            "mainClass": "com.grupo6.dao.ContaDAO",
+            "projectName": "pagamento"
+        },
+        {
+            "type": "java",
+            "name": "InicializarTabelas",
+            "request": "launch",
+            "mainClass": "com.grupo6.dao.InicializarTabelas",
+            "projectName": "pagamento"
+        },
+        {
+            "type": "java",
             "name": "ConexaoBD",
             "request": "launch",
             "mainClass": "com.grupo6.dao.ConexaoBD",

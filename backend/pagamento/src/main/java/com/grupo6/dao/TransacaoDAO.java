@@ -13,7 +13,7 @@ public class TransacaoDAO {
     
     public TransacaoDAO(){}
 
-    public boolean EfetuarTransacao(TransacaoDTO transacao){
+    public boolean efetuarTransacao(TransacaoDTO transacao){
         boolean resultado=false;
        String sql="INSERT INTO transacao (tipo, valor, estado, data,hora,id_conta) VALUES (?, ?, ?, ?, ?, ?)";
 
