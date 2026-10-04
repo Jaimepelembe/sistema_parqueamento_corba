@@ -10,6 +10,7 @@ from validacoes import validarTelefone
 from validacoes import validarNome
 from validacoes import validar_dinheiro_string
 from validacoes import validar_dinheiro
+from validacoes import validarMatricula
 
 from datetime import datetime
 
@@ -183,7 +184,15 @@ class GerenciadorJanelas:
         else:
             sg.popup_error('Erro', 'O valor de deposito deve ser maior que zero.')
         
-   
+    def adicionarViatura(self,window,values):
+        marca=values["-MARCA-"]
+        modelo=values["-MODELO-"]
+        matricula=values["-MATRICULA-"]
+        
+        if validarNome(marca) and validarNome(modelo) and validarMatricula(matricula):
+           # self.servico_viatura.adicionarViatura(ViaturaDTO viatura)
+           pass
+        
    
     def executar(self):
         while True:
@@ -308,7 +317,9 @@ class GerenciadorJanelas:
                 if event == "-BTN_ATUALIZAR_PERFIL-":
                     self.actualizarDadosUsuario(self.tela_usuario_comum.window,values)
                         
-
+               # EVENTOS DA TABELA Minhas Viaturas
+                if event == "-BTN_ADD_VIATURA-":
+                   self.adicionarViatura(self.tela_usuario_comum.window,values)
             
 
 if __name__ == '__main__':

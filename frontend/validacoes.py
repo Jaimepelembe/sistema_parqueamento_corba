@@ -108,8 +108,33 @@ def validar_dinheiro(valor) ->float:
         return numero 
     except ValueError:
         return False
-
+    
+def validarMatricula(matricula:str):
+    padrao=r"^[A-Z]{3}\s\d{3}\s(MP|MC|GZ|IB|SF|MN|TT|ZB|NP|NS|CA){1}$"
+    resultado= bool(re.match(padrao, matricula))
+    if not resultado:
+        sg.popup_error(
+            'Marca Inválida',
+            'A marca deve estar no formato 3 Letras 3 Digitos e o indicativo da provincia\nExemplo: ABC 123 MP.',
+            title='Erro de Validação'
+        )
+    return resultado
+        
+    
 """
+testes = [
+    "ABC 123 MC",      # Válido
+    "xyz 789 vermelho",  # Válido
+    "A1C 123 azul",      # Inválido (contém número nas três letras)
+    "ABC 126 MP",       # Inválido (falta um dígito)
+    "XYZ 789 amarelo"    # Inválido (amarelo não está na lista de opções)
+]
+
+
+for item in testes:
+    print(f"{item}: {validarMatricula(item)}")
+
+
 # Exemplos de uso:
 print(validar_dinheiro_string("1250.50"))   # True
 print(validar_dinheiro_string("1,250.50"))  # True
@@ -118,6 +143,7 @@ print(validar_dinheiro_string("12,50,50"))  # False (formato inválido)
 print(validar_dinheiro_string("abc"))      # False
 
 print(validar_dinheiro("12450.0"))
+
 """
 
 #print(validarSenha("12345Ae!"))
