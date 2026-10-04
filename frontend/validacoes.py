@@ -95,6 +95,31 @@ def validarTelefone(telefone: str) -> bool:
     return True
 
 
+def validar_dinheiro_string(valor):
+    # Expressão regular para formatos comuns de moeda (com ou sem separadores de milhares)
+    padrao = r'^\d+([.,]\d{1,2})?$'
+    return bool(re.match(padrao, valor.strip()))
+
+def validar_dinheiro(valor) ->float:
+    valor = valor.strip().replace(",", ".")
+
+    try:
+        numero = float(valor)
+        return numero 
+    except ValueError:
+        return False
+
+"""
+# Exemplos de uso:
+print(validar_dinheiro_string("1250.50"))   # True
+print(validar_dinheiro_string("1,250.50"))  # True
+print(validar_dinheiro_string("1250"))      # True (aceita sem cêntimos)
+print(validar_dinheiro_string("12,50,50"))  # False (formato inválido)
+print(validar_dinheiro_string("abc"))      # False
+
+print(validar_dinheiro("12450.0"))
+"""
+
 #print(validarSenha("12345Ae!"))
 #print(validarTelefone("847502352"))
 #print("Ola mundo")

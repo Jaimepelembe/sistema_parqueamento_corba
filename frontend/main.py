@@ -8,6 +8,8 @@ from telas.telaReservaVaga import TelaReservaVaga
 from validacoes import validarSenha
 from validacoes import validarTelefone
 from validacoes import validarNome
+from validacoes import validar_dinheiro_string
+from validacoes import validar_dinheiro
 
 from datetime import datetime
 
@@ -93,7 +95,7 @@ class GerenciadorJanelas:
         if self.tela_cadastro:
             self.tela_cadastro.fechar()
    
-    def listarTransoces(self):
+    def listarTransacoes(self):
         self.listaTransacoesDTO= self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)
         listaTransacoes=[]
         for transacaoDTO in self.listaTransacoesDTO:
@@ -129,7 +131,36 @@ class GerenciadorJanelas:
             resultado=self.servico_conta.criarConta(conta) 
             if resultado:
                 print("Conta Criada com sucesso")
+    
+    def actualizarDadosUsuario(self,values):
+        pass
+    
+    
+    def depositar(self,window,values):
+        valorDeposito=values["-VALOR_DEPOSITO-"]
+        if valorDeposito!="" and validar_dinheiro_string(valorDeposito):
+            valorDeposito=validar_dinheiro(valorDeposito)
         
+            foiDepositado=self.servico_conta.depositar(self.usuario_logado.id_usuario,valorDeposito)
+            if foiDepositado:
+                idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
+                if idConta>0:
+                    hoje=datetime.now()
+                    data=hoje.strftime("%d-%m-%Y")
+                    hora=hoje.strftime("%H:%M:%S")
+                    transacaoDTO= PagamentoApp.TransacaoDTO(-1,"DEPOSITO",valorDeposito,"CONCLUIDO",data,hora, idConta)
+                    sucesso=self.servico_transacao.efetuarTransacao(transacaoDTO)
+                    if sucesso:
+                        # Actualizar o saldo actual e o historico de transacoes
+                        #self.listaTransacoesDTO=self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)  
+                        self.saldoActual= self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
+                        window['-TXT_SALDO-'].update(f'Saldo Atual: {self.saldoActual:.2f} MT')        
+                        window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes())        
+                               
+                        sg.popup('Sucesso', 'O deposito foi efectuado com sucesso.')
+            
+        else:
+            sg.popup_error('Erro', 'O valor de deposito deve ser maior que zero.')
         
    
    
@@ -168,10 +199,9 @@ class GerenciadorJanelas:
                                     self.saldoActual =self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
                                     
                                     #Pesquisar os dados que o usuario vai precisar usando as funcoes listarParques, listarViaturas, listarTransacoes.
-                                    self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransoces(),self.saldoActual)
+                                    self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.saldoActual)
                                     #listaParques=None
-                                    
-                                  
+     
                                     
                                 else:
                                     pass # Mostra a tela de admin
@@ -251,24 +281,10 @@ class GerenciadorJanelas:
                             self.tela_usuario_comum.ocultar()
                             self.tela_reserva_vaga= TelaReservaVaga()  
                     
-                # EVENTOS DA TABELA 
+                # EVENTOS DA TABELA PERFIL
                 if event == "-BTN_DEPOSITAR-":
-                    valorDeposito=values["-VALOR_DEPOSITO-"]
-                    if valorDeposito>0:
-                        
-                        foiDepositado=self.servico_conta.depositar(self.usuario_logado.id_usuario,valorDeposito)
-                        if foiDepositado:
-                            idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
-                            if idConta>0:
-                                print("Ja tem conta")
-                                pass
-                            transacaoDTO= PagamentoApp.TransacaoDTO(-1,"DEPOSITO",valorDeposito,"CONCLUIDO",DATA,HORA, idConta)
-                            sucesso=self.servico_transacao.efetuarTransacao(transacaoDTO)
-                            if sucesso:
-                                self.listaTransacoesDTO=self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)                 
-                        
-                    else:
-                        sg.popup_error('Erro', 'O valor de deposito deve ser maior que zero.')
+                    self.depositar(self.tela_usuario_comum.window,values)
+                  
                         
 
             
