@@ -42,7 +42,7 @@ public class UsuarioImpl
             
         }
     
-   
+          /**
         public static void main(String[] args){
         UsuarioDTO us = null;
         UsuarioImpl user = new UsuarioImpl();
@@ -60,11 +60,12 @@ public class UsuarioImpl
         us=new UsuarioDTO(id, "Tomas Vieira Mario", "840000004", "senha123",-1);
         //Actualizar dados
         boolean resultado= user.actualizarDados(us);
+        System.out.println("Login: "+us.nome);
         System.out.println("Resultado: "+resultado);
 
 
     }
-        /**
+ 
     * */
 
         }

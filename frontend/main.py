@@ -132,8 +132,28 @@ class GerenciadorJanelas:
             if resultado:
                 print("Conta Criada com sucesso")
     
-    def actualizarDadosUsuario(self,values):
-        pass
+    def actualizarDadosUsuario(self,window,values):
+        novoNome=values["-PERFIL_NOME-"]
+        novoTelefone=values["-PERFIL_TEL-"]
+        novaSenha=values["-PERFIL_SENHA-"]
+        
+        if validarNome(novoNome) and validarTelefone(novoTelefone) and validarSenha(novaSenha):
+            nomeAntigo=self.usuario_logado.nome
+            telefoneAntigo=self.usuario_logado.telefone
+            senhaAntiga=self.usuario_logado.senha
+            if novoNome!=nomeAntigo or novoTelefone!= telefoneAntigo or novaSenha!= senhaAntiga:
+                #print("DadosSao diferentes")
+                usuarioDTO=ParqueamentoApp.UsuarioDTO(self.usuario_logado.id_usuario,novoNome,novoTelefone,novaSenha,self.usuario_logado.tipo)
+                sucesso=self.servico_usuario.actualizarDados(usuarioDTO)
+                #self.servico_usuario.login(novoTelefone,novaSenha)
+                if sucesso:
+                    window["-PERFIL_NOME-"].update(novoNome)
+                    window["-PERFIL_TEL-"].update(novoTelefone)
+                    window["-PERFIL_SENHA-"].update(novaSenha)
+                    
+                    sg.popup('Sucesso', 'Dados actualizados com sucesso.')
+            else:
+                 sg.popup_error('Erro', 'Voce nao modificou nenhum dos seus dados!\nModifique um deles para poder actualizar.')
     
     
     def depositar(self,window,values):
@@ -156,6 +176,7 @@ class GerenciadorJanelas:
                         self.saldoActual= self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
                         window['-TXT_SALDO-'].update(f'Saldo Atual: {self.saldoActual:.2f} MT')        
                         window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes())        
+                        window['-VALOR_DEPOSITO-'].update('')        
                                
                         sg.popup('Sucesso', 'O deposito foi efectuado com sucesso.')
             
@@ -284,7 +305,8 @@ class GerenciadorJanelas:
                 # EVENTOS DA TABELA PERFIL
                 if event == "-BTN_DEPOSITAR-":
                     self.depositar(self.tela_usuario_comum.window,values)
-                  
+                if event == "-BTN_ATUALIZAR_PERFIL-":
+                    self.actualizarDadosUsuario(self.tela_usuario_comum.window,values)
                         
 
             
