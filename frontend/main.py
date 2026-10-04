@@ -9,6 +9,8 @@ from validacoes import validarSenha
 from validacoes import validarTelefone
 from validacoes import validarNome
 
+from datetime import datetime
+
 #Importacoes de corba
 import sys
 from omniORB import CORBA
@@ -91,6 +93,44 @@ class GerenciadorJanelas:
         if self.tela_cadastro:
             self.tela_cadastro.fechar()
    
+    def listarTransoces(self):
+        self.listaTransacoesDTO= self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)
+        listaTransacoes=[]
+        for transacaoDTO in self.listaTransacoesDTO:
+            listaTransacoes.append([transacaoDTO.id_transacao,transacaoDTO.tipo,transacaoDTO.valor,transacaoDTO.estado,transacaoDTO.data,transacaoDTO.hora])
+
+        return listaTransacoes
+    
+    def listarViaturas(self) ->list[ParqueamentoApp.ViaturaDTO]:
+        self.listaViaturasDTO=self.servico_viatura.listarViaturas(self.usuario_logado.id_usuario)
+        print(self.listaViaturasDTO)
+        
+        listaViaturas=[]
+        for viaturaDTO in self.listaViaturasDTO:
+            listaViaturas.append([viaturaDTO.marca,viaturaDTO.modelo,viaturaDTO.matricula])
+        return listaViaturas    
+    
+    def listarParques(self) ->list:
+        self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
+        listaParques=[]
+        for parqueDTO in self.listaParquesDTO:
+            listaParques.append([parqueDTO.nome,parqueDTO.provincia,parqueDTO.localizacao,parqueDTO.telefone,parqueDTO.horario,parqueDTO.cobertura,parqueDTO.preco])
+            #print(parqueDTO.nome)
+        return listaParques
+    
+    def verificarContaBancaria(self):
+        idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
+        if idConta>0:
+            #print(idConta)
+            print("Ja tem conta")
+        else:
+            print("Nao tem conta.")
+            conta =PagamentoApp.ContaDTO(-1,0,self.usuario_logado.id_usuario)
+            resultado=self.servico_conta.criarConta(conta) 
+            if resultado:
+                print("Conta Criada com sucesso")
+        
+        
    
    
     def executar(self):
@@ -124,43 +164,12 @@ class GerenciadorJanelas:
                                     #self.tela_usuario_comum.usuario_logado=user_dto
                                     
                                     #Verificar se ele ja possui uma conta bancaria
-                                    idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
-                                    if idConta>0:
-                                        #print(idConta)
-                                        print("Ja tem conta")
-                                        pass
-                                    else:
-                                        print("Nao tem conta.")
-                                        conta =PagamentoApp.ContaDTO(-1,0,self.usuario_logado.id_usuario)
-                                        resultado=self.servico_conta.criarConta(conta) 
-                                        if resultado:
-                                            print("Conta Criada com sucesso")
-                                    
+                                    self.verificarContaBancaria()
                                     self.saldoActual =self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
-                                    self.listaTransacoesDTO= self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)
-                                    listaTransacoes=[]
-                                    for transacaoDTO in self.listaTransacoesDTO:
-                                        listaTransacoes.append([transacaoDTO.id_transacao,transacaoDTO.tipo,transacaoDTO.valor,transacaoDTO.estado,transacaoDTO.data,transacaoDTO.hora])
                                     
-                                    #Pesquisar os dados que o usuario vai precisar
-                                    #Viaturas
-                                    self.listaViaturasDTO=self.servico_viatura.listarViaturas(self.usuario_logado.id_usuario)
-                                    print(self.listaViaturasDTO)
-    
-                                    listaViaturas=[]
-                                    for viaturaDTO in self.listaViaturasDTO:
-                                        listaViaturas.append([viaturaDTO.marca,viaturaDTO.modelo,viaturaDTO.matricula])
-                                        #print(viaturaDTO.matricula)
-                                    
-                                    
-                                    self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
-                                    listaParques=[]
-                                    for parqueDTO in self.listaParquesDTO:
-                                        listaParques.append([parqueDTO.nome,parqueDTO.provincia,parqueDTO.localizacao,parqueDTO.telefone,parqueDTO.horario,parqueDTO.cobertura,parqueDTO.preco])
-                                        #print(parqueDTO.nome)
-                                    
-                                    self.tela_usuario_comum= TelaUsuarioComum(user_dto,listaParques,listaViaturas,listaTransacoes,self.saldoActual)
-                                    listaParques=None
+                                    #Pesquisar os dados que o usuario vai precisar usando as funcoes listarParques, listarViaturas, listarTransacoes.
+                                    self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransoces(),self.saldoActual)
+                                    #listaParques=None
                                     
                                   
                                     
@@ -242,8 +251,25 @@ class GerenciadorJanelas:
                             self.tela_usuario_comum.ocultar()
                             self.tela_reserva_vaga= TelaReservaVaga()  
                     
-
-                
+                # EVENTOS DA TABELA 
+                if event == "-BTN_DEPOSITAR-":
+                    valorDeposito=values["-VALOR_DEPOSITO-"]
+                    if valorDeposito>0:
+                        
+                        foiDepositado=self.servico_conta.depositar(self.usuario_logado.id_usuario,valorDeposito)
+                        if foiDepositado:
+                            idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
+                            if idConta>0:
+                                print("Ja tem conta")
+                                pass
+                            transacaoDTO= PagamentoApp.TransacaoDTO(-1,"DEPOSITO",valorDeposito,"CONCLUIDO",DATA,HORA, idConta)
+                            sucesso=self.servico_transacao.efetuarTransacao(transacaoDTO)
+                            if sucesso:
+                                self.listaTransacoesDTO=self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)                 
+                        
+                    else:
+                        sg.popup_error('Erro', 'O valor de deposito deve ser maior que zero.')
+                        
 
             
 
