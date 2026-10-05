@@ -67,9 +67,9 @@ class TelaUsuarioComum:
             [sg.Text('Adicionar Nova Viatura', font=('Helvetica', 12, 'bold'))],
             [
                 sg.Text('Marca:'),
-                sg.Combo(list(self.dicionarioCarros.keys()), key="-MARCA-",  readonly=True, size=(25, 1)),
+                sg.Combo(list(self.dicionarioCarros.keys()), key="-MARCA-", enable_events=True ,readonly=True, size=(25, 1)),
                 sg.Text('Modelo:'),
-                sg.Combo([], key="-MODELO-",  readonly=True, size=(25, 1)),
+                sg.Combo([], key="-MODELO-", enable_events=False,  readonly=True, size=(25, 1)),
                 sg.Text('Matrícula:'),
                 sg.Input(default_text="Ex: ABC 126 MP",key='-MATRICULA-', size=(15, 1)),
             ],
@@ -107,7 +107,9 @@ class TelaUsuarioComum:
                 sg.Table(
                     values=self.minhas_transacoes,
                     headings=['ID','Tipo', 'Valor','Estado','Data', 'Hora'],
-                    auto_size_columns=True,
+                    col_widths=[5, 10, 10, 12,12,10],
+                    justification="center",
+                    auto_size_columns=False,
                     num_rows=6,
                     key='-TABELA_TRANSACOES-',
                 )

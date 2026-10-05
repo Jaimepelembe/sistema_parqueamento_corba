@@ -189,7 +189,7 @@ class GerenciadorJanelas:
         modelosCarros=self.tela_usuario_comum.dicionarioCarros[marca]
 
         #Actualizar comboBox dos modelos
-        window["-MODELO-"].update(values=modelosCarros)
+        window["-MODELO-"].update(values=modelosCarros,value="")
       
         
         
@@ -198,10 +198,13 @@ class GerenciadorJanelas:
         modelo=values["-MODELO-"]
         matricula=values["-MATRICULA-"]
         
-        if len(marca)>2 and len(modelo)>2 and validarMatricula(matricula):
+        if len(marca)>1 and len(modelo)>1 and validarMatricula(matricula):
             viaturaDTO = ParqueamentoApp.ViaturaDTO(-1,marca,modelo,matricula,self.usuario_logado.id_usuario)
             self.servico_viatura.adicionarViatura(viaturaDTO)
             window["-TABELA_VIATURAS-"].update(values=self.listarViaturas())
+            window["-MARCA-"].update(value="")
+            window["-MODELO-"].update(values=[],value="")
+            window["-MATRICULA-"].update("Ex: ABC 126 MP")
    
         
    
