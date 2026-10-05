@@ -106,7 +106,7 @@ class GerenciadorJanelas:
     
     def listarViaturas(self) ->list[ParqueamentoApp.ViaturaDTO]:
         self.listaViaturasDTO=self.servico_viatura.listarViaturas(self.usuario_logado.id_usuario)
-        print(self.listaViaturasDTO)
+        #print(self.listaViaturasDTO)
         
         listaViaturas=[]
         for viaturaDTO in self.listaViaturasDTO:
@@ -183,15 +183,26 @@ class GerenciadorJanelas:
             
         else:
             sg.popup_error('Erro', 'O valor de deposito deve ser maior que zero.')
+    
+    def selecionarModelosCarro(self,window,values):
+        marca=values["-MARCA-"]
+        modelosCarros=self.tela_usuario_comum.dicionarioCarros[marca]
+
+        #Actualizar comboBox dos modelos
+        window["-MODELO-"].update(values=modelosCarros)
+      
+        
         
     def adicionarViatura(self,window,values):
         marca=values["-MARCA-"]
         modelo=values["-MODELO-"]
         matricula=values["-MATRICULA-"]
         
-        if validarNome(marca) and validarNome(modelo) and validarMatricula(matricula):
-           # self.servico_viatura.adicionarViatura(ViaturaDTO viatura)
-           pass
+        if len(marca)>2 and len(modelo)>2 and validarMatricula(matricula):
+            viaturaDTO = ParqueamentoApp.ViaturaDTO(-1,marca,modelo,matricula,self.usuario_logado.id_usuario)
+            self.servico_viatura.adicionarViatura(viaturaDTO)
+            window["-TABELA_VIATURAS-"].update(values=self.listarViaturas())
+   
         
    
     def executar(self):
@@ -316,6 +327,10 @@ class GerenciadorJanelas:
                     self.depositar(self.tela_usuario_comum.window,values)
                 if event == "-BTN_ATUALIZAR_PERFIL-":
                     self.actualizarDadosUsuario(self.tela_usuario_comum.window,values)
+                
+                #EVENTO QUANDO UMA MARCA E SELECIONADA
+                if event == "-MARCA-":
+                    self.selecionarModelosCarro(self.tela_usuario_comum.window,values)
                         
                # EVENTOS DA TABELA Minhas Viaturas
                 if event == "-BTN_ADD_VIATURA-":

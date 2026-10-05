@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-
+from marcasModelosCarro import dicionarioMarcasModelos
 
 # Define o tema do PySimpleGUI
 sg.theme('DarkBlue3')
@@ -29,6 +29,7 @@ class TelaUsuarioComum:
         ] """
 
         self.minhas_transacoes = listaTransacoes
+        self.dicionarioCarros=dicionarioMarcasModelos
         """
         [
             ['30/09/2026', 'Depósito', '+500.00 MT'],
@@ -66,11 +67,11 @@ class TelaUsuarioComum:
             [sg.Text('Adicionar Nova Viatura', font=('Helvetica', 12, 'bold'))],
             [
                 sg.Text('Marca:'),
-                sg.Input(key='-MARCA-', size=(15, 1)),
+                sg.Combo(list(self.dicionarioCarros.keys()), key="-MARCA-",  readonly=True, size=(25, 1)),
                 sg.Text('Modelo:'),
-                sg.Input(key='-MODELO-', size=(15, 1)),
+                sg.Combo([], key="-MODELO-",  readonly=True, size=(25, 1)),
                 sg.Text('Matrícula:'),
-                sg.Input(key='-MATRICULA-', size=(15, 1)),
+                sg.Input(default_text="Ex: ABC 126 MP",key='-MATRICULA-', size=(15, 1)),
             ],
             [sg.Button('Cadastrar Viatura', key='-BTN_ADD_VIATURA-')],
             [sg.HSeparator()],
