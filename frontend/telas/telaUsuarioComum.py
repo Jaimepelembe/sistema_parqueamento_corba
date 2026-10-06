@@ -53,7 +53,8 @@ class TelaUsuarioComum:
                     values=self.lista_parques,
                     headings=headings,
                     auto_size_columns=True,
-                    num_rows=8,
+                    justification="left",
+                    num_rows=16,
                     key='-TABELA_PARQUES-',
                     enable_events=True,
                     select_mode=sg.TABLE_SELECT_MODE_BROWSE,
@@ -81,6 +82,7 @@ class TelaUsuarioComum:
                     values=self.minhas_viaturas,
                     headings=['Marca', 'Modelo', 'Matrícula'],
                     auto_size_columns=True,
+                    justification="center",
                     num_rows=6,
                     key='-TABELA_VIATURAS-',
                 )
