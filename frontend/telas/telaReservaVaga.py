@@ -22,7 +22,7 @@ class TelaReservaVaga:
                 sg.Combo(
                     self.vagas_disponiveis,
                     default_value=self.vagas_disponiveis[0] if self.vagas_disponiveis else '',
-                    key='-RESERVA_VAGA-',
+                    key='-COMBO-VAGA-',
                     readonly=True,
                     size=(20, 1),
                 ),
@@ -32,7 +32,7 @@ class TelaReservaVaga:
                 sg.Combo(
                     self.listaMatriculas,
                     default_value=self.listaMatriculas[0] if self.listaMatriculas else '',
-                    key='-RESERVA_MATRICULA-',
+                    key='-COMBO-MATRICULA-',
                     readonly=True,
                     size=(20, 1),
                 ),

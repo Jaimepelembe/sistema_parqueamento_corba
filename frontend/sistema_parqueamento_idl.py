@@ -303,6 +303,7 @@ omniORB.registerType(Vaga._NP_RepositoryId, _0_ParqueamentoApp._d_Vaga, _0_Parqu
 
 # Vaga operations and attributes
 Vaga._d_adicionarVaga = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.tv_long), (), None)
+Vaga._d_actualizarEstadoVaga = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.tv_long), (omniORB.tcInternal.tv_boolean, ), None)
 Vaga._d_listarVagas = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None)
 Vaga._d_numeroTotalVagas = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.tv_long, ), None)
 Vaga._d_listarVagasDisponiveis = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None)
@@ -316,6 +317,9 @@ class _objref_Vaga (CORBA.Object):
 
     def adicionarVaga(self, *args):
         return self._obj.invoke("adicionarVaga", _0_ParqueamentoApp.Vaga._d_adicionarVaga, args)
+
+    def actualizarEstadoVaga(self, *args):
+        return self._obj.invoke("actualizarEstadoVaga", _0_ParqueamentoApp.Vaga._d_actualizarEstadoVaga, args)
 
     def listarVagas(self, *args):
         return self._obj.invoke("listarVagas", _0_ParqueamentoApp.Vaga._d_listarVagas, args)
@@ -336,7 +340,7 @@ class Vaga (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Vaga._NP_RepositoryId
 
 
-    _omni_op_d = {"adicionarVaga": _0_ParqueamentoApp.Vaga._d_adicionarVaga, "listarVagas": _0_ParqueamentoApp.Vaga._d_listarVagas, "numeroTotalVagas": _0_ParqueamentoApp.Vaga._d_numeroTotalVagas, "listarVagasDisponiveis": _0_ParqueamentoApp.Vaga._d_listarVagasDisponiveis}
+    _omni_op_d = {"adicionarVaga": _0_ParqueamentoApp.Vaga._d_adicionarVaga, "actualizarEstadoVaga": _0_ParqueamentoApp.Vaga._d_actualizarEstadoVaga, "listarVagas": _0_ParqueamentoApp.Vaga._d_listarVagas, "numeroTotalVagas": _0_ParqueamentoApp.Vaga._d_numeroTotalVagas, "listarVagasDisponiveis": _0_ParqueamentoApp.Vaga._d_listarVagasDisponiveis}
 
 Vaga._omni_skeleton = Vaga
 _0_ParqueamentoApp__POA.Vaga = Vaga
@@ -418,7 +422,7 @@ _0_ParqueamentoApp._tc_Reserva = omniORB.tcInternal.createTypeCode(_0_Parqueamen
 omniORB.registerType(Reserva._NP_RepositoryId, _0_ParqueamentoApp._d_Reserva, _0_ParqueamentoApp._tc_Reserva)
 
 # Reserva operations and attributes
-Reserva._d_criarReserva = ((omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), (), None)
+Reserva._d_criarReserva = ((omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
 Reserva._d_obterReserva = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), None)
 Reserva._d_listarReservas = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaReservaDTO:1.0"], ), None)
 

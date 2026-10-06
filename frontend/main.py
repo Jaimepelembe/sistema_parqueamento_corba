@@ -13,6 +13,7 @@ from validacoes import validar_dinheiro
 from validacoes import validarMatricula
 
 from datetime import datetime
+#from datetime import 
 
 #Importacoes de corba
 import sys
@@ -230,9 +231,130 @@ class GerenciadorJanelas:
         window[key].update(dataFormatada)
         #print(dataFormatada)
     
+    def validarVagaSelecionada(self,values)->int:
+        numeroVagaSelecionada=values["-COMBO-VAGA-"]
+        id_vaga=-1
+        if numeroVagaSelecionada !="" and numeroVagaSelecionada:
+            indice=self.tela_reserva_vaga.vagas_disponiveis.index(numeroVagaSelecionada)
+            vagaDTO=self.listaVagasDTO[indice]
+            id_vaga=vagaDTO.id_vaga
+        
+        else:
+            sg.popup_error('Erro', 'Voce selecionou uma vaga invalida!')
+        
+        return id_vaga
+
+    def validarMatriculaSelecionada(self,values)->int:    
+        matriculaSelecionada=values["-COMBO-MATRICULA-"]
+        id_viatura=-1
+   
+        if matriculaSelecionada !="" and matriculaSelecionada:
+            indice=self.tela_reserva_vaga.listaMatriculas.index(matriculaSelecionada)
+            viaturaDTO=self.listaViaturasDTO[indice]
+            id_viatura=viaturaDTO.id_viatura    
+        else:
+            sg.popup_error('Erro', 'Voce selecionou uma matricula invalida!')
+        
+        return id_viatura
+
+    def validarPeriodoEscolhido(self,values):
+        dataEntrada= values["-DT-ENTRADA-"]    
+        horaEntrada=values["-RESERVA-HORA-ENTRADA-"]
+        minutosEntrada=values["-RESERVA-MINUTO-ENTRADA-"]
+        tempoEntrada= f"{horaEntrada}:{minutosEntrada}"
+        formato="%d-%m-%Y %H:%M:%S"
+        resultado=False
+        if dataEntrada and dataEntrada!="":
+            periodoEntradaStr=f"{dataEntrada} {tempoEntrada}"
+            periodoEntradaDateTime=datetime.strptime(periodoEntradaStr,formato)
+       
+            print(periodoEntradaDateTime)
+            
+            dataSaida=values["-DT-SAIDA-"]
+            horaSaida=values["-RESERVA-HORA-SAIDA-"]
+            minutosSaida=values["-RESERVA-MINUTO-SAIDA-"]
+            tempoSaida= f"{horaSaida}:{minutosSaida}"
+            
+            if dataSaida and dataSaida!="":
+                periodoSaidaStr=f"{dataSaida} {tempoSaida}"
+                periodoSaidaDateTime=datetime.strptime(periodoSaidaStr,formato)
+                
+                if periodoEntradaDateTime == periodoSaidaDateTime:
+                    sg.popup_error('Erro', 'O periodo de entrada nao pode ser o mesmo que o periodo de saida!')
+                    resultado= False
+                elif periodoEntradaDateTime > periodoSaidaDateTime:                    
+                    sg.popup_error('Erro', 'O periodo de entrada nao pode ser maior que o periodo de saida!')
+                    resultado= False
+                else:
+                    self.dataTempoEntrada=periodoEntradaDateTime
+                    self.dataTempoSaida=periodoSaidaDateTime
+                    resultado= True
+
+            else:
+                sg.popup_error('Erro', 'Voce selecionou uma data de Saida invalida!')
+            
+        else:
+            sg.popup_error('Erro', 'Voce selecionou uma data de entrada invalida!')
+            
+        return resultado
+        
+ 
+    def calcularPrecoPagar(dataTempoEntrada,dataTempoSaida, precoHoraParque):
+        diferenca=dataTempoSaida-dataTempoEntrada
+        totalHoras=diferenca.total_seconds()/3600
+        precoPagar=totalHoras*precoHoraParque
+        return precoPagar
+    
+    
     def reservarVaga(self,window,values):
-       # self.servico_reserva.
-        pass
+       # self.servico_reserva. 
+        id_vaga=self.validarVagaSelecionada(values)
+        id_usuario=self.usuario_logado.id_usuario
+        id_viatura=self.validarMatriculaSelecionada(values)
+        self.dataTempoEntrada=None
+        self.dataTempoSaida=None
+        if id_vaga>0 and id_usuario>0 and id_viatura >0 and self.validarPeriodoEscolhido(values):
+            precoPagar=self.calcularPrecoPagar(self.dataTempoEntrada,self.dataTempoSaida,self.tela_reserva_vaga.parque_selecionado.preco)
+            
+            if precoPagar >=self.saldoActual:
+
+                resposta = sg.popup_yes_no(f"Confirma o pagamento de {precoPagar}mts para a reserva da vaga?", title="Confirmar")
+                if resposta == "Yes":
+                    print("Confirmado")
+                    dataEntrada= values["-DT-ENTRADA-"]    
+                    horaEntrada=values["-RESERVA-HORA-ENTRADA-"]
+                    minutosEntrada=values["-RESERVA-MINUTO-ENTRADA-"]
+                    tempoEntrada= f"{horaEntrada}:{minutosEntrada}"
+                    print(f"Preco a pagar: {precoPagar}")
+                    
+                    dataSaida=values["-DT-SAIDA-"]
+                    horaSaida=values["-RESERVA-HORA-SAIDA-"]
+                    minutosSaida=values["-RESERVA-MINUTO-SAIDA-"]
+                    tempoSaida= f"{horaSaida}:{minutosSaida}"
+                    reservaDTO =ParqueamentoApp.ReservaDTO(-1,dataEntrada,tempoEntrada,dataSaida,tempoSaida,precoPagar,id_vaga,id_usuario,id_viatura)
+                    sucesso=self.servico_reserva.criarReserva(reservaDTO)       
+                    
+                    if sucesso:
+                        #Mudar o estado da vaga para ocupado: 1
+                        self.servico_vaga.actualizarEstadoVaga(id_vaga, 1)                        
+                        
+                        
+                        #window["-COMBO-VAGA-"].update(values=self.listarVagasDisponiveis(self.tela_reserva_vaga.parque_selecionado.id_parque),default_value=self.vagas_disponiveis[0] if self.vagas_disponiveis else '')
+                        #window["-COMBO-MATRICULA-"].update(values=self.listarMatriculaViaturas(),default_value=self.[0] if self. else '')
+                        
+
+                        sg.popup("Voce Efectuou a reserva com sucesso", title="Sucesso")
+                    else:
+                        sg.popup_error('Erro', 'Falha ao ao reservar a vaga.')    
+
+            else:
+                 sg.popup_error('Erro', 'Voce nao tem saldo suficiente na tua conta para poder reservar a vaga!\nPor favor recarregue a sua conta')    
+            
+            
+       
+
+       
+
 
     def executar(self):
         while True:
@@ -368,7 +490,7 @@ class GerenciadorJanelas:
                     self.escolherData("Selecione a Data de Saida",self.tela_reserva_vaga.window,"-DT-SAIDA-")
                 
                 if event == "-BTN_CONFIRMAR_RESERVA-":
-                    self.escolherData("Selecione a Data de Saida",self.tela_reserva_vaga.window,"-DT-SAIDA-")
+                    self.reservarVaga(self.tela_reserva_vaga.window,values)
                     
 
                     
