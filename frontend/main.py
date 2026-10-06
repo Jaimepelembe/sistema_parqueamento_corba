@@ -194,6 +194,33 @@ class GerenciadorJanelas:
         else:
             sg.popup_error('Erro', 'O valor de deposito deve ser maior que zero.')
     
+
+    def debitar(self,window,valorDebito:float):
+        if valorDebito and valorDebito>0 :
+        
+            foiDebitado=self.servico_conta.debitar(self.usuario_logado.id_usuario,valorDebito)
+            if foiDebitado:
+                idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
+                if idConta>0:
+                    hoje=datetime.now()
+                    data=hoje.strftime("%d-%m-%Y")
+                    hora=hoje.strftime("%H:%M:%S")
+                    transacaoDTO= PagamentoApp.TransacaoDTO(-1,"DEBITO",valorDebito,"CONCLUIDO",data,hora, idConta)
+                    sucesso=self.servico_transacao.efetuarTransacao(transacaoDTO)
+                    if sucesso:
+                        # Actualizar o saldo actual e o historico de transacoes
+                        #self.listaTransacoesDTO=self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)  
+                        self.saldoActual= self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
+                        window['-TXT_SALDO-'].update(f'Saldo Atual: {self.saldoActual:.2f} MT')        
+                        window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes())          
+                                
+                        #sg.popup('Sucesso', 'O deposito foi efectuado com sucesso.')
+                        print(f"Debitou {valorDebito} com sucesso")
+            
+        else:
+            sg.popup_error('Erro', 'O valor de debito deve ser maior que zero.')
+    
+
     def selecionarModelosCarro(self,window,values):
         marca=values["-MARCA-"]
         modelosCarros=self.tela_usuario_comum.dicionarioCarros[marca]
@@ -261,11 +288,12 @@ class GerenciadorJanelas:
         dataEntrada= values["-DT-ENTRADA-"]    
         horaEntrada=values["-RESERVA-HORA-ENTRADA-"]
         minutosEntrada=values["-RESERVA-MINUTO-ENTRADA-"]
-        tempoEntrada= f"{horaEntrada}:{minutosEntrada}"
+        tempoEntrada= f"{horaEntrada}:{minutosEntrada}:00"
         formato="%d-%m-%Y %H:%M:%S"
         resultado=False
         if dataEntrada and dataEntrada!="":
             periodoEntradaStr=f"{dataEntrada} {tempoEntrada}"
+            print(f"Periodo: {periodoEntradaStr}")
             periodoEntradaDateTime=datetime.strptime(periodoEntradaStr,formato)
        
             print(periodoEntradaDateTime)
@@ -273,7 +301,7 @@ class GerenciadorJanelas:
             dataSaida=values["-DT-SAIDA-"]
             horaSaida=values["-RESERVA-HORA-SAIDA-"]
             minutosSaida=values["-RESERVA-MINUTO-SAIDA-"]
-            tempoSaida= f"{horaSaida}:{minutosSaida}"
+            tempoSaida= f"{horaSaida}:{minutosSaida}:00"
             
             if dataSaida and dataSaida!="":
                 periodoSaidaStr=f"{dataSaida} {tempoSaida}"
@@ -299,7 +327,7 @@ class GerenciadorJanelas:
         return resultado
         
  
-    def calcularPrecoPagar(dataTempoEntrada,dataTempoSaida, precoHoraParque):
+    def calcularPrecoPagar(self,dataTempoEntrada,dataTempoSaida, precoHoraParque):
         diferenca=dataTempoSaida-dataTempoEntrada
         totalHoras=diferenca.total_seconds()/3600
         precoPagar=totalHoras*precoHoraParque
@@ -315,8 +343,9 @@ class GerenciadorJanelas:
         self.dataTempoSaida=None
         if id_vaga>0 and id_usuario>0 and id_viatura >0 and self.validarPeriodoEscolhido(values):
             precoPagar=self.calcularPrecoPagar(self.dataTempoEntrada,self.dataTempoSaida,self.tela_reserva_vaga.parque_selecionado.preco)
-            
-            if precoPagar >=self.saldoActual:
+            print(f"Saldo actual {self.saldoActual}")
+            print(f"Tens que pagar {precoPagar}")
+            if self.saldoActual >=precoPagar:
 
                 resposta = sg.popup_yes_no(f"Confirma o pagamento de {precoPagar}mts para a reserva da vaga?", title="Confirmar")
                 if resposta == "Yes":
@@ -324,22 +353,29 @@ class GerenciadorJanelas:
                     dataEntrada= values["-DT-ENTRADA-"]    
                     horaEntrada=values["-RESERVA-HORA-ENTRADA-"]
                     minutosEntrada=values["-RESERVA-MINUTO-ENTRADA-"]
-                    tempoEntrada= f"{horaEntrada}:{minutosEntrada}"
-                    print(f"Preco a pagar: {precoPagar}")
+                    tempoEntrada= f"{horaEntrada}:{minutosEntrada}:00"
+                    #print(f"Preco a pagar: {precoPagar}")
                     
                     dataSaida=values["-DT-SAIDA-"]
                     horaSaida=values["-RESERVA-HORA-SAIDA-"]
                     minutosSaida=values["-RESERVA-MINUTO-SAIDA-"]
-                    tempoSaida= f"{horaSaida}:{minutosSaida}"
+                    tempoSaida= f"{horaSaida}:{minutosSaida}:00"
                     reservaDTO =ParqueamentoApp.ReservaDTO(-1,dataEntrada,tempoEntrada,dataSaida,tempoSaida,precoPagar,id_vaga,id_usuario,id_viatura)
                     sucesso=self.servico_reserva.criarReserva(reservaDTO)       
                     
                     if sucesso:
                         #Mudar o estado da vaga para ocupado: 1
-                        self.servico_vaga.actualizarEstadoVaga(id_vaga, 1)                        
+                        self.servico_vaga.actualizarEstadoVaga(id_vaga, 1)                  
+                        self.tela_reserva_vaga.vagas_disponiveis=self.listarVagasDisponiveis(self.tela_reserva_vaga.parque_selecionado.id_parque)
+                        
+                        #Debitar o valor
+                        self.debitar(self.tela_usuario_comum.window,precoPagar)
+                        
+                        window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
+                        window["-DT-ENTRADA-"].update( '')
+                        window["-DT-SAIDA-"].update( '')
                         
                         
-                        #window["-COMBO-VAGA-"].update(values=self.listarVagasDisponiveis(self.tela_reserva_vaga.parque_selecionado.id_parque),default_value=self.vagas_disponiveis[0] if self.vagas_disponiveis else '')
                         #window["-COMBO-MATRICULA-"].update(values=self.listarMatriculaViaturas(),default_value=self.[0] if self. else '')
                         
 
@@ -348,7 +384,7 @@ class GerenciadorJanelas:
                         sg.popup_error('Erro', 'Falha ao ao reservar a vaga.')    
 
             else:
-                 sg.popup_error('Erro', 'Voce nao tem saldo suficiente na tua conta para poder reservar a vaga!\nPor favor recarregue a sua conta')    
+                 sg.popup_error('Erro', f'Voce nao tem saldo suficiente na tua conta para poder reservar a vaga!\nA reserva custa {precoPagar}mts e voce so tem {self.saldoActual}mts\nPor favor recarregue a sua conta')    
             
             
        
