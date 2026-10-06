@@ -37,6 +37,7 @@ class GerenciadorJanelas:
         self.tela_reserva_vaga=None
         self.inicializarCORBA()
         self.listaParquesDTO=None
+        self.listaVagasDTO=None
         self.listaViaturasDTO=None
         self.listaTransacoesDTO=None
 
@@ -120,6 +121,14 @@ class GerenciadorJanelas:
             listaParques.append([parqueDTO.nome,parqueDTO.provincia,parqueDTO.localizacao,parqueDTO.telefone,parqueDTO.horario,parqueDTO.cobertura,parqueDTO.preco])
             #print(parqueDTO.nome)
         return listaParques
+    
+    
+    def listarVagasDisponiveis(self,id_parque) ->list:
+        self.listaVagasDTO=self.servico_vaga.listarVagasDisponiveis(id_parque)
+        listaVagas=[]
+        for vagaDTO in self.listaVagasDTO:
+            listaVagas.append(vagaDTO.numero_vaga)
+        return listaVagas
     
     def verificarContaBancaria(self):
         idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
@@ -206,8 +215,25 @@ class GerenciadorJanelas:
             window["-MODELO-"].update(values=[],value="")
             window["-MATRICULA-"].update("Ex: ABC 126 MP")
    
-        
-   
+    def listarMatriculaViaturas(self):
+        listaMatriculaViaturas=[]
+        for viaturaDTO in self.listaViaturasDTO:
+            listaMatriculaViaturas.append(viaturaDTO.matricula)
+            #print(viaturaDTO.matricula)
+        return listaMatriculaViaturas  
+    
+
+    def escolherData(self,titulo,window,key):
+        data = sg.popup_get_date(title=titulo,keep_on_top=True,modal=True)
+        mes,dia,ano=data
+        dataFormatada=f"{dia:02d}-{mes:02d}-{ano}"
+        window[key].update(dataFormatada)
+        #print(dataFormatada)
+    
+    def reservarVaga(self,window,values):
+       # self.servico_reserva.
+        pass
+
     def executar(self):
         while True:
             # Captura eventos de TODAS as janelas abertas
@@ -297,25 +323,14 @@ class GerenciadorJanelas:
 
                 # 1. EVENTOS DA TAB PARQUES (Seleção na Tabela para Reserva)
                 if event == '-TABELA_PARQUES-':
-                    #Listar as viaturas
-                    
                     
                     linhas_selecionadas = values['-TABELA_PARQUES-']
                     if linhas_selecionadas:
                         indice = linhas_selecionadas[0]
-                       # parque_selecionado = self.lista_parques[indice]
                         parqueDTO=self.listaParquesDTO[indice]
-                        print(f"Parque selecionado {parqueDTO}")
-                        #nome_parque = parque_selecionado[0]
-                        #preco_parque = parque_selecionado[6]
-                        print("entrou na reserva")
-                        #minhas_viaturas, parqueSelecioinado,vagasDisponiveis
-                        listaViaturas=[]
-                        for viaturaDTO in self.listaViaturasDTO:
-                            listaViaturas.append([viaturaDTO.marca,viaturaDTO.modelo,viaturaDTO.matricula])
-                            print(viaturaDTO.matricula)
-                        
-                        self.tela_reserva_vaga= TelaReservaVaga(listaViaturas,parqueDTO,[])  
+                       # print(f"Parque selecionado {parqueDTO}")
+                   
+            
                         
                         #sg.popup_error('Erro', ' reservar.')
                         if not self.listaViaturasDTO:
@@ -323,7 +338,7 @@ class GerenciadorJanelas:
                             #Abrir a tab para dicionar viaturas
                         else:
                             self.tela_usuario_comum.ocultar()
-                            self.tela_reserva_vaga= TelaReservaVaga()  
+                            self.tela_reserva_vaga= TelaReservaVaga(self.listarMatriculaViaturas(),parqueDTO,self.listarVagasDisponiveis(parqueDTO.id_parque))  
                     
                 # EVENTOS DA TABELA PERFIL
                 if event == "-BTN_DEPOSITAR-":
@@ -338,8 +353,28 @@ class GerenciadorJanelas:
                # EVENTOS DA TABELA Minhas Viaturas
                 if event == "-BTN_ADD_VIATURA-":
                    self.adicionarViatura(self.tela_usuario_comum.window,values)
-            
+                   
+            #---Eventos da tela de Reserva de vaga ---
+            elif self.tela_reserva_vaga !=None  and window==self.tela_reserva_vaga.window:   
+                # EVENTO DE CANCELAR A RESERVA
+                if event == "-CANCELAR_RESERVA-" or event==sg.WIN_CLOSED:
+                    self.tela_reserva_vaga.fechar()
+                    self.tela_usuario_comum.exibir()
+                
+                if event == "-BTN-DATA-ENTRADA-":
+                    self.escolherData("Selecione a Data de Entrada",self.tela_reserva_vaga.window,"-DT-ENTRADA-")
+                
+                if event == "-BTN-DATA-SAIDA-":
+                    self.escolherData("Selecione a Data de Saida",self.tela_reserva_vaga.window,"-DT-SAIDA-")
+                
+                if event == "-BTN_CONFIRMAR_RESERVA-":
+                    self.escolherData("Selecione a Data de Saida",self.tela_reserva_vaga.window,"-DT-SAIDA-")
+                    
+
+                    
 
 if __name__ == '__main__':
     app = GerenciadorJanelas()
     app.executar()
+    
+    

@@ -4,22 +4,15 @@ import PySimpleGUI as sg
 
 class TelaReservaVaga:
     
-    def __init__(self, minhas_viaturas, parqueSelecioinado,vagasDisponiveis):
+    def __init__(self, minhasMatriculas, parqueSelecioinado,vagasDisponiveis):
         
-        self.minhas_viaturas=minhas_viaturas
+        self.listaMatriculas=minhasMatriculas
         self.parque_selecionado=parqueSelecioinado
         self.vagas_disponiveis=vagasDisponiveis
 
         # Gerar opções de horas (00 a 23) e minutos (00, 15, 30, 45)
         horas = [f'{h:02d}' for h in range(24)]
         minutos = ['00', '15', '30', '45']
-
-        # Extrai matrículas para a caixa de seleção
-        matriculas_disponiveis = [v[2] for v in self.minhas_viaturas]
-        #self.vagas_disponiveis = ['Vaga A-01', 'Vaga A-02', 'Vaga B-05', 'Vaga B-06', 'Vaga C-10']
-
-        # Data de hoje padrão
-        hoje = datetime.now()
 
         layout_reserva = [
             [sg.Text(f'Reservar Vaga - {self.parque_selecionado.nome}', font=('Helvetica', 13, 'bold'))],
@@ -37,8 +30,8 @@ class TelaReservaVaga:
             [
                 sg.Text('Selecionar Viatura:'),
                 sg.Combo(
-                    matriculas_disponiveis,
-                    default_value=matriculas_disponiveis[0] if matriculas_disponiveis else '',
+                    self.listaMatriculas,
+                    default_value=self.listaMatriculas[0] if self.listaMatriculas else '',
                     key='-RESERVA_MATRICULA-',
                     readonly=True,
                     size=(20, 1),
@@ -49,14 +42,9 @@ class TelaReservaVaga:
        [
            sg.Text('Data de Entrada:', size=(15, 1)),
            sg.Input(key='-DT-ENTRADA-', size=(15, 1), readonly=True),
-           sg.CalendarButton(
-               'Escolher Data',
-               target='-DT-ENTRADA-',
-               format='%Y-%m-%d',
-               button_color=('white', '#1f77b4'),
-               title='Selecione a Data de entrada'
-           )
-       ],
+          sg.Button('Escolher Data', key='-BTN-DATA-ENTRADA-')
+        
+       ],        
                   
              # Campo para Hora de Entrada
             [
@@ -72,13 +60,7 @@ class TelaReservaVaga:
        [
            sg.Text('Data de Saída:', size=(15, 1)),
            sg.Input(key='-DT-SAIDA-', size=(15, 1), readonly=True),
-           sg.CalendarButton(
-               'Escolher Data',
-               target='-DT-SAIDA-',
-               format='%Y-%m-%d',
-               button_color=('white', '#1f77b4'),
-               title='Selecione a Data de Saída'
-           )
+           sg.Button('Escolher Data', key='-BTN-DATA-SAIDA-')
        ],
             
             
@@ -93,7 +75,7 @@ class TelaReservaVaga:
             [sg.Button('Confirmar Reserva', key='-BTN_CONFIRMAR_RESERVA-'), sg.Button('Cancelar', key='-CANCELAR_RESERVA-')],
         ]
 
-        self.window= sg.Window('Efetuar Reserva', layout_reserva, modal=True, finalize=True)
+        self.window= sg.Window('Efetuar Reserva', layout_reserva, finalize=True)
 
 
     def fechar(self):
@@ -104,12 +86,5 @@ class TelaReservaVaga:
 
     def exibir(self):
         self.window.un_hide()
-
-"""
-import ParqueamentoApp.        
-tela =TelaReservaVaga([],)
-while True:
-    window, event = sg.read_all_windows()
-    pass
-    
-    """
+        
+        
