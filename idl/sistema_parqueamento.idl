@@ -124,6 +124,11 @@ typedef sequence<ReservaDTO> listaReservaDTO;
             in long numero_de_vagas
         );
 
+        boolean actualizarEstadoVaga(
+            in long id_vaga,
+            in long estado
+        );
+
         listaVagaDTO listarVagas(
             in long id_parque
         );
@@ -169,7 +174,7 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         // RESERVAS
         // ==========================
 
-        void criarReserva(
+        boolean criarReserva(
             in ReservaDTO reserva
 
         );

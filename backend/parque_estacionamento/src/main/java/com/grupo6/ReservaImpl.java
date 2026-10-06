@@ -32,6 +32,7 @@ public class ReservaImpl
 
         //reserva.preco_total=precoApagar;
         //System.out.println("Preco vou pagar"+reserva.preco_total);
+        
        return  reservaDAO.criarReserva(reserva);
     }
 

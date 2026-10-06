@@ -18,7 +18,7 @@ public class ReservaDAO {
   public boolean  criarReserva (ReservaDTO reserva){
       String sql="INSERT INTO reserva_vaga (data_entrada, hora_entrada, data_saida,hora_saida,preco_total,id_vaga,id_usuario,id_viatura) VALUES (?,?,?,?,?,?,?,?)";
 
-      boolean resultado=false
+      boolean resultado=false;
            try{
         Connection conn = ConexaoBD.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql);
