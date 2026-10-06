@@ -29,6 +29,14 @@ public class VagaImpl extends VagaPOA {
         }
     }
 
+    public boolean actualizarEstadoVaga(int id_vaga, int estadoVaga){
+        vagaDAO= new VagaDAO();
+        boolean resultado=false;
+        resultado=vagaDAO.actualizarEstadoVaga(id_vaga, estadoVaga);
+
+        return resultado;
+    }
+
     
     public VagaDTO[] listarVagas(int id_parque) {
         vagaDAO = new VagaDAO();

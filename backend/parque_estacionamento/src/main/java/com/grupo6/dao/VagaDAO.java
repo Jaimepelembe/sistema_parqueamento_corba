@@ -43,6 +43,39 @@ public class VagaDAO {
 
   }
 
+      public boolean actualizarEstadoVaga(int id_vaga, int estadoVaga){
+        boolean resultado =false;
+
+             String sql="UPDATE vaga_estacionamento SET estado=? WHERE id_vaga=?";
+        try{
+            Connection conn = ConexaoBD.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,estadoVaga);
+            stmt.setInt(2,id_vaga);
+            
+            int linhasAfectadas = stmt.executeUpdate();
+            if (linhasAfectadas>0){
+                resultado = true;
+            }
+
+            if (!conn.isClosed()) {
+                conn.close();}
+
+
+    } catch (SQLException e){
+            System.out.println("Erro de SQL: "+e);
+
+        }
+        catch (Exception e){
+            System.out.println("Erro: "+e);
+
+        }
+         return resultado;// Garante que o método sempre retorne algo (o objeto montado ou null)
+
+    }
+
+
+
 
 public VagaDTO[] listarVagas (int id_parque){
     //Usamos uma List normal do Java para adicionar os elementos dinamicamente
