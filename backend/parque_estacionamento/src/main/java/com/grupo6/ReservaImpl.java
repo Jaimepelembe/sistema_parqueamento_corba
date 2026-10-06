@@ -23,16 +23,16 @@ public class ReservaImpl
 
 
     @Override
-    public void criarReserva(ReservaDTO reserva){
+    public boolean criarReserva(ReservaDTO reserva){
         reservaDAO = new ReservaDAO();
 
-        float precoHoraParque=reservaDAO.obterPrecoHoraParque(reserva.id_vaga);
-        long tempoTotal=calcularTempoReserva(reserva.data_entrada, reserva.hora_entrada, reserva.data_saida, reserva.hora_saida);
-        float precoApagar=tempoTotal*precoHoraParque;
+        //float precoHoraParque=reservaDAO.obterPrecoHoraParque(reserva.id_vaga);
+        //long tempoTotal=calcularTempoReserva(reserva.data_entrada, reserva.hora_entrada, reserva.data_saida, reserva.hora_saida);
+        //float precoApagar=tempoTotal*precoHoraParque;
 
-        reserva.preco_total=precoApagar;
-        System.out.println("Preco vou pagar"+reserva.preco_total);
-        reservaDAO.criarReserva(reserva);
+        //reserva.preco_total=precoApagar;
+        //System.out.println("Preco vou pagar"+reserva.preco_total);
+       return  reservaDAO.criarReserva(reserva);
     }
 
 
