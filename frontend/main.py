@@ -3,6 +3,7 @@ from telas.login import TelaLogin
 from telas.TelaPrincipal import TelaPrincipal
 from telas.cadastraUsuario import TelaCadastroUsuario
 from telas.telaUsuarioComum import TelaUsuarioComum
+from telas.telaAdministrador import TelaAdministrador
 from telas.telaReservaVaga import TelaReservaVaga
 
 from validacoes import validarSenha
@@ -34,7 +35,8 @@ class GerenciadorJanelas:
     def __init__(self):
         self.tela_login = TelaLogin()
         self.tela_usuario_comum = None
-        self.tela_cadastro = None#TelaCadastroUsuario()
+        self.tela_administrador = None
+        self.tela_cadastro = None
         self.tela_reserva_vaga=None
         self.inicializarCORBA()
         self.listaParquesDTO=None
@@ -99,6 +101,8 @@ class GerenciadorJanelas:
             self.tela_usuario_comum.fechar()
         if self.tela_cadastro:
             self.tela_cadastro.fechar()
+        if self.tela_administrador:
+            self.tela_administrador.fechar()
    
     def listarTransacoes(self):
         self.listaTransacoesDTO= self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)
@@ -233,6 +237,10 @@ class GerenciadorJanelas:
                         self.saldoActual= self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
                         window['-TXT_SALDO-'].update(f'Saldo Atual: {self.saldoActual:.2f} MT')        
                         window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes())          
+                            
+                        #Actualizar o historico de reservas
+                        window['-TABELA_RESERVAS-'].update(values=self.listarReservasVaga())   
+                        
                                 
                         #sg.popup('Sucesso', 'O deposito foi efectuado com sucesso.')
                         print(f"Debitou {valorDebito} com sucesso")
@@ -420,18 +428,17 @@ class GerenciadorJanelas:
     def listarReservasVaga(self):
         """Lista as reservas de vagas que o usuario ja efectuou."""
         self.listaReservasVagaDTO=self.servico_reserva.listarReservas(self.usuario_logado.id_usuario)
-        print(f"lista BD: {self.listaReservasVagaDTO}")
         listaReservaVagas=[]
         if self.listaReservasVagaDTO:
             for reservaDTO in self.listaReservasVagaDTO:
-                print("-------------")
+                #print("-------------")
                # numeroVaga=self.buscarNumeroVagaReservada(reservaDTO.id_vaga)
                 #print(f"Vaga: {numeroVaga}")
                 matriculaViatura=self.buscarMatriculaViaturaReservada(reservaDTO.id_viatura)
-                print(f"Matricula: {matriculaViatura}")
+         #      print(f"Matricula: {matriculaViatura}")
                 listaReservaVagas.append([reservaDTO.id_reserva,reservaDTO.data_entrada,reservaDTO.hora_entrada,reservaDTO.data_saida,reservaDTO.hora_saida,reservaDTO.preco_total,reservaDTO.id_vaga,matriculaViatura])
             
-        print(f"lista: {listaReservaVagas}")
+        #print(f"lista: {listaReservaVagas}")
         
         return listaReservaVagas              
             
@@ -481,7 +488,8 @@ class GerenciadorJanelas:
      
                                     
                                 else:
-                                    pass # Mostra a tela de admin
+                                    # Mostra a tela de admin
+                                    self.tela_administrador=TelaAdministrador(user_dto,self.listarParques())
                                 
                             else:
                                 sg.popup_error("Telefone ou senha incorretos.")
