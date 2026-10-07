@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
 from telas.login import TelaLogin
-from telas.TelaPrincipal import TelaPrincipal
 from telas.cadastraUsuario import TelaCadastroUsuario
 from telas.telaUsuarioComum import TelaUsuarioComum
 from telas.telaAdministrador import TelaAdministrador
