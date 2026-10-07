@@ -1,4 +1,3 @@
-from datetime import datetime
 import PySimpleGUI as sg
 
 

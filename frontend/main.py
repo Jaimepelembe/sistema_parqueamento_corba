@@ -6,12 +6,12 @@ from telas.telaUsuarioComum import TelaUsuarioComum
 from telas.telaAdministrador import TelaAdministrador
 from telas.telaReservaVaga import TelaReservaVaga
 
-from validacoes import validarSenha
-from validacoes import validarTelefone
-from validacoes import validarNome
-from validacoes import validar_dinheiro_string
-from validacoes import validar_dinheiro
-from validacoes import validarMatricula
+from utils.validacoes import validarSenha
+from utils.validacoes import validarTelefone
+from utils.validacoes import validarNome
+from utils.validacoes import validar_dinheiro_string
+from utils.validacoes import validar_dinheiro
+from utils.validacoes import validarMatricula
 
 from datetime import datetime
 #from datetime import 

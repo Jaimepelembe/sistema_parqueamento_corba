@@ -1,5 +1,4 @@
 import PySimpleGUI as sg
-from marcasModelosCarro import dicionarioMarcasModelos
 
 # Define o tema do PySimpleGUI
 sg.theme('DarkBlue3')
