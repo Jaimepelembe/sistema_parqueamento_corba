@@ -39,8 +39,10 @@ class GerenciadorJanelas:
         self.inicializarCORBA()
         self.listaParquesDTO=None
         self.listaVagasDTO=None
+        self.listaVagasReservadasDTO=None
         self.listaViaturasDTO=None
         self.listaTransacoesDTO=None
+        self.listaReservasVagaDTO=None
 
         
 
@@ -130,6 +132,24 @@ class GerenciadorJanelas:
         for vagaDTO in self.listaVagasDTO:
             listaVagas.append(vagaDTO.numero_vaga)
         return listaVagas
+    
+    def listarVagasReservadas(self,id_parque) ->list:
+        self.listaVagasReservadasDTO=self.servico_vaga.listarVagasReservadas(id_parque)
+        listaVagas=[]
+        for vagaDTO in self.listaVagasDTO:
+            listaVagas.append(vagaDTO.numero_vaga)
+        return listaVagas
+    
+    def buscarNumeroVagaReservada(self,id_vaga):
+        """Busca o numero de uma vaga que ja foi reservada pelo usuario. Retorna o numero da vaga"""
+        #self.listarVagasDisponiveis()
+        numeroVaga=None
+        for vagaDTO in self.listaVagasDTO:
+            if vagaDTO.id_vaga==id_vaga:
+                numeroVaga=vagaDTO.numero_vaga
+                break
+        return numeroVaga
+        
     
     def verificarContaBancaria(self):
         idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
@@ -249,6 +269,16 @@ class GerenciadorJanelas:
             listaMatriculaViaturas.append(viaturaDTO.matricula)
             #print(viaturaDTO.matricula)
         return listaMatriculaViaturas  
+
+    def  buscarMatriculaViaturaReservada(self,id_viatura):
+        """Busca o numero de matricula de uma viatura que tem uma reservada feita pelo usuario. Retorna o numero da matricula"""
+        matricula=None
+        for viaturaDTO in self.listaViaturasDTO:
+            if viaturaDTO.id_viatura==id_viatura:
+                matricula=viaturaDTO.matricula
+                break
+        return matricula
+        
     
 
     def escolherData(self,titulo,window,key):
@@ -385,7 +415,25 @@ class GerenciadorJanelas:
 
             else:
                  sg.popup_error('Erro', f'Voce nao tem saldo suficiente na tua conta para poder reservar a vaga!\nA reserva custa {precoPagar}mts e voce so tem {self.saldoActual}mts\nPor favor recarregue a sua conta')    
+
+    
+    def listarReservasVaga(self):
+        """Lista as reservas de vagas que o usuario ja efectuou."""
+        self.listaReservasVagaDTO=self.servico_reserva.listarReservas(self.usuario_logado.id_usuario)
+        print(f"lista BD: {self.listaReservasVagaDTO}")
+        listaReservaVagas=[]
+        if self.listaReservasVagaDTO:
+            for reservaDTO in self.listaReservasVagaDTO:
+                print("-------------")
+               # numeroVaga=self.buscarNumeroVagaReservada(reservaDTO.id_vaga)
+                #print(f"Vaga: {numeroVaga}")
+                matriculaViatura=self.buscarMatriculaViaturaReservada(reservaDTO.id_viatura)
+                print(f"Matricula: {matriculaViatura}")
+                listaReservaVagas.append([reservaDTO.id_reserva,reservaDTO.data_entrada,reservaDTO.hora_entrada,reservaDTO.data_saida,reservaDTO.hora_saida,reservaDTO.preco_total,reservaDTO.id_vaga,matriculaViatura])
             
+        print(f"lista: {listaReservaVagas}")
+        
+        return listaReservaVagas              
             
        
 
@@ -427,7 +475,8 @@ class GerenciadorJanelas:
                                     self.saldoActual =self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
                                     
                                     #Pesquisar os dados que o usuario vai precisar usando as funcoes listarParques, listarViaturas, listarTransacoes.
-                                    self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.saldoActual)
+                                    self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.listarReservasVaga(),self.saldoActual)
+                                    self.tela_usuario_comum.minhas_reservas=self.listarReservasVaga()
                                     #listaParques=None
      
                                     

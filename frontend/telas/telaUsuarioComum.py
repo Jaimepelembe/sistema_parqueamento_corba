@@ -6,41 +6,18 @@ sg.theme('DarkBlue3')
 
 
 class TelaUsuarioComum:
-    def __init__(self,usuario_logado,listaParques, listaViaturas,listaTransacoes,saldoActual):
+    def __init__(self,usuario_logado,listaParques, listaViaturas,listaTransacoes,listaReservas,saldoActual):
         self.usuario_logado= usuario_logado
-        #listaBaseDados=self.servico_parque.pesquisarPorCategoria("nome")
-        
         self.saldo_atual = saldoActual  # Exemplo de saldo inicial em Meticais (MT)
-
-        # Listas de dados para popular a interface (Simulação de Banco de Dados)
         self.lista_parques =listaParques
-        
-        """[
-            ['Parque Central', 'Maputo', 'Av. 24 de Julho', '841234567', '07:00 - 22:00', 'COBERTO', 50.0],
-            ['Parque Baixa', 'Maputo', 'Rua da Bagamoyo', '829876543', '24 Horas', 'NAO_COBERTO', 30.0],
-            ['Parque Matola', 'Maputo', 'Av. das Indústrias', '865554433', '08:00 - 20:00', 'COBERTO', 40.0],
-        ]"""
-
         self.minhas_viaturas = listaViaturas
-        
-        """[
-            ['Toyota', 'Ractis', 'ABC-123-MC'],
-            ['Nissan', 'Hardbody', 'AAB-456-MP'],
-        ] """
-
         self.minhas_transacoes = listaTransacoes
+        self.minhas_reservas = listaReservas
         self.dicionarioCarros=dicionarioMarcasModelos
-        """
-        [
-            ['30/09/2026', 'Depósito', '+500.00 MT'],
-            ['29/09/2026', 'Reserva Parque Central', '-50.00 MT'],
-        ]
-        """
         
         self.iniciar_janela_principal()
-        # Janelas
-       # self.window_principal = None
-        #self.window_reserva = None
+
+
 
     # --- MONTAGEM DAS TABS PRINCIPAIS ---
 
@@ -118,6 +95,26 @@ class TelaUsuarioComum:
             ],
         ]
 
+    def _criar_tab_reservas(self):
+        return [
+
+            [sg.Text('Histórico de reservas', font=('Helvetica', 12, 'bold'))],
+            [
+                sg.Table(
+                    values=self.minhas_reservas,
+                    headings=['ID','Data Entrada', 'Hora Entrada','Data Saida','Hora Saida', 'Preco','ID Vaga','Matricula Viatura'],
+                    col_widths=[5, 12, 12, 12,12,10,10,15],
+                    justification="center",
+                    auto_size_columns=False,
+                    num_rows=10,
+                    key='-TABELA_RESERVAS-',
+                )
+            ],
+        ]
+
+
+
+
     def iniciar_janela_principal(self):
         layout = [
             [
@@ -126,6 +123,7 @@ class TelaUsuarioComum:
                         sg.Tab('Parques', self._criar_tab_parques()),
                         sg.Tab('Minhas Viaturas', self._criar_tab_viaturas()),
                         sg.Tab('Meu Perfil', self._criar_tab_perfil()),
+                        sg.Tab("Minhas Reservas",self._criar_tab_reservas())
                     ]
                 ])
             ],
