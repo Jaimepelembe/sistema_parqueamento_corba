@@ -454,6 +454,7 @@ class GerenciadorJanelas:
         window["-PARQUE_PRECO-"].update(parqueDTO.preco)
         window["-BTN_ADICIONAR_PARQUE-"].update(disabled=True)
         window["-BTN_ATUALIZAR_PARQUE-"].update(disabled=False)
+        window["-BTN_REMOVER_PARQUE-"].update(disabled=False)
         
         
         
@@ -468,7 +469,7 @@ class GerenciadorJanelas:
         url=""
         
         if validarNome(nome) and len(provincia)>3 and validarTelefone(telefone) and len(horario)>=2 and cobertura in ["COBERTO", "NAO_COBERTO"] and validar_dinheiro_string(preco):
-            parqueDTO=ParqueamentoApp.ParqueDTO(-1,nome,provincia,localizacao,telefone,horario,cobertura,preco,url)
+            parqueDTO=ParqueamentoApp.ParqueDTO(-1,nome,provincia,localizacao,telefone,horario,cobertura,validar_dinheiro(preco),url)
             idParque=self.servico_parque.adicionarParque(parqueDTO)
             if idParque>0: 
                 window["-TABELA_PARQUES-"].update(values=self.listarParques())
@@ -480,6 +481,15 @@ class GerenciadorJanelas:
                 sg.popup("Sucesso","O parque foi adicionado com sucesso")
             else:
                 sg.popup_error("Erro","Houve uma falha ao adicionar o novo parque.")
+     
+    def removerParque(self,window,parqueDTO):
+        if parqueDTO.id_parque >0:
+            resposta=sg.popup_yes_no(f"Voce tem certeza que quer remover o parque '{parqueDTO.nome}' ?")
+            if resposta =="Yes":
+                resultado=self.servico_parque.removerParque(parqueDTO.id_parque)
+                if resultado:
+                    window["-TABELA_PARQUES-"].update(values=self.listarParques())
+                    sg.popup("Sucesso", "Você removeu o parque com sucesso")
         
         
     def limparDadosParque(self,window):
@@ -493,6 +503,7 @@ class GerenciadorJanelas:
         window["-PARQUE_PRECO-"].update("")
         window["-BTN_ADICIONAR_PARQUE-"].update(disabled=False)
         window["-BTN_ATUALIZAR_PARQUE-"].update(disabled=True)
+        window["-BTN_REMOVER_PARQUE-"].update(disabled=True)
         
 
        
@@ -664,6 +675,10 @@ class GerenciadorJanelas:
                 if event == '-BTN_ATUALIZAR_PARQUE-':
                     pass
                     #Voltar a habilitar o botao adicionar
+                    
+                if event == "-BTN_REMOVER_PARQUE-":
+                    self.removerParque(self.tela_administrador.window,parqueDTO)
+                    self.limparDadosParque(self.tela_administrador.window)
                     
                 # EVENTO PARA Limpar os dados selecionados
                 if event == '-BTN_LIMPAR-':

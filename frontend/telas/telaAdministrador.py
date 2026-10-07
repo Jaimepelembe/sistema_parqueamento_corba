@@ -24,7 +24,7 @@ class TelaAdministrador:
         cobertura=["COBERTO","NAO_COBERTO"]
 
         return [
-            [sg.Text('Adicionar Parque', font=('Helvetica', 12, 'bold'))],
+            [sg.Text('Adicionar, Actualizar ou Remover o Parque', font=('Helvetica', 12, 'bold'))],
             [sg.Text('Nome:    '), sg.Input(default_text="", key='-PARQUE_NOME-', size=(30, 1))],
             [sg.Text('Provincia:    '), sg.Combo(provincias_mocambique, default_value=provincias_mocambique[0], key='-COMBO-PROVINCIA-', readonly=True, size=(20, 1))],
             [sg.Text('Localização:    '), sg.Input(default_text="", key='-PARQUE_LOCALIZACAO-', size=(30, 1))],
@@ -32,7 +32,7 @@ class TelaAdministrador:
             [sg.Text('Horário:   '), sg.Input(default_text="", key='-PARQUE_HORARIO-', size=(30, 1))],
             [sg.Text('Cobertura:    '), sg.Combo(cobertura, default_value=cobertura[0], key='-COMBO-COBERTURA-', readonly=True, size=(15, 1))],
             [sg.Text('Preço (MT):    '), sg.Input(default_text="", key='-PARQUE_PRECO-', size=(30, 1))],
-            [sg.Button('Adicionar', key='-BTN_ADICIONAR_PARQUE-',button_color=("white","#283B5B")),sg.Button('Atualizar Dados', key='-BTN_ATUALIZAR_PARQUE-',disabled=True, button_color=("white","#021a0d")),sg.Button('Limpar', key='-BTN_LIMPAR-', button_color=("white","#D5573B"))],
+            [sg.Button('Adicionar', key='-BTN_ADICIONAR_PARQUE-',button_color=("white","#283B5B")),sg.Button('Atualizar Dados', key='-BTN_ATUALIZAR_PARQUE-',disabled=True, button_color=("white","#021a0d")),sg.Button('Remover Parque', key='-BTN_REMOVER_PARQUE-',disabled=True, button_color=("white","#251701")),sg.Button('Limpar', key='-BTN_LIMPAR-', button_color=("white","#D5573B"))],
             
             [sg.HSeparator()],
         
@@ -58,7 +58,7 @@ class TelaAdministrador:
             [sg.Text('Nome:    '), sg.Input(default_text=self.usuario_logado.nome, key='-PERFIL_NOME-', size=(30, 1))],
             [sg.Text('Telefone:'), sg.Input(default_text=self.usuario_logado.telefone, key='-PERFIL_TEL-', size=(30, 1))],
             [sg.Text('Senha:   '), sg.Input(default_text=self.usuario_logado.senha, password_char='*', key='-PERFIL_SENHA-', size=(30, 1))],
-            [sg.Button('Atualizar Dados', key='-BTN_ATUALIZAR_PERFIL-')],
+            [sg.Button('Atualizar Dados', key='-BTN_ATUALIZAR_PERFIL_ADM-')],
         ]
 
 
