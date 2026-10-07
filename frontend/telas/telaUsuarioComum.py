@@ -127,7 +127,6 @@ class TelaUsuarioComum:
                     ]
                 ])
             ],
-            [sg.Button('Sair do Sistema', key='-SAIR-')],
         ]
         self.window = sg.Window('Sistema de Gestão de Parqueamento', layout, finalize=True)
 
