@@ -242,9 +242,9 @@ _0_ParqueamentoApp._tc_Parque = omniORB.tcInternal.createTypeCode(_0_Parqueament
 omniORB.registerType(Parque._NP_RepositoryId, _0_ParqueamentoApp._d_Parque, _0_ParqueamentoApp._tc_Parque)
 
 # Parque operations and attributes
-Parque._d_adicionarParque = ((omniORB.typeMapping["IDL:ParqueamentoApp/ParqueDTO:1.0"], ), (), None)
+Parque._d_adicionarParque = ((omniORB.typeMapping["IDL:ParqueamentoApp/ParqueDTO:1.0"], ), (omniORB.tcInternal.tv_long, ), None)
 Parque._d_editarParque = ((omniORB.typeMapping["IDL:ParqueamentoApp/ParqueDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
-Parque._d_removerParque = ((omniORB.tcInternal.tv_long, ), (), None)
+Parque._d_removerParque = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.tv_boolean, ), None)
 Parque._d_pesquisarPorCategoria = (((omniORB.tcInternal.tv_string,0), ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaParqueDTO:1.0"], ), None)
 
 # Parque object reference

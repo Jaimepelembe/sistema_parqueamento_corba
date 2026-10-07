@@ -91,7 +91,7 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         // PARQUES
         // ==========================
 
-        void adicionarParque(
+        long adicionarParque(
             in ParqueDTO parque
         );
 
@@ -100,7 +100,7 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         );
 
 
-        void removerParque(
+        boolean removerParque(
             in long id_parque
         );
 

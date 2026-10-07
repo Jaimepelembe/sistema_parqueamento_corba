@@ -19,19 +19,20 @@ class TelaAdministrador:
 
     def _criar_tab_parques(self):
         headings = ['Nome', 'Província', 'Localização', 'Telefone', 'Horário', 'Cobertura', 'Preço (MT)']
-        provincias_mocambique = ["Maputo","Gaza","Inhambane","Sofala","Manica","Tete","Zambézia","Nampula","Niassa","Cabo Delgado"
+        provincias_mocambique = ["Maputo Provincia","Maputo Cidade","Gaza","Inhambane","Sofala","Manica","Tete","Zambézia","Nampula","Niassa","Cabo Delgado"
 ]
+        cobertura=["COBERTO","NAO_COBERTO"]
 
         return [
             [sg.Text('Adicionar Parque', font=('Helvetica', 12, 'bold'))],
-            [sg.Text('Nome:    '), sg.Input(default_text=self.usuario_logado.nome, key='-PARQUE_NOME-', size=(30, 1))],
-            [sg.Text('Provincia:    '), sg.Combo(provincias_mocambique, default_value=provincias_mocambique[0], key='-COMBO-PROVINCIA-', readonly=True, size=(5, 1))],
+            [sg.Text('Nome:    '), sg.Input(default_text="", key='-PARQUE_NOME-', size=(30, 1))],
+            [sg.Text('Provincia:    '), sg.Combo(provincias_mocambique, default_value=provincias_mocambique[0], key='-COMBO-PROVINCIA-', readonly=True, size=(20, 1))],
             [sg.Text('Localização:    '), sg.Input(default_text="", key='-PARQUE_LOCALIZACAO-', size=(30, 1))],
             [sg.Text('Telefone:'), sg.Input(default_text="", key='-PARQUE_TEL-', size=(30, 1))],
             [sg.Text('Horário:   '), sg.Input(default_text="", key='-PARQUE_HORARIO-', size=(30, 1))],
-            [sg.Text('Cobertura:    '), sg.Combo(["COBERTO","NAO_COBERTO"], default_value=provincias_mocambique[0], key='-COMBO-COBERTURA-', readonly=True, size=(5, 1))],
+            [sg.Text('Cobertura:    '), sg.Combo(cobertura, default_value=cobertura[0], key='-COMBO-COBERTURA-', readonly=True, size=(15, 1))],
             [sg.Text('Preço (MT):    '), sg.Input(default_text="", key='-PARQUE_PRECO-', size=(30, 1))],
-            [sg.Button('Adicionar', key='-BTN_ADICIONAR_PARQUE-'),sg.Button('Atualizar Dados', key='-BTN_ATUALIZAR_PARQUE-',disabled=True)],
+            [sg.Button('Adicionar', key='-BTN_ADICIONAR_PARQUE-',button_color=("white","#283B5B")),sg.Button('Atualizar Dados', key='-BTN_ATUALIZAR_PARQUE-',disabled=True, button_color=("white","#021a0d")),sg.Button('Limpar', key='-BTN_LIMPAR-', button_color=("white","#D5573B"))],
             
             [sg.HSeparator()],
         

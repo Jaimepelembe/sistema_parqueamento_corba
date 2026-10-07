@@ -443,6 +443,57 @@ class GerenciadorJanelas:
         return listaReservaVagas              
             
        
+#Funcoes exclusivas do administrador
+    def colocarDadosParque(self,window,parqueDTO):
+        window["-PARQUE_NOME-"].update(parqueDTO.nome)
+        window["-COMBO-PROVINCIA-"].update(parqueDTO.provincia)
+        window["-PARQUE_LOCALIZACAO-"].update(parqueDTO.localizacao)
+        window["-PARQUE_TEL-"].update(parqueDTO.telefone)
+        window["-PARQUE_HORARIO-"].update(parqueDTO.horario)
+        window["-COMBO-COBERTURA-"].update(parqueDTO.cobertura)
+        window["-PARQUE_PRECO-"].update(parqueDTO.preco)
+        window["-BTN_ADICIONAR_PARQUE-"].update(disabled=True)
+        window["-BTN_ATUALIZAR_PARQUE-"].update(disabled=False)
+        
+        
+        
+    def adicionarParque(self,window,values):
+        nome=values["-PARQUE_NOME-"]
+        provincia=values["-COMBO-PROVINCIA-"]
+        localizacao=values["-PARQUE_LOCALIZACAO-"]
+        telefone=values["-PARQUE_TEL-"]
+        horario=values["-PARQUE_HORARIO-"]
+        cobertura=values["-COMBO-COBERTURA-"]
+        preco=values["-PARQUE_PRECO-"]
+        url=""
+        
+        if validarNome(nome) and len(provincia)>3 and validarTelefone(telefone) and len(horario)>=2 and cobertura in ["COBERTO", "NAO_COBERTO"] and validar_dinheiro_string(preco):
+            parqueDTO=ParqueamentoApp.ParqueDTO(-1,nome,provincia,localizacao,telefone,horario,cobertura,preco,url)
+            idParque=self.servico_parque.adicionarParque(parqueDTO)
+            if idParque>0: 
+                window["-TABELA_PARQUES-"].update(values=self.listarParques())
+                
+                #Criar vagas para o parque
+                numeroVagas=50
+                self.servico_vaga.adicionarVaga(idParque,numeroVagas)
+                
+                sg.popup("Sucesso","O parque foi adicionado com sucesso")
+            else:
+                sg.popup_error("Erro","Houve uma falha ao adicionar o novo parque.")
+        
+        
+    def limparDadosParque(self,window):
+        """Limpa os dados do parque selecionadao"""
+        window["-PARQUE_NOME-"].update("")
+        window["-COMBO-PROVINCIA-"].update(value="")
+        window["-PARQUE_LOCALIZACAO-"].update("")
+        window["-PARQUE_TEL-"].update("")
+        window["-PARQUE_HORARIO-"].update("")
+        window["-COMBO-COBERTURA-"].update(value="")
+        window["-PARQUE_PRECO-"].update("")
+        window["-BTN_ADICIONAR_PARQUE-"].update(disabled=False)
+        window["-BTN_ATUALIZAR_PARQUE-"].update(disabled=True)
+        
 
        
 
@@ -584,7 +635,41 @@ class GerenciadorJanelas:
                 
                 if event == "-BTN_CONFIRMAR_RESERVA-":
                     self.reservarVaga(self.tela_reserva_vaga.window,values)
+            
+            
+             #---Eventos da tela de administrador---
+            elif self.tela_administrador !=None  and window==self.tela_administrador.window:  
+                
+                if event ==sg.WIN_CLOSED:
+                    break
+                
+               # . EVENTOS DA TAB PARQUES (Seleção na Tabela para Edicao)
+                if event == '-TABELA_PARQUES-':
                     
+                    linhas_selecionadas = values['-TABELA_PARQUES-']
+                    if linhas_selecionadas:
+                        indice = linhas_selecionadas[0]
+                        parqueDTO=self.listaParquesDTO[indice]
+                        
+                        self.colocarDadosParque(self.tela_administrador.window,parqueDTO)
+
+                
+                # EVENTO PARA ADICIONAR PARQUE
+                if event == '-BTN_ADICIONAR_PARQUE-':
+                    self.adicionarParque(self.tela_administrador.window,values)
+                    self.limparDadosParque(self.tela_administrador.window)
+                
+                
+                # EVENTO PARA ACTUALIZAR PARQUE
+                if event == '-BTN_ATUALIZAR_PARQUE-':
+                    pass
+                    #Voltar a habilitar o botao adicionar
+                    
+                # EVENTO PARA Limpar os dados selecionados
+                if event == '-BTN_LIMPAR-':
+                    self.limparDadosParque(self.tela_administrador.window)
+                
+
 
                     
 

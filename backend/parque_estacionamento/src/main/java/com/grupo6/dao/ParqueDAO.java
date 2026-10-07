@@ -15,9 +15,10 @@ public class ParqueDAO {
 
     public ParqueDAO(){}
 
-  public void  adicionarParque (ParqueDTO parque){
+  public int  adicionarParque (ParqueDTO parque){
       String sql="INSERT INTO parque_estacionamento (nome, provincia, localizacao,telefone,horario,cobertura,preco, foto_url) VALUES (?,?,?,?,?,?,?,?)";
 
+      int idParque=-1;
            try{
         Connection conn = ConexaoBD.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -32,6 +33,14 @@ public class ParqueDAO {
 
         stmt.executeUpdate();
 
+        ResultSet generatedKeys = stmt.getGeneratedKeys();
+
+        while (generatedKeys.next()){
+            idParque=generatedKeys.getInt(1);
+        }
+
+
+
 
         if (!conn.isClosed()) {
                 conn.close();}
@@ -44,6 +53,8 @@ public class ParqueDAO {
             System.out.println("Erro: "+e);
 
         }
+
+        return idParque;
 
 
   }
@@ -133,15 +144,21 @@ public ParqueDTO[] pesquisarPorCategoria (String categoria){
 
         }
 
-public void removerParque (int id_parque){
+public boolean removerParque (int id_parque){
 
           String sql="DELETE FROM parque_estacionamento WHERE id_parque=?";
+        boolean resultado=false;
 
            try{
         Connection conn = ConexaoBD.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1,id_parque);
-        stmt.executeUpdate();
+
+        int linhasAfectadas=stmt.executeUpdate();
+        if (linhasAfectadas>0){
+            resultado=true;
+        }
+
 
 
         if (!conn.isClosed()) {
@@ -155,6 +172,7 @@ public void removerParque (int id_parque){
             System.out.println("Erro: "+e);
 
         }
+        return resultado;
 
 };
 

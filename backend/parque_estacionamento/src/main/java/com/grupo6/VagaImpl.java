@@ -23,7 +23,7 @@ public class VagaImpl extends VagaPOA {
 
         for ( int i=0; i<numero_de_vagas;i++){
            String numero="A-"+(i+1);
-           System.out.println(numero);
+           //System.out.println(numero);
             vaga = new VagaDTO(-1,numero, 0, id_parque);
             vagaDAO.adicionarVaga(vaga);
         }

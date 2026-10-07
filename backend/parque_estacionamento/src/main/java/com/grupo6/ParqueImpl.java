@@ -18,9 +18,9 @@ public class ParqueImpl
 
 
     @Override
-    public void adicionarParque(ParqueDTO parque){
+    public int adicionarParque(ParqueDTO parque){
         parqueDAO = new ParqueDAO();
-        parqueDAO.adicionarParque(parque);
+        return parqueDAO.adicionarParque(parque);
     }
 
     @Override
@@ -41,11 +41,9 @@ public class ParqueImpl
     
 
     @Override
-    public void removerParque( int id_parque){
+    public boolean removerParque( int id_parque){
         parqueDAO = new ParqueDAO();
-        parqueDAO.removerParque(id_parque);
-
-
+        return parqueDAO.removerParque(id_parque);
     }
 
    
