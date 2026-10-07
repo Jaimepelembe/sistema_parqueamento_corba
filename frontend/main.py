@@ -242,8 +242,8 @@ class GerenciadorJanelas:
                         window['-TABELA_RESERVAS-'].update(values=self.listarReservasVaga())   
                         
                                 
-                        #sg.popup('Sucesso', 'O deposito foi efectuado com sucesso.')
-                        print(f"Debitou {valorDebito} com sucesso")
+                        #sg.popup('Sucesso', 'O debito foi efectuado com sucesso.')
+                        #print(f"Debitou {valorDebito} com sucesso")
             
         else:
             sg.popup_error('Erro', 'O valor de debito deve ser maior que zero.')
@@ -291,9 +291,10 @@ class GerenciadorJanelas:
 
     def escolherData(self,titulo,window,key):
         data = sg.popup_get_date(title=titulo,keep_on_top=True,modal=True)
-        mes,dia,ano=data
-        dataFormatada=f"{dia:02d}-{mes:02d}-{ano}"
-        window[key].update(dataFormatada)
+        if data:
+            mes,dia,ano=data
+            dataFormatada=f"{dia:02d}-{mes:02d}-{ano}"
+            window[key].update(dataFormatada)
         #print(dataFormatada)
     
     def validarVagaSelecionada(self,values)->int:
@@ -331,10 +332,10 @@ class GerenciadorJanelas:
         resultado=False
         if dataEntrada and dataEntrada!="":
             periodoEntradaStr=f"{dataEntrada} {tempoEntrada}"
-            print(f"Periodo: {periodoEntradaStr}")
+            #print(f"Periodo: {periodoEntradaStr}")
             periodoEntradaDateTime=datetime.strptime(periodoEntradaStr,formato)
        
-            print(periodoEntradaDateTime)
+           # print(periodoEntradaDateTime)
             
             dataSaida=values["-DT-SAIDA-"]
             horaSaida=values["-RESERVA-HORA-SAIDA-"]
@@ -563,7 +564,7 @@ class GerenciadorJanelas:
                             if user_dto and user_dto.id_usuario > 0:
                                 sg.popup("Login efetuado com sucesso!", title="Sucesso")
                                 self.usuario_logado = user_dto
-                                print(user_dto.nome)
+                                #print(user_dto.nome)
                                 self.tela_login.ocultar()
                                 
                                 if self.usuario_logado.tipo==0: #Mostra a tela do usuario comum
@@ -591,7 +592,7 @@ class GerenciadorJanelas:
                     else:
                         sg.popup_error('Por favor, preencha usuário e senha correctamente.')
                 elif event == "-BTN-TELA-CADASTRO-":
-                    print("Cadastrar")
+                    #print("Cadastrar")
                     self.tela_login.ocultar()
                     self.tela_cadastro = TelaCadastroUsuario()
                 
