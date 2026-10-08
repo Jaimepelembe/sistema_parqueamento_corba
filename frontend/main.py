@@ -37,7 +37,7 @@ class GerenciadorJanelas:
         self.tela_administrador = None
         self.tela_cadastro = None
         self.tela_reserva_vaga=None
-        self.inicializarCORBA()
+        self.inicializarCORBA(initial_host="10.234.196.150", initial_port="1050")
         self.listaParquesDTO=None
         self.listaVagasDTO=None
         self.listaVagasReservadasDTO=None

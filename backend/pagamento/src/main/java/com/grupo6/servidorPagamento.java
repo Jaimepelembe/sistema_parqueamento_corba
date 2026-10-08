@@ -42,7 +42,7 @@ public class servidorPagamento {
         try{
             //Criar e inicializa o ORB
            // ORB orb = ORB.init(args,null);
-           String Host="localhost";
+           String Host="10.234.196.150";//"localhost";
            String Port ="1050";
 
             //Propriedades
