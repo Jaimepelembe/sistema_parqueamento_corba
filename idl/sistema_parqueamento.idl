@@ -112,6 +112,17 @@ typedef sequence<ReservaDTO> listaReservaDTO;
 
     };
 
+    // ==========================
+    // OBSERVADOR 
+    // ==========================
+
+    interface Observador {
+        oneway void notificarParquesActualizados(
+            in listaParqueDTO parques
+        );
+    };
+
+
 
     interface Vaga{
 
