@@ -107,6 +107,10 @@ class GerenciadorJanelas:
         self.idObsParque = self.servico_parque.registarObservador(referencia_observador)
         print(f"Observador Numero registado. ID: {self.idObsParque}")
         
+        
+        self.idObsUsuario = self.servico_usuario.registarObservador(referencia_observador)
+        print(f"Observador usuario registado. ID: {self.idObsUsuario}")
+        
         """
         # Registar o observador de potencia no servidor
         referencia_observador_potencia = poa.servant_to_reference(observador)
@@ -228,7 +232,7 @@ class GerenciadorJanelas:
             window["-PERFIL_NOME-"].update(self.usuario_logado.nome)
             window["-PERFIL_TEL-"].update(self.usuario_logado.telefone)
             window["-PERFIL_SENHA-"].update(self.usuario_logado.senha)
-            sg.popup(f"Usuario {self.usuario_logado.id_usuario} actualizado com sucesso")
+            #sg.popup(f"Usuario {self.usuario_logado.id_usuario} actualizado com sucesso")
     
     
     
