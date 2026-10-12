@@ -24,6 +24,8 @@ import CosNaming
 import ParqueamentoApp
 import PagamentoApp
 
+from ObservadorImpl import ObservadorImpl
+import threading
 
 
 
@@ -37,7 +39,7 @@ class GerenciadorJanelas:
         self.tela_administrador = None
         self.tela_cadastro = None
         self.tela_reserva_vaga=None
-        self.inicializarCORBA(initial_host="10.234.196.150", initial_port="1050")
+        self.inicializarCORBA(initial_host="localhost", initial_port="1050") #"10.234.196.150"
         self.listaParquesDTO=None
         self.listaVagasDTO=None
         self.listaVagasReservadasDTO=None
@@ -80,6 +82,8 @@ class GerenciadorJanelas:
         self.servico_conta= self.obter_servico("Conta",PagamentoApp.Conta)
         self.servico_transacao= self.obter_servico("Transacao",PagamentoApp.Transacao)
 
+        self.criarObservadores(orb)
+        
         # Guarda o utilizador autenticado após o login
         self.usuario_logado = None
     
@@ -90,7 +94,32 @@ class GerenciadorJanelas:
         obj = self.root_context.resolve(name)
         return obj._narrow(interface_class)
         
+    def criarObservadores(self,orb):
+        # Criar o observador e disponibiliza-lo ao servidor.
+        poa = orb.resolve_initial_references("RootPOA")
+        poa._get_the_POAManager().activate() # passa a atender callbacks
         
+        # Criar e activar o observador no cliente
+        self.observador = ObservadorImpl(self.tela_administrador.window)
+        referencia_observador = poa.servant_to_reference(self.observador)
+
+        # Registar o observador de numero no servidor
+        self.idObsParque = self.servico_parque.registarObservador(referencia_observador)
+        print(f"Observador Numero registado. ID: {self.idObsParque}")
+        
+        """
+        # Registar o observador de potencia no servidor
+        referencia_observador_potencia = poa.servant_to_reference(observador)
+        self.idObsPotencia = self.servico_potencia.registarObservador(referencia_observador_potencia)
+        print(f"Observador Potencia registado. ID: {self.idObsPotencia}")
+         """
+        
+        # Manter o ORB activo para receber callbacks.
+        thread_orb = threading.Thread(
+            target=orb.run,
+            daemon=True
+        )
+        thread_orb.start()    
     
     
     def encerrar_aplicacao(self):
@@ -582,6 +611,7 @@ class GerenciadorJanelas:
                                 else:
                                     # Mostra a tela de admin
                                     self.tela_administrador=TelaAdministrador(user_dto,self.listarParques())
+                                    self.observador.janelaAdmin=self.tela_administrador.window
                                 
                             else:
                                 sg.popup_error("Telefone ou senha incorretos.")

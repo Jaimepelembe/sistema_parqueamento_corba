@@ -27,17 +27,35 @@ public class ParqueImpl
     @Override
     public int adicionarParque(ParqueDTO parque){
         synchronized(lock){
+        int idParque=-1;
         parqueDAO = new ParqueDAO();
-        return parqueDAO.adicionarParque(parque);
+        idParque=parqueDAO.adicionarParque(parque);
+        
+        //Se o parque foi adicionado busca a nova lista de parques e envia a para todos os clientes activos
+        if (idParque >0){
+            ParqueDTO[] parques=null;
+            parques=pesquisarPorCategoria("nome");
+            notificarTodos(parques);
+        }
+        return idParque;
     }
     }
 
     @Override
     public boolean editarParque(ParqueDTO parque) {
         synchronized(lock){
+        boolean resultado=false;
         parqueDAO = new ParqueDAO();
+        resultado=parqueDAO.editarParque(parque);
         
-    return parqueDAO.editarParque(parque);   } 
+        //Se o parque foi editado, busca a nova lista de parques e envia a para todos os clientes activos
+        if (resultado){
+            ParqueDTO[] parques=null;
+            parques=pesquisarPorCategoria("nome");
+            notificarTodos(parques);
+        }
+
+    return resultado;   } 
     }
 
 
@@ -51,8 +69,19 @@ public class ParqueImpl
 
     @Override
     public boolean removerParque( int id_parque){
+        synchronized(lock){
+        boolean resultado=false;
         parqueDAO = new ParqueDAO();
-        return parqueDAO.removerParque(id_parque);
+        resultado=parqueDAO.removerParque(id_parque);
+
+        //Se o parque foi removido, busca a nova lista de parques e envia a para todos os clientes activos
+        if (resultado){
+            ParqueDTO[] parques=null;
+            parques=pesquisarPorCategoria("nome");
+            notificarTodos(parques);
+        }
+        return resultado;
+    }
     }
 
     @Override
