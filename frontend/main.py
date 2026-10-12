@@ -604,13 +604,17 @@ class GerenciadorJanelas:
                                     self.saldoActual =self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
                                     
                                     #Pesquisar os dados que o usuario vai precisar usando as funcoes listarParques, listarViaturas, listarTransacoes.
+                                    self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
                                     self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.listarReservasVaga(),self.saldoActual)
                                     self.tela_usuario_comum.minhas_reservas=self.listarReservasVaga()
+                                    self.observador.janelaUsuarioComum=self.tela_usuario_comum.window
                                     #listaParques=None
      
                                     
                                 else:
                                     # Mostra a tela de admin
+                                    #Buscar os parques na base de dados
+                                    self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
                                     self.tela_administrador=TelaAdministrador(user_dto,self.listarParques())
                                     self.observador.janelaAdmin=self.tela_administrador.window
                                 
@@ -692,6 +696,15 @@ class GerenciadorJanelas:
                 if event == "-BTN_ADD_VIATURA-":
                    self.adicionarViatura(self.tela_usuario_comum.window,values)
                    
+                   
+                #EVENTOS DO OBSERVADOR
+                   
+                #EVENTO DA TABELA PARQUE   ACTUALIZADA POR UM ADMIM
+                if event == "-TABELA-PARQUE-ACTUALIZADA-":
+                    self.listaParquesDTO=values["-TABELA-PARQUE-ACTUALIZADA-"]
+                    # Actualiza a janela dos usuarios comum que estao conectados ao servidor
+                    self.tela_usuario_comum.window["-TABELA_PARQUES-"].update(self.listarParques()) #Actualiza a lista de parques na tabela do usuario comum
+                   
             #---Eventos da tela de Reserva de vaga ---
             elif self.tela_reserva_vaga !=None  and window==self.tela_reserva_vaga.window:   
                 # EVENTO DE CANCELAR A RESERVA
@@ -755,8 +768,8 @@ class GerenciadorJanelas:
                 if event == "-TABELA-PARQUE-ACTUALIZADA-":
                     self.listaParquesDTO=values["-TABELA-PARQUE-ACTUALIZADA-"]
                     self.tela_administrador.window["-TABELA_PARQUES-"].update(self.listarParques())
-                    self.tela_usuario_comum.window["-TABELA_PARQUES-"].update(self.listarParques())
-                    sg.popup("Sucesso","Valor actualizado por um cliente")
+                    
+                    
                 
                     
                 
