@@ -168,6 +168,54 @@ _0_ParqueamentoApp._tc_listaReservaDTO = omniORB.tcInternal.createTypeCode(_0_Pa
 omniORB.registerType(listaReservaDTO._NP_RepositoryId, _0_ParqueamentoApp._ad_listaReservaDTO, _0_ParqueamentoApp._tc_listaReservaDTO)
 del listaReservaDTO
 
+# interface Observador
+_0_ParqueamentoApp._d_Observador = (omniORB.tcInternal.tv_objref, "IDL:ParqueamentoApp/Observador:1.0", "Observador")
+omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"] = _0_ParqueamentoApp._d_Observador
+_0_ParqueamentoApp.Observador = omniORB.newEmptyClass()
+class Observador :
+    _NP_RepositoryId = _0_ParqueamentoApp._d_Observador[1]
+
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+
+    _nil = CORBA.Object._nil
+
+
+_0_ParqueamentoApp.Observador = Observador
+_0_ParqueamentoApp._tc_Observador = omniORB.tcInternal.createTypeCode(_0_ParqueamentoApp._d_Observador)
+omniORB.registerType(Observador._NP_RepositoryId, _0_ParqueamentoApp._d_Observador, _0_ParqueamentoApp._tc_Observador)
+
+# Observador operations and attributes
+Observador._d_notificarParquesActualizados = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaParqueDTO:1.0"], ), None, None)
+
+# Observador object reference
+class _objref_Observador (CORBA.Object):
+    _NP_RepositoryId = Observador._NP_RepositoryId
+
+    def __init__(self, obj):
+        CORBA.Object.__init__(self, obj)
+
+    def notificarParquesActualizados(self, *args):
+        return self._obj.invoke("notificarParquesActualizados", _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, args)
+
+omniORB.registerObjref(Observador._NP_RepositoryId, _objref_Observador)
+_0_ParqueamentoApp._objref_Observador = _objref_Observador
+del Observador, _objref_Observador
+
+# Observador skeleton
+__name__ = "ParqueamentoApp__POA"
+class Observador (PortableServer.Servant):
+    _NP_RepositoryId = _0_ParqueamentoApp.Observador._NP_RepositoryId
+
+
+    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados}
+
+Observador._omni_skeleton = Observador
+_0_ParqueamentoApp__POA.Observador = Observador
+omniORB.registerSkeleton(Observador._NP_RepositoryId, Observador)
+del Observador
+__name__ = "ParqueamentoApp"
+
 # interface Usuario
 _0_ParqueamentoApp._d_Usuario = (omniORB.tcInternal.tv_objref, "IDL:ParqueamentoApp/Usuario:1.0", "Usuario")
 omniORB.typeMapping["IDL:ParqueamentoApp/Usuario:1.0"] = _0_ParqueamentoApp._d_Usuario
@@ -246,6 +294,8 @@ Parque._d_adicionarParque = ((omniORB.typeMapping["IDL:ParqueamentoApp/ParqueDTO
 Parque._d_editarParque = ((omniORB.typeMapping["IDL:ParqueamentoApp/ParqueDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
 Parque._d_removerParque = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.tv_boolean, ), None)
 Parque._d_pesquisarPorCategoria = (((omniORB.tcInternal.tv_string,0), ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaParqueDTO:1.0"], ), None)
+Parque._d_registarObservador = ((omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"], ), (omniORB.tcInternal.tv_long, ), None)
+Parque._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
 # Parque object reference
 class _objref_Parque (CORBA.Object):
@@ -266,6 +316,12 @@ class _objref_Parque (CORBA.Object):
     def pesquisarPorCategoria(self, *args):
         return self._obj.invoke("pesquisarPorCategoria", _0_ParqueamentoApp.Parque._d_pesquisarPorCategoria, args)
 
+    def registarObservador(self, *args):
+        return self._obj.invoke("registarObservador", _0_ParqueamentoApp.Parque._d_registarObservador, args)
+
+    def removerObservador(self, *args):
+        return self._obj.invoke("removerObservador", _0_ParqueamentoApp.Parque._d_removerObservador, args)
+
 omniORB.registerObjref(Parque._NP_RepositoryId, _objref_Parque)
 _0_ParqueamentoApp._objref_Parque = _objref_Parque
 del Parque, _objref_Parque
@@ -276,7 +332,7 @@ class Parque (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Parque._NP_RepositoryId
 
 
-    _omni_op_d = {"adicionarParque": _0_ParqueamentoApp.Parque._d_adicionarParque, "editarParque": _0_ParqueamentoApp.Parque._d_editarParque, "removerParque": _0_ParqueamentoApp.Parque._d_removerParque, "pesquisarPorCategoria": _0_ParqueamentoApp.Parque._d_pesquisarPorCategoria}
+    _omni_op_d = {"adicionarParque": _0_ParqueamentoApp.Parque._d_adicionarParque, "editarParque": _0_ParqueamentoApp.Parque._d_editarParque, "removerParque": _0_ParqueamentoApp.Parque._d_removerParque, "pesquisarPorCategoria": _0_ParqueamentoApp.Parque._d_pesquisarPorCategoria, "registarObservador": _0_ParqueamentoApp.Parque._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Parque._d_removerObservador}
 
 Parque._omni_skeleton = Parque
 _0_ParqueamentoApp__POA.Parque = Parque
