@@ -100,7 +100,7 @@ class GerenciadorJanelas:
         poa._get_the_POAManager().activate() # passa a atender callbacks
         
         # Criar e activar o observador no cliente
-        self.observador = ObservadorImpl(self.tela_administrador.window)
+        self.observador = ObservadorImpl()
         referencia_observador = poa.servant_to_reference(self.observador)
 
         # Registar o observador de numero no servidor
@@ -150,11 +150,12 @@ class GerenciadorJanelas:
         return listaViaturas    
     
     def listarParques(self) ->list:
-        self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
+        #self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
         listaParques=[]
-        for parqueDTO in self.listaParquesDTO:
-            listaParques.append([parqueDTO.nome,parqueDTO.provincia,parqueDTO.localizacao,parqueDTO.telefone,parqueDTO.horario,parqueDTO.cobertura,parqueDTO.preco])
-            #print(parqueDTO.nome)
+        if self.listaParquesDTO:
+            for parqueDTO in self.listaParquesDTO:
+                listaParques.append([parqueDTO.nome,parqueDTO.provincia,parqueDTO.localizacao,parqueDTO.telefone,parqueDTO.horario,parqueDTO.cobertura,parqueDTO.preco])
+                #print(parqueDTO.nome)
         return listaParques
     
     
@@ -501,7 +502,7 @@ class GerenciadorJanelas:
             parqueDTO=ParqueamentoApp.ParqueDTO(-1,nome,provincia,localizacao,telefone,horario,cobertura,validar_dinheiro(preco),url)
             idParque=self.servico_parque.adicionarParque(parqueDTO)
             if idParque>0: 
-                window["-TABELA_PARQUES-"].update(values=self.listarParques())
+                #window["-TABELA_PARQUES-"].update(values=self.listarParques())
                 
                 #Criar vagas para o parque
                 numeroVagas=50
@@ -526,7 +527,7 @@ class GerenciadorJanelas:
                 parqueDTO=ParqueamentoApp.ParqueDTO(antigoParque.id_parque,nome,provincia,localizacao,telefone,horario,cobertura,validar_dinheiro(preco),url)
                 resusltado=self.servico_parque.editarParque(parqueDTO)
                 if resusltado: 
-                    window["-TABELA_PARQUES-"].update(values=self.listarParques())
+                    #window["-TABELA_PARQUES-"].update(values=self.listarParques())
                     sg.popup("Sucesso", "Você editou o parque com sucesso")
                 
             else:
@@ -747,6 +748,18 @@ class GerenciadorJanelas:
                 #EVENTOS DA TAB PERFIL
                 if event == "-BTN_ATUALIZAR_PERFIL_ADM-":
                     self.actualizarDadosUsuario(self.tela_administrador.window,values)
+                    
+                #EVENTOS DO OBSERVADOR
+                
+                #EVENTO DA TABELA PARQUE
+                if event == "-TABELA-PARQUE-ACTUALIZADA-":
+                    self.listaParquesDTO=values["-TABELA-PARQUE-ACTUALIZADA-"]
+                    self.tela_administrador.window["-TABELA_PARQUES-"].update(self.listarParques())
+                    self.tela_usuario_comum.window["-TABELA_PARQUES-"].update(self.listarParques())
+                    sg.popup("Sucesso","Valor actualizado por um cliente")
+                
+                    
+                
                 
 
 
