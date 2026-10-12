@@ -60,6 +60,17 @@ typedef sequence<ReservaDTO> listaReservaDTO;
 
 //Interfaces
 
+        // ==========================
+        // OBSERVADOR
+        // ==========================
+
+    interface Observador {
+    oneway void notificarParquesActualizados(
+        in listaParqueDTO parques
+    );
+};
+
+
     interface Usuario{
         // ==========================
         // USUÁRIO
@@ -109,18 +120,19 @@ typedef sequence<ReservaDTO> listaReservaDTO;
             in string categoria
         ); //Categoria pode ser província, nome ou preço. 
 
+ 
+        // Registar o cliente para receber callbacks
+        long registarObservador( in Observador obs); // Retorna o Id do observador
+
+
+        // Deixar de receber callbacks
+        void removerObservador(in long id);
+
+
 
     };
 
-    // ==========================
-    // OBSERVADOR 
-    // ==========================
 
-    interface Observador {
-        oneway void notificarParquesActualizados(
-            in listaParqueDTO parques
-        );
-    };
 
 
 
@@ -202,6 +214,8 @@ typedef sequence<ReservaDTO> listaReservaDTO;
 
 
     };
+
+
 
 
 

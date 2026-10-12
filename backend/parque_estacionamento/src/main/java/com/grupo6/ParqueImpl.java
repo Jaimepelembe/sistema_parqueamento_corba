@@ -3,10 +3,17 @@ package com.grupo6;
 import com.grupo6.ParqueamentoApp.ParquePOA;
 import com.grupo6.ParqueamentoApp.ParqueDTO;
 import com.grupo6.dao.ParqueDAO;
+import com.grupo6.ParqueamentoApp.Observador;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ParqueImpl
         extends ParquePOA {
+    private final Object lock = new Object();
+    private final Map<Integer, Observador> observadores = new HashMap<Integer, Observador>();
+    private int proximoId = 1;
     
     private ParqueDAO parqueDAO;
 
@@ -19,16 +26,18 @@ public class ParqueImpl
 
     @Override
     public int adicionarParque(ParqueDTO parque){
+        synchronized(lock){
         parqueDAO = new ParqueDAO();
         return parqueDAO.adicionarParque(parque);
+    }
     }
 
     @Override
     public boolean editarParque(ParqueDTO parque) {
-
+        synchronized(lock){
         parqueDAO = new ParqueDAO();
         
-    return parqueDAO.editarParque(parque);    
+    return parqueDAO.editarParque(parque);   } 
     }
 
 
@@ -46,6 +55,42 @@ public class ParqueImpl
         return parqueDAO.removerParque(id_parque);
     }
 
+    @Override
+    public int registarObservador(Observador obs){
+        int id;
+        int total;
+        synchronized (lock){
+            id=proximoId++;
+            observadores.put(id,obs);
+            total=observadores.size();
+        }
+
+        System.out.println("Observador "+id +"registado (" +total+" no total)");
+        return id;
+    }
+
+    @Override 
+    public void removerObservador(int id){
+        synchronized (lock){
+            observadores.remove(id);
+        }
+        System.out.println("Observador "+id + " removido");
+    }
+
+
+    private void notificarTodos(ParqueDTO[] parques) {
+    Iterator<Map.Entry<Integer, Observador>> it = observadores.entrySet().iterator();
+    while (it.hasNext()) {
+        Map.Entry<Integer, Observador> e = it.next();
+        try {
+            e.getValue().notificarParquesActualizados(parques);   // callback para o cliente
+        } catch (org.omg.CORBA.SystemException ex) {
+            System.out.println("Observador " + e.getKey() + " inacessível ("
+                    + ex.getClass().getSimpleName() + "); a remover");
+            it.remove();
+        }
+    }
+}
    
 
       /**
