@@ -14,4 +14,12 @@ class ObservadorImpl(Observador):
             
         if self.janelaUsuarioComum:
             self.janelaUsuarioComum.write_event_value("-TABELA-PARQUE-ACTUALIZADA-", parquesActualizados)
+    
+    def notificarActualizacaoDadosUsuario(self,usuario):
+        if self.janelaAdmin:
+            #print(f"\n>>> Valor actualizado: {parquesActualizados}")
+            self.janelaAdmin.write_event_value("-ATUALIZAR_PERFIL_UM_USUARIO-", usuario)
             
+        if self.janelaUsuarioComum:
+            self.janelaUsuarioComum.write_event_value("-ATUALIZAR_PERFIL_UM_USUARIO-", usuario)
+      

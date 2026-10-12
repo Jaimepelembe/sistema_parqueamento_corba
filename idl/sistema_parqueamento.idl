@@ -68,6 +68,10 @@ typedef sequence<ReservaDTO> listaReservaDTO;
     oneway void notificarParquesActualizados(
         in listaParqueDTO parques
     );
+
+    oneway void notificarActualizacaoDadosUsuario(
+        in UsuarioDTO usuario
+    );
 };
 
 
@@ -85,6 +89,13 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         void cadastrar (in UsuarioDTO usuario);
 
         boolean actualizarDados(in UsuarioDTO usuario); 
+
+        // Registar o cliente para receber callbacks
+        long registarObservador( in Observador obs); // Retorna o Id do observador
+
+
+        // Deixar de receber callbacks
+        void removerObservador(in long id);
 
         //in id_usuario,
         //in string nome,

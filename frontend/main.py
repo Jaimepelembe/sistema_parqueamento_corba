@@ -219,6 +219,19 @@ class GerenciadorJanelas:
             else:
                  sg.popup_error('Erro', 'Voce nao modificou nenhum dos seus dados!\nModifique um deles para poder actualizar.')
     
+    def notificarActualizacaoDadosUsuario(self,window,values):
+        usuarioActualizado=values["-ATUALIZAR_PERFIL_UM_USUARIO-"]
+        if usuarioActualizado.id_usuario==self.usuario_logado.id_usuario:
+            self.usuario_logado=usuarioActualizado
+            
+            # Actualiza a janela dos usuarios comum que estao conectados ao servidor
+            window["-PERFIL_NOME-"].update(self.usuario_logado.nome)
+            window["-PERFIL_TEL-"].update(self.usuario_logado.telefone)
+            window["-PERFIL_SENHA-"].update(self.usuario_logado.senha)
+            sg.popup(f"Usuario {self.usuario_logado.id_usuario} actualizado com sucesso")
+    
+    
+    
     
     def depositar(self,window,values):
         valorDeposito=values["-VALOR_DEPOSITO-"]
@@ -704,6 +717,13 @@ class GerenciadorJanelas:
                     self.listaParquesDTO=values["-TABELA-PARQUE-ACTUALIZADA-"]
                     # Actualiza a janela dos usuarios comum que estao conectados ao servidor
                     self.tela_usuario_comum.window["-TABELA_PARQUES-"].update(self.listarParques()) #Actualiza a lista de parques na tabela do usuario comum
+                
+                #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DO DADO DE UM USUARIO
+                if event == "-ATUALIZAR_PERFIL_UM_USUARIO-":
+                    self.notificarActualizacaoDadosUsuario(window,values)
+
+ 
+                                    
                    
             #---Eventos da tela de Reserva de vaga ---
             elif self.tela_reserva_vaga !=None  and window==self.tela_reserva_vaga.window:   
@@ -768,6 +788,10 @@ class GerenciadorJanelas:
                 if event == "-TABELA-PARQUE-ACTUALIZADA-":
                     self.listaParquesDTO=values["-TABELA-PARQUE-ACTUALIZADA-"]
                     self.tela_administrador.window["-TABELA_PARQUES-"].update(self.listarParques())
+                
+                #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DO DADO DE UM USUARIO
+                if event == "-ATUALIZAR_PERFIL_UM_USUARIO-":
+                    self.notificarActualizacaoDadosUsuario(window,values)
                     
                     
                 

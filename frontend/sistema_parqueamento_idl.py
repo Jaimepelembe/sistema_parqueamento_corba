@@ -187,6 +187,7 @@ omniORB.registerType(Observador._NP_RepositoryId, _0_ParqueamentoApp._d_Observad
 
 # Observador operations and attributes
 Observador._d_notificarParquesActualizados = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaParqueDTO:1.0"], ), None, None)
+Observador._d_notificarActualizacaoDadosUsuario = ((omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), None, None)
 
 # Observador object reference
 class _objref_Observador (CORBA.Object):
@@ -198,6 +199,9 @@ class _objref_Observador (CORBA.Object):
     def notificarParquesActualizados(self, *args):
         return self._obj.invoke("notificarParquesActualizados", _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, args)
 
+    def notificarActualizacaoDadosUsuario(self, *args):
+        return self._obj.invoke("notificarActualizacaoDadosUsuario", _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario, args)
+
 omniORB.registerObjref(Observador._NP_RepositoryId, _objref_Observador)
 _0_ParqueamentoApp._objref_Observador = _objref_Observador
 del Observador, _objref_Observador
@@ -208,7 +212,7 @@ class Observador (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Observador._NP_RepositoryId
 
 
-    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados}
+    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, "notificarActualizacaoDadosUsuario": _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario}
 
 Observador._omni_skeleton = Observador
 _0_ParqueamentoApp__POA.Observador = Observador
@@ -237,6 +241,8 @@ omniORB.registerType(Usuario._NP_RepositoryId, _0_ParqueamentoApp._d_Usuario, _0
 Usuario._d_login = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), None)
 Usuario._d_cadastrar = ((omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), (), None)
 Usuario._d_actualizarDados = ((omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
+Usuario._d_registarObservador = ((omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"], ), (omniORB.tcInternal.tv_long, ), None)
+Usuario._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
 # Usuario object reference
 class _objref_Usuario (CORBA.Object):
@@ -254,6 +260,12 @@ class _objref_Usuario (CORBA.Object):
     def actualizarDados(self, *args):
         return self._obj.invoke("actualizarDados", _0_ParqueamentoApp.Usuario._d_actualizarDados, args)
 
+    def registarObservador(self, *args):
+        return self._obj.invoke("registarObservador", _0_ParqueamentoApp.Usuario._d_registarObservador, args)
+
+    def removerObservador(self, *args):
+        return self._obj.invoke("removerObservador", _0_ParqueamentoApp.Usuario._d_removerObservador, args)
+
 omniORB.registerObjref(Usuario._NP_RepositoryId, _objref_Usuario)
 _0_ParqueamentoApp._objref_Usuario = _objref_Usuario
 del Usuario, _objref_Usuario
@@ -264,7 +276,7 @@ class Usuario (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Usuario._NP_RepositoryId
 
 
-    _omni_op_d = {"login": _0_ParqueamentoApp.Usuario._d_login, "cadastrar": _0_ParqueamentoApp.Usuario._d_cadastrar, "actualizarDados": _0_ParqueamentoApp.Usuario._d_actualizarDados}
+    _omni_op_d = {"login": _0_ParqueamentoApp.Usuario._d_login, "cadastrar": _0_ParqueamentoApp.Usuario._d_cadastrar, "actualizarDados": _0_ParqueamentoApp.Usuario._d_actualizarDados, "registarObservador": _0_ParqueamentoApp.Usuario._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Usuario._d_removerObservador}
 
 Usuario._omni_skeleton = Usuario
 _0_ParqueamentoApp__POA.Usuario = Usuario
