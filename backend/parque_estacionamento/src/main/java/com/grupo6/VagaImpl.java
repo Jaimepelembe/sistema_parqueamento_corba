@@ -40,9 +40,9 @@ public class VagaImpl extends VagaPOA {
             vaga = new VagaDTO(-1,numero, 0, id_parque);
             vagaDAO.adicionarVaga(vaga);
         }
-        VagaDTO[] vagas=null;
-        vagas=listarVagasDisponiveis(id_parque);
-        notificarTodos(vagas);
+        //VagaDTO[] vagas=null;
+        //vagas=listarVagasDisponiveis(id_parque);
+        //notificarTodos(vagas);
 
     }
     }
@@ -52,10 +52,28 @@ public class VagaImpl extends VagaPOA {
         vagaDAO= new VagaDAO();
         boolean resultado=false;
         resultado=vagaDAO.actualizarEstadoVaga(id_vaga, estadoVaga);
+        if (resultado){ //Buscar a nova lista de actualizada e enviar para todos os usuarios comum
+            int id_parque=vagaDAO.buscarIdParque(id_vaga);
+            
+            if (id_parque >0){
+                VagaDTO[] vagas=null;
+                vagas=listarVagasDisponiveis(id_parque);
+                notificarTodos(vagas);
+            }
+        }
   
         return resultado;
     }          
     }
+
+    /**
+    private int buscarIdParque(int id_vaga){
+        synchronized (lock){
+
+            vagadao= new VagaDAO();
+        }
+
+    }* */
 
     
     public VagaDTO[] listarVagas(int id_parque) {

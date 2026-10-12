@@ -188,6 +188,36 @@ public int numeroTotalVagas (int id_parque){
 
         }
         
+public int buscarIdParque(int id_vaga){
+    
+     String sql="SELECT id_parque FROM vaga_estacionamento WHERE id_vaga=?";
+     int id_parque=-1;
+        try{
+            Connection conn = ConexaoBD.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,id_vaga);
+  
+            ResultSet rs = stmt.executeQuery();
+        
+             while(rs.next()){
+   
+               id_parque=rs.getInt("id_parque");
+    
+        }
+
+            if (!conn.isClosed()) {
+                conn.close();}
+
+    }
+        catch (Exception e){
+            System.out.println("Erro: "+e);
+
+        }
+
+        return id_parque;// Garante que o método sempre retorne algo
+
+        }
+
 
 
 

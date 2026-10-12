@@ -111,6 +111,11 @@ class GerenciadorJanelas:
         self.idObsUsuario = self.servico_usuario.registarObservador(referencia_observador)
         print(f"Observador usuario registado. ID: {self.idObsUsuario}")
         
+        self.observador = ObservadorImpl()
+        referencia_observador = poa.servant_to_reference(self.observador)
+        self.idObsVaga = self.servico_vaga.registarObservador(referencia_observador)
+        print(f"Observador usuario registado. ID: {self.idObsVaga}")
+        
         """
         # Registar o observador de potencia no servidor
         referencia_observador_potencia = poa.servant_to_reference(observador)
@@ -163,8 +168,8 @@ class GerenciadorJanelas:
         return listaParques
     
     
-    def listarVagasDisponiveis(self,id_parque) ->list:
-        self.listaVagasDTO=self.servico_vaga.listarVagasDisponiveis(id_parque)
+    def listarVagasDisponiveis(self) ->list:
+        #self.listaVagasDTO=self.servico_vaga.listarVagasDisponiveis(id_parque)
         listaVagas=[]
         for vagaDTO in self.listaVagasDTO:
             listaVagas.append(vagaDTO.numero_vaga)
@@ -234,8 +239,13 @@ class GerenciadorJanelas:
             window["-PERFIL_SENHA-"].update(self.usuario_logado.senha)
             #sg.popup(f"Usuario {self.usuario_logado.id_usuario} actualizado com sucesso")
     
+    def notificarActualizacaoVagas(self,window,values):
+        self.listaVagasDTO=values["-ATUALIZAR_VAGAS_DISPONIVEIS-"]
     
-    
+        # Actualiza a janela dos usuarios comum que estao conectados ao servidor
+        window["-COMBO-VAGA-"].update(values=self.listarVagasDisponiveis())
+        sg.popup("Vagas actualizadas com sucesso.")
+
     
     def depositar(self,window,values):
         valorDeposito=values["-VALOR_DEPOSITO-"]
@@ -428,13 +438,13 @@ class GerenciadorJanelas:
         self.dataTempoSaida=None
         if id_vaga>0 and id_usuario>0 and id_viatura >0 and self.validarPeriodoEscolhido(values):
             precoPagar=self.calcularPrecoPagar(self.dataTempoEntrada,self.dataTempoSaida,self.tela_reserva_vaga.parque_selecionado.preco)
-            print(f"Saldo actual {self.saldoActual}")
-            print(f"Tens que pagar {precoPagar}")
+            #print(f"Saldo actual {self.saldoActual}")
+            #print(f"Tens que pagar {precoPagar}")
             if self.saldoActual >=precoPagar:
 
                 resposta = sg.popup_yes_no(f"Confirma o pagamento de {precoPagar}mts para a reserva da vaga?", title="Confirmar")
                 if resposta == "Yes":
-                    print("Confirmado")
+                    #print("Confirmado")
                     dataEntrada= values["-DT-ENTRADA-"]    
                     horaEntrada=values["-RESERVA-HORA-ENTRADA-"]
                     minutosEntrada=values["-RESERVA-MINUTO-ENTRADA-"]
@@ -451,7 +461,7 @@ class GerenciadorJanelas:
                     if sucesso:
                         #Mudar o estado da vaga para ocupado: 1
                         self.servico_vaga.actualizarEstadoVaga(id_vaga, 1)                  
-                        self.tela_reserva_vaga.vagas_disponiveis=self.listarVagasDisponiveis(self.tela_reserva_vaga.parque_selecionado.id_parque)
+                        self.tela_reserva_vaga.vagas_disponiveis=self.listarVagasDisponiveis()
                         
                         #Debitar o valor
                         self.debitar(self.tela_usuario_comum.window,precoPagar)
@@ -700,7 +710,9 @@ class GerenciadorJanelas:
                                 #Abrir a tab para dicionar viaturas
                             else:
                                 self.tela_usuario_comum.ocultar()
-                                self.tela_reserva_vaga= TelaReservaVaga(self.listarMatriculaViaturas(),parqueDTO,self.listarVagasDisponiveis(parqueDTO.id_parque))  
+                                self.listaVagasDTO=self.servico_vaga.listarVagasDisponiveis(parqueDTO.id_parque)
+                                
+                                self.tela_reserva_vaga= TelaReservaVaga(self.listarMatriculaViaturas(),parqueDTO,self.listarVagasDisponiveis())  
                         
                 # EVENTOS DA TABELA PERFIL
                 if event == "-BTN_DEPOSITAR-":
@@ -727,10 +739,8 @@ class GerenciadorJanelas:
                 
                 #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DO DADO DE UM USUARIO
                 if event == "-ATUALIZAR_PERFIL_UM_USUARIO-":
-                    self.notificarActualizacaoDadosUsuario(window,values)
-
- 
-                                    
+                    self.notificarActualizacaoDadosUsuario(self.tela_usuario_comum.window,values)
+        
                    
             #---Eventos da tela de Reserva de vaga ---
             elif self.tela_reserva_vaga !=None  and window==self.tela_reserva_vaga.window:   
@@ -747,6 +757,11 @@ class GerenciadorJanelas:
                 
                 if event == "-BTN_CONFIRMAR_RESERVA-":
                     self.reservarVaga(self.tela_reserva_vaga.window,values)
+                    
+                # EVENTO DO OBSERVADOR
+                #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DE VAGAS, OCORRE QUANDO UMA VAGA É OCUPADA
+                if event == "-ATUALIZAR_VAGAS_DISPONIVEIS-":
+                    self.notificarActualizacaoVagas(self.tela_reserva_vaga.window,values)
             
             
              #---Eventos da tela de administrador---
