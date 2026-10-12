@@ -37,7 +37,7 @@ class TelaUsuarioComum:
                     select_mode=sg.TABLE_SELECT_MODE_BROWSE,
                 )
             ],
-            [sg.Text('Clique em uma linha da tabela para realizar a reserva da vaga.', font=('Helvetica', 9, 'italic'))],
+            [sg.Text('Clique duas vezes em uma linha da tabela para realizar a reserva da vaga.', font=('Helvetica', 9, 'italic'))],
         ]
 
     def _criar_tab_viaturas(self):

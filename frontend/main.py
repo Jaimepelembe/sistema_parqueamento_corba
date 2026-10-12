@@ -587,6 +587,7 @@ class GerenciadorJanelas:
 
 
     def executar(self):
+        self.numeroCliques=0
         while True:
             # Captura eventos de TODAS as janelas abertas
             window, event, values = sg.read_all_windows()
@@ -682,23 +683,25 @@ class GerenciadorJanelas:
 
                 # 1. EVENTOS DA TAB PARQUES (Seleção na Tabela para Reserva)
                 if event == '-TABELA_PARQUES-':
+                    self.numeroCliques+=1
+                    if self.numeroCliques==2:
+                        self.numeroCliques=0
+                        linhas_selecionadas = values['-TABELA_PARQUES-']
+                        if linhas_selecionadas:
+                            indice = linhas_selecionadas[0]
+                            parqueDTO=self.listaParquesDTO[indice]
+                        # print(f"Parque selecionado {parqueDTO}")
                     
-                    linhas_selecionadas = values['-TABELA_PARQUES-']
-                    if linhas_selecionadas:
-                        indice = linhas_selecionadas[0]
-                        parqueDTO=self.listaParquesDTO[indice]
-                       # print(f"Parque selecionado {parqueDTO}")
-                   
-            
+                
+                            
+                            #sg.popup_error('Erro', ' reservar.')
+                            if not self.listaViaturasDTO:
+                                sg.popup_error('Erro', 'Você precisa cadastrar pelo menos uma viatura antes de reservar.')
+                                #Abrir a tab para dicionar viaturas
+                            else:
+                                self.tela_usuario_comum.ocultar()
+                                self.tela_reserva_vaga= TelaReservaVaga(self.listarMatriculaViaturas(),parqueDTO,self.listarVagasDisponiveis(parqueDTO.id_parque))  
                         
-                        #sg.popup_error('Erro', ' reservar.')
-                        if not self.listaViaturasDTO:
-                            sg.popup_error('Erro', 'Você precisa cadastrar pelo menos uma viatura antes de reservar.')
-                            #Abrir a tab para dicionar viaturas
-                        else:
-                            self.tela_usuario_comum.ocultar()
-                            self.tela_reserva_vaga= TelaReservaVaga(self.listarMatriculaViaturas(),parqueDTO,self.listarVagasDisponiveis(parqueDTO.id_parque))  
-                    
                 # EVENTOS DA TABELA PERFIL
                 if event == "-BTN_DEPOSITAR-":
                     self.depositar(self.tela_usuario_comum.window,values)
@@ -754,13 +757,16 @@ class GerenciadorJanelas:
                 
                # . EVENTOS DA TAB PARQUES (Seleção na Tabela para Edicao)
                 if event == '-TABELA_PARQUES-':
+                    self.numeroCliques+=1
+                    if self.numeroCliques==2:
+                        self.numeroCliques=0
                     
-                    linhas_selecionadas = values['-TABELA_PARQUES-']
-                    if linhas_selecionadas:
-                        indice = linhas_selecionadas[0]
-                        parqueDTO=self.listaParquesDTO[indice]
-                        
-                        self.colocarDadosParque(self.tela_administrador.window,parqueDTO)
+                        linhas_selecionadas = values['-TABELA_PARQUES-']
+                        if linhas_selecionadas:
+                            indice = linhas_selecionadas[0]
+                            parqueDTO=self.listaParquesDTO[indice]
+                            
+                            self.colocarDadosParque(self.tela_administrador.window,parqueDTO)
 
                 
                 # EVENTO PARA ADICIONAR PARQUE

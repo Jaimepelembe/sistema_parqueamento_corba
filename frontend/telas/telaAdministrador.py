@@ -48,7 +48,7 @@ class TelaAdministrador:
                     select_mode=sg.TABLE_SELECT_MODE_BROWSE,
                 )
             ],
-            [sg.Text('Clique em uma linha da tabela para actualizar os dados do parque.', font=('Helvetica', 9, 'italic'))],
+            [sg.Text('Clique duas vezes em uma linha da tabela para actualizar os dados do parque.', font=('Helvetica', 9, 'italic'))],
         ]
         #,sg.Button('Remover Parque', key='-BTN_REMOVER_PARQUE-',disabled=True, button_color=("white","#251701"))
 
