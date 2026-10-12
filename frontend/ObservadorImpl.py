@@ -6,6 +6,7 @@ class ObservadorImpl(Observador):
         #self.valorActualizado=None
         self.janelaAdmin=None
         self.janelaUsuarioComum=None
+        self.janelaReservaVaga=None
     
     def notificarParquesActualizados(self,parquesActualizados):
         if self.janelaAdmin:
@@ -24,6 +25,6 @@ class ObservadorImpl(Observador):
             self.janelaUsuarioComum.write_event_value("-ATUALIZAR_PERFIL_UM_USUARIO-", usuario)
     
     def notificarActualizacaoVaga(self,listaVagas):
-        if self.janelaUsuarioComum:
-            self.janelaUsuarioComum.write_event_value("-ATUALIZAR_VAGAS_DISPONIVEIS-", listaVagas)
+        if self.janelaReservaVaga:
+            self.janelaReservaVaga.write_event_value("-ATUALIZAR_VAGAS_DISPONIVEIS-", listaVagas)
         

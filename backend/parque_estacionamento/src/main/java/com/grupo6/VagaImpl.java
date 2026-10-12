@@ -54,7 +54,8 @@ public class VagaImpl extends VagaPOA {
         resultado=vagaDAO.actualizarEstadoVaga(id_vaga, estadoVaga);
         if (resultado){ //Buscar a nova lista de actualizada e enviar para todos os usuarios comum
             int id_parque=vagaDAO.buscarIdParque(id_vaga);
-            
+            System.out.println("Id do parque: "+id_parque);
+
             if (id_parque >0){
                 VagaDTO[] vagas=null;
                 vagas=listarVagasDisponiveis(id_parque);

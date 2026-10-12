@@ -111,10 +111,10 @@ class GerenciadorJanelas:
         self.idObsUsuario = self.servico_usuario.registarObservador(referencia_observador)
         print(f"Observador usuario registado. ID: {self.idObsUsuario}")
         
-        self.observador = ObservadorImpl()
-        referencia_observador = poa.servant_to_reference(self.observador)
+        #self.observador = ObservadorImpl()
+        #referencia_observador = poa.servant_to_reference(self.observador)
         self.idObsVaga = self.servico_vaga.registarObservador(referencia_observador)
-        print(f"Observador usuario registado. ID: {self.idObsVaga}")
+        print(f"Observador vaga registado. ID: {self.idObsVaga}")
         
         """
         # Registar o observador de potencia no servidor
@@ -241,10 +241,11 @@ class GerenciadorJanelas:
     
     def notificarActualizacaoVagas(self,window,values):
         self.listaVagasDTO=values["-ATUALIZAR_VAGAS_DISPONIVEIS-"]
+        self.tela_reserva_vaga.vagas_disponiveis=self.listarVagasDisponiveis()
     
-        # Actualiza a janela dos usuarios comum que estao conectados ao servidor
-        window["-COMBO-VAGA-"].update(values=self.listarVagasDisponiveis())
-        sg.popup("Vagas actualizadas com sucesso.")
+        # Actualiza a janela dos usuarios comum que estao conecetados ao servidor
+        window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
+        #sg.popup("Vagas actualizadas com sucesso.")
 
     
     def depositar(self,window,values):
@@ -713,6 +714,7 @@ class GerenciadorJanelas:
                                 self.listaVagasDTO=self.servico_vaga.listarVagasDisponiveis(parqueDTO.id_parque)
                                 
                                 self.tela_reserva_vaga= TelaReservaVaga(self.listarMatriculaViaturas(),parqueDTO,self.listarVagasDisponiveis())  
+                                self.observador.janelaReservaVaga=self.tela_reserva_vaga.window
                         
                 # EVENTOS DA TABELA PERFIL
                 if event == "-BTN_DEPOSITAR-":
