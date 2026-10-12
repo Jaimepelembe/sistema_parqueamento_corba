@@ -1,12 +1,24 @@
 package com.grupo6;
 
 import com.grupo6.ParqueamentoApp.VagaPOA;
+
+import java.util.Map;
+
+import com.grupo6.ParqueamentoApp.Observador;
+import com.grupo6.ParqueamentoApp.UsuarioDTO;
 import com.grupo6.ParqueamentoApp.VagaDTO;
 import com.grupo6.dao.VagaDAO;
 
+import com.grupo6.ParqueamentoApp.Observador;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class VagaImpl extends VagaPOA {
-    
+    private final Object lock = new Object();
+    private final Map<Integer, Observador> observadores = new HashMap<Integer, Observador>();
+    private int proximoId = 1;
     private VagaDAO vagaDAO;
 
 
@@ -18,6 +30,7 @@ public class VagaImpl extends VagaPOA {
 
 
     public void adicionarVaga(int id_parque, int numero_de_vagas){
+        synchronized (lock){
         vagaDAO= new VagaDAO();
         VagaDTO vaga= null;
 
@@ -27,14 +40,21 @@ public class VagaImpl extends VagaPOA {
             vaga = new VagaDTO(-1,numero, 0, id_parque);
             vagaDAO.adicionarVaga(vaga);
         }
+        VagaDTO[] vagas=null;
+        vagas=listarVagasDisponiveis(id_parque);
+        notificarTodos(vagas);
+
+    }
     }
 
     public boolean actualizarEstadoVaga(int id_vaga, int estadoVaga){
+        synchronized (lock){
         vagaDAO= new VagaDAO();
         boolean resultado=false;
         resultado=vagaDAO.actualizarEstadoVaga(id_vaga, estadoVaga);
-
+  
         return resultado;
+    }          
     }
 
     
@@ -47,20 +67,59 @@ public class VagaImpl extends VagaPOA {
 
 @Override 
 public VagaDTO[] listarVagasDisponiveis(int id_parque) {
+    synchronized (lock){
     vagaDAO = new VagaDAO();
     VagaDTO[] listaVagas=   vagaDAO.listarVagasDisponivies(id_parque);
 
     return listaVagas;}
+}
 
 
     
-@Override 
-public int numeroTotalVagas(int id_parque) {
-    int numeroTotal=0;
-    vagaDAO = new VagaDAO();
-    numeroTotal= vagaDAO.numeroTotalVagas(id_parque);
+    @Override 
+    public int numeroTotalVagas(int id_parque) {
+        int numeroTotal=0;
+        vagaDAO = new VagaDAO();
+        numeroTotal= vagaDAO.numeroTotalVagas(id_parque);
 
-    return numeroTotal;}
+        return numeroTotal;}
+
+
+    @Override
+    public int registarObservador(Observador obs){
+        int id;
+        int total;
+        synchronized (lock){
+            id=proximoId++;
+            observadores.put(id,obs);
+            total=observadores.size();
+        }
+
+        System.out.println("Observador "+id +"registado (" +total+" no total)");
+        return id;
+    }
+
+    @Override 
+    public void removerObservador(int id){
+        synchronized (lock){
+            observadores.remove(id);
+        }
+       System.out.println("Observador "+id + " removido");
+    }
+
+
+    private void notificarTodos(VagaDTO[] vagas) {
+    Iterator<Map.Entry<Integer, Observador>> it = observadores.entrySet().iterator();
+    while (it.hasNext()) {
+        Map.Entry<Integer, Observador> e = it.next();
+        try {
+            e.getValue().notificarActualizacaoVaga(vagas);   // callback para o cliente
+        } catch (org.omg.CORBA.SystemException ex) {
+            System.out.println("Observador " + e.getKey() + " inacessível ("
+                    + ex.getClass().getSimpleName() + "); a remover");
+            it.remove();
+        }
+    }}
 
 
 

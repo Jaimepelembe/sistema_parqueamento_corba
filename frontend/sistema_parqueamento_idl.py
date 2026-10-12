@@ -188,6 +188,7 @@ omniORB.registerType(Observador._NP_RepositoryId, _0_ParqueamentoApp._d_Observad
 # Observador operations and attributes
 Observador._d_notificarParquesActualizados = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaParqueDTO:1.0"], ), None, None)
 Observador._d_notificarActualizacaoDadosUsuario = ((omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), None, None)
+Observador._d_notificarActualizacaoVaga = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None, None)
 
 # Observador object reference
 class _objref_Observador (CORBA.Object):
@@ -202,6 +203,9 @@ class _objref_Observador (CORBA.Object):
     def notificarActualizacaoDadosUsuario(self, *args):
         return self._obj.invoke("notificarActualizacaoDadosUsuario", _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario, args)
 
+    def notificarActualizacaoVaga(self, *args):
+        return self._obj.invoke("notificarActualizacaoVaga", _0_ParqueamentoApp.Observador._d_notificarActualizacaoVaga, args)
+
 omniORB.registerObjref(Observador._NP_RepositoryId, _objref_Observador)
 _0_ParqueamentoApp._objref_Observador = _objref_Observador
 del Observador, _objref_Observador
@@ -212,7 +216,7 @@ class Observador (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Observador._NP_RepositoryId
 
 
-    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, "notificarActualizacaoDadosUsuario": _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario}
+    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, "notificarActualizacaoDadosUsuario": _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario, "notificarActualizacaoVaga": _0_ParqueamentoApp.Observador._d_notificarActualizacaoVaga}
 
 Observador._omni_skeleton = Observador
 _0_ParqueamentoApp__POA.Observador = Observador
@@ -375,6 +379,8 @@ Vaga._d_actualizarEstadoVaga = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.
 Vaga._d_listarVagas = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None)
 Vaga._d_numeroTotalVagas = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.tv_long, ), None)
 Vaga._d_listarVagasDisponiveis = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None)
+Vaga._d_registarObservador = ((omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"], ), (omniORB.tcInternal.tv_long, ), None)
+Vaga._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
 # Vaga object reference
 class _objref_Vaga (CORBA.Object):
@@ -398,6 +404,12 @@ class _objref_Vaga (CORBA.Object):
     def listarVagasDisponiveis(self, *args):
         return self._obj.invoke("listarVagasDisponiveis", _0_ParqueamentoApp.Vaga._d_listarVagasDisponiveis, args)
 
+    def registarObservador(self, *args):
+        return self._obj.invoke("registarObservador", _0_ParqueamentoApp.Vaga._d_registarObservador, args)
+
+    def removerObservador(self, *args):
+        return self._obj.invoke("removerObservador", _0_ParqueamentoApp.Vaga._d_removerObservador, args)
+
 omniORB.registerObjref(Vaga._NP_RepositoryId, _objref_Vaga)
 _0_ParqueamentoApp._objref_Vaga = _objref_Vaga
 del Vaga, _objref_Vaga
@@ -408,7 +420,7 @@ class Vaga (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Vaga._NP_RepositoryId
 
 
-    _omni_op_d = {"adicionarVaga": _0_ParqueamentoApp.Vaga._d_adicionarVaga, "actualizarEstadoVaga": _0_ParqueamentoApp.Vaga._d_actualizarEstadoVaga, "listarVagas": _0_ParqueamentoApp.Vaga._d_listarVagas, "numeroTotalVagas": _0_ParqueamentoApp.Vaga._d_numeroTotalVagas, "listarVagasDisponiveis": _0_ParqueamentoApp.Vaga._d_listarVagasDisponiveis}
+    _omni_op_d = {"adicionarVaga": _0_ParqueamentoApp.Vaga._d_adicionarVaga, "actualizarEstadoVaga": _0_ParqueamentoApp.Vaga._d_actualizarEstadoVaga, "listarVagas": _0_ParqueamentoApp.Vaga._d_listarVagas, "numeroTotalVagas": _0_ParqueamentoApp.Vaga._d_numeroTotalVagas, "listarVagasDisponiveis": _0_ParqueamentoApp.Vaga._d_listarVagasDisponiveis, "registarObservador": _0_ParqueamentoApp.Vaga._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Vaga._d_removerObservador}
 
 Vaga._omni_skeleton = Vaga
 _0_ParqueamentoApp__POA.Vaga = Vaga

@@ -22,4 +22,8 @@ class ObservadorImpl(Observador):
             
         if self.janelaUsuarioComum:
             self.janelaUsuarioComum.write_event_value("-ATUALIZAR_PERFIL_UM_USUARIO-", usuario)
-      
+    
+    def notificarActualizacaoVaga(self,listaVagas):
+        if self.janelaUsuarioComum:
+            self.janelaUsuarioComum.write_event_value("-ATUALIZAR_VAGAS_DISPONIVEIS-", listaVagas)
+        

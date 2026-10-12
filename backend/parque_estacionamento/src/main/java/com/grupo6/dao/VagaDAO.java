@@ -17,7 +17,7 @@ public class VagaDAO {
 
   public void  adicionarVaga (VagaDTO vaga){
       String sql="INSERT INTO vaga_estacionamento (numero_vaga,estado,id_parque) VALUES (?,?,?)";
-
+        
            try{
         Connection conn = ConexaoBD.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql);
