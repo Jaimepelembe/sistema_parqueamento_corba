@@ -1,0 +1,46 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Nameserver",
+      "type": "shell",
+      "command": "tnameserv -ORBInitialPort 1050 '-J-Dcom.sun.CORBA.ORBServerHost=localhost'",
+      "options": {
+        "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-Command"] }
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "servidores" }
+    },
+    {
+      "label": "Servidor Pagamento",
+      "type": "shell",
+      "command": "Start-Sleep -Seconds 5; java -cp 'target/classes;target/dependency/*' com.grupo6.servidorPagamento",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/pagamento",
+        "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-Command"] }
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "servidores" }
+    },
+    {
+      "label": "Servidor Parqueamento",
+      "type": "shell",
+      "command": "Start-Sleep -Seconds 7; java -cp 'target/classes;target/dependency/*' com.grupo6.servidorParqueamento",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/parque_estacionamento",
+        "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-Command"] }
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "servidores" }
+    },
+    {
+      "label": "Iniciar servidores",
+      "dependsOn": ["Nameserver", "Servidor Pagamento", "Servidor Parqueamento"],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    }
+  ]
+}
