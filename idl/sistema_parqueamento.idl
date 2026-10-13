@@ -77,6 +77,10 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         in listaVagaDTO vagas
     );
 
+    oneway void notificarActualizacaoViaturas(in listaViaturaDTO viaturas);
+
+
+    
 };
 
 
@@ -210,6 +214,14 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         void removerViatura(
             in long id_viatura
         );
+
+
+        // Registar o cliente para receber callbacks
+        long registarObservador(in long id_usuario, in Observador obs); // Retorna o Id do observador, que é Id do Observador
+
+
+        // Deixar de receber callbacks
+        void removerObservador(in long id);
 
     };   
 

@@ -28,3 +28,6 @@ class ObservadorImpl(Observador):
         if self.janelaReservaVaga:
             self.janelaReservaVaga.write_event_value("-ATUALIZAR_VAGAS_DISPONIVEIS-", listaVagas)
         
+    def notificarActualizacaoViaturas(self,listaViaturas):
+        if self.janelaUsuarioComum:
+            self.janelaUsuarioComum.write_event_value("-ATUALIZAR_VIATURAS_DISPONIVEIS-", listaViaturas)

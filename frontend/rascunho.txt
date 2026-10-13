@@ -1,0 +1,3 @@
+  def notificarActualizacaoViaturas(self,listaViaturas):
+        if self.janelaUsuarioComum:
+            self.janelaUsuarioComum.write_event_value("-ATUALIZAR_VIATURAS_DISPONIVEIS-", listaViaturas)

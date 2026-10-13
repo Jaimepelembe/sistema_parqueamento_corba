@@ -150,7 +150,6 @@ class GerenciadorJanelas:
         return listaTransacoes
     
     def listarViaturas(self) ->list[ParqueamentoApp.ViaturaDTO]:
-        self.listaViaturasDTO=self.servico_viatura.listarViaturas(self.usuario_logado.id_usuario)
         #print(self.listaViaturasDTO)
         
         listaViaturas=[]
@@ -237,7 +236,7 @@ class GerenciadorJanelas:
         window["-PERFIL_NOME-"].update(self.usuario_logado.nome)
         window["-PERFIL_TEL-"].update(self.usuario_logado.telefone)
         window["-PERFIL_SENHA-"].update(self.usuario_logado.senha)
-        sg.popup(f"Usuario {self.usuario_logado.id_usuario} actualizado com sucesso")
+        #sg.popup(f"Usuario {self.usuario_logado.id_usuario} actualizado com sucesso")
     
     def notificarActualizacaoVagas(self,window,values):
         self.listaVagasDTO=values["-ATUALIZAR_VAGAS_DISPONIVEIS-"]
@@ -247,6 +246,10 @@ class GerenciadorJanelas:
         window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
         # sg.popup("Vagas actualizadas com sucesso.")
 
+    def notificarActualizacaoViaturas(self,window,values):
+        self.listaViaturasDTO=values["-ATUALIZAR_VIATURAS_DISPONIVEIS-"]
+        self.tela_usuario_comum.minhas_viaturas=self.listarViaturas()
+        window["-TABELA_VIATURAS-"].update(values=self.tela_usuario_comum.minhas_viaturas,value=self.tela_usuario_comum.minhas_viaturas[0] if self.tela_usuario_comum.minhas_viaturas else '')
     
     def depositar(self,window,values):
         valorDeposito=values["-VALOR_DEPOSITO-"]
@@ -626,8 +629,8 @@ class GerenciadorJanelas:
                                 self.tela_login.ocultar()
                                 
                                 #Registar o observador de usuario
-                                idObsUsuario = self.servico_usuario.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador)
-                                sg.popup(f"ID do usuario registado {idObsUsuario}")
+                                self.servico_usuario.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador)#Retorna o id do usuario
+                                #sg.popup(f"ID do usuario registado {idObsUsuario}")
                                 
                                 
                                 if self.usuario_logado.tipo==0: #Mostra a tela do usuario comum
@@ -639,6 +642,7 @@ class GerenciadorJanelas:
                                     
                                     #Pesquisar os dados que o usuario vai precisar usando as funcoes listarParques, listarViaturas, listarTransacoes.
                                     self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
+                                    self.listaViaturasDTO=self.servico_viatura.listarViaturas(self.usuario_logado.id_usuario)
                                     self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.listarReservasVaga(),self.saldoActual)
                                     self.tela_usuario_comum.minhas_reservas=self.listarReservasVaga()
                                     self.observador.janelaUsuarioComum=self.tela_usuario_comum.window
@@ -747,6 +751,11 @@ class GerenciadorJanelas:
                 #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DO DADO DE UM USUARIO
                 if event == "-ATUALIZAR_PERFIL_UM_USUARIO-":
                     self.notificarActualizacaoDadosUsuario(self.tela_usuario_comum.window,values)
+                
+                #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DE UMA VIATURA
+                if event == "-ATUALIZAR_VIATURAS_DISPONIVEIS-":
+                    self.notificarActualizacaoViaturas(self.tela_usuario_comum.window,values)
+                    
         
                    
             #---Eventos da tela de Reserva de vaga ---
@@ -769,6 +778,10 @@ class GerenciadorJanelas:
                 #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DE VAGAS, OCORRE QUANDO UMA VAGA É OCUPADA
                 if event == "-ATUALIZAR_VAGAS_DISPONIVEIS-":
                     self.notificarActualizacaoVagas(self.tela_reserva_vaga.window,values)
+                    
+                if event =="-ATUALIZAR_VIATURAS_DISPONIVEIS-":
+                    window["-COMBO-MATRICULA-"].update(values=self.listarMatriculaViaturas(),value=self.tela_usuario_comum.minhas_viaturas[0] if self.tela_usuario_comum.minhas_viaturas else '')
+                        
             
             
              #---Eventos da tela de administrador---
