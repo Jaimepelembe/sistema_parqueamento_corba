@@ -1,13 +1,13 @@
-com\grupo6\ViaturaImpl.class
 com\grupo6\UsuarioImpl.class
 com\grupo6\dao\ConexaoBD.class
+com\grupo6\servidorParqueamento.class
+com\grupo6\dao\ViaturaDAO.class
+com\grupo6\ParqueamentoApp\UsuarioDTOHelper.class
+com\grupo6\ViaturaImpl.class
 com\grupo6\dao\UsuarioDAO.class
 com\grupo6\dao\ReservaDAO.class
-com\grupo6\servidorParqueamento.class
 com\grupo6\ReservaImpl.class
 com\grupo6\dao\InicializarTabelas.class
 com\grupo6\dao\VagaDAO.class
 com\grupo6\VagaImpl.class
-com\grupo6\dao\ViaturaDAO.class
 com\grupo6\ParqueamentoApp\UsuarioDTOHolder.class
-com\grupo6\ParqueamentoApp\UsuarioDTOHelper.class

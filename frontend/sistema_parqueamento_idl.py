@@ -189,6 +189,7 @@ omniORB.registerType(Observador._NP_RepositoryId, _0_ParqueamentoApp._d_Observad
 Observador._d_notificarParquesActualizados = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaParqueDTO:1.0"], ), None, None)
 Observador._d_notificarActualizacaoDadosUsuario = ((omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), None, None)
 Observador._d_notificarActualizacaoVaga = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None, None)
+Observador._d_notificarActualizacaoViaturas = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaViaturaDTO:1.0"], ), None, None)
 
 # Observador object reference
 class _objref_Observador (CORBA.Object):
@@ -206,6 +207,9 @@ class _objref_Observador (CORBA.Object):
     def notificarActualizacaoVaga(self, *args):
         return self._obj.invoke("notificarActualizacaoVaga", _0_ParqueamentoApp.Observador._d_notificarActualizacaoVaga, args)
 
+    def notificarActualizacaoViaturas(self, *args):
+        return self._obj.invoke("notificarActualizacaoViaturas", _0_ParqueamentoApp.Observador._d_notificarActualizacaoViaturas, args)
+
 omniORB.registerObjref(Observador._NP_RepositoryId, _objref_Observador)
 _0_ParqueamentoApp._objref_Observador = _objref_Observador
 del Observador, _objref_Observador
@@ -216,7 +220,7 @@ class Observador (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Observador._NP_RepositoryId
 
 
-    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, "notificarActualizacaoDadosUsuario": _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario, "notificarActualizacaoVaga": _0_ParqueamentoApp.Observador._d_notificarActualizacaoVaga}
+    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, "notificarActualizacaoDadosUsuario": _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario, "notificarActualizacaoVaga": _0_ParqueamentoApp.Observador._d_notificarActualizacaoVaga, "notificarActualizacaoViaturas": _0_ParqueamentoApp.Observador._d_notificarActualizacaoViaturas}
 
 Observador._omni_skeleton = Observador
 _0_ParqueamentoApp__POA.Observador = Observador
@@ -449,6 +453,8 @@ omniORB.registerType(Viatura._NP_RepositoryId, _0_ParqueamentoApp._d_Viatura, _0
 Viatura._d_adicionarViatura = ((omniORB.typeMapping["IDL:ParqueamentoApp/ViaturaDTO:1.0"], ), (), None)
 Viatura._d_listarViaturas = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaViaturaDTO:1.0"], ), None)
 Viatura._d_removerViatura = ((omniORB.tcInternal.tv_long, ), (), None)
+Viatura._d_registarObservador = ((omniORB.tcInternal.tv_long, omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"]), (omniORB.tcInternal.tv_long, ), None)
+Viatura._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
 # Viatura object reference
 class _objref_Viatura (CORBA.Object):
@@ -466,6 +472,12 @@ class _objref_Viatura (CORBA.Object):
     def removerViatura(self, *args):
         return self._obj.invoke("removerViatura", _0_ParqueamentoApp.Viatura._d_removerViatura, args)
 
+    def registarObservador(self, *args):
+        return self._obj.invoke("registarObservador", _0_ParqueamentoApp.Viatura._d_registarObservador, args)
+
+    def removerObservador(self, *args):
+        return self._obj.invoke("removerObservador", _0_ParqueamentoApp.Viatura._d_removerObservador, args)
+
 omniORB.registerObjref(Viatura._NP_RepositoryId, _objref_Viatura)
 _0_ParqueamentoApp._objref_Viatura = _objref_Viatura
 del Viatura, _objref_Viatura
@@ -476,7 +488,7 @@ class Viatura (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Viatura._NP_RepositoryId
 
 
-    _omni_op_d = {"adicionarViatura": _0_ParqueamentoApp.Viatura._d_adicionarViatura, "listarViaturas": _0_ParqueamentoApp.Viatura._d_listarViaturas, "removerViatura": _0_ParqueamentoApp.Viatura._d_removerViatura}
+    _omni_op_d = {"adicionarViatura": _0_ParqueamentoApp.Viatura._d_adicionarViatura, "listarViaturas": _0_ParqueamentoApp.Viatura._d_listarViaturas, "removerViatura": _0_ParqueamentoApp.Viatura._d_removerViatura, "registarObservador": _0_ParqueamentoApp.Viatura._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Viatura._d_removerObservador}
 
 Viatura._omni_skeleton = Viatura
 _0_ParqueamentoApp__POA.Viatura = Viatura

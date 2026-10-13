@@ -628,13 +628,22 @@ class GerenciadorJanelas:
                                 #print(user_dto.nome)
                                 self.tela_login.ocultar()
                                 
+                                #
                                 #Registar o observador de usuario
                                 self.servico_usuario.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador)#Retorna o id do usuario
                                 #sg.popup(f"ID do usuario registado {idObsUsuario}")
                                 
                                 
+                                 
+                                
+                                
                                 if self.usuario_logado.tipo==0: #Mostra a tela do usuario comum
                                     #self.tela_usuario_comum.usuario_logado=user_dto
+                                    
+                                    #Registar o observador de viatura
+                                    self.servico_viatura.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador)#Retorna o id do usuario
+                                                                  
+                                     
                                     
                                     #Verificar se ele ja possui uma conta bancaria
                                     self.verificarContaBancaria()

@@ -35,7 +35,7 @@ public class ViaturaImpl
         viaturaDAO.adicionarViatura(viatura);
         
         //Envia notificacao ao observador
-        ViaturaDTO [] viaturas=listarViaturas(viatura.id_usuario);
+        ViaturaDTO[] viaturas=listarViaturas(viatura.id_usuario);
         notificarTodos(viatura.id_usuario,viaturas);
 
     }
