@@ -249,7 +249,10 @@ class GerenciadorJanelas:
     def notificarActualizacaoViaturas(self,window,values):
         self.listaViaturasDTO=values["-ATUALIZAR_VIATURAS_DISPONIVEIS-"]
         self.tela_usuario_comum.minhas_viaturas=self.listarViaturas()
-        window["-TABELA_VIATURAS-"].update(values=self.tela_usuario_comum.minhas_viaturas,value=self.tela_usuario_comum.minhas_viaturas[0] if self.tela_usuario_comum.minhas_viaturas else '')
+        window["-TABELA_VIATURAS-"].update(values=self.tela_usuario_comum.minhas_viaturas)
+        
+        
+                           
     
     def depositar(self,window,values):
         valorDeposito=values["-VALOR_DEPOSITO-"]
@@ -787,10 +790,13 @@ class GerenciadorJanelas:
                 #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DE VAGAS, OCORRE QUANDO UMA VAGA É OCUPADA
                 if event == "-ATUALIZAR_VAGAS_DISPONIVEIS-":
                     self.notificarActualizacaoVagas(self.tela_reserva_vaga.window,values)
-                    
+                
+                """
                 if event =="-ATUALIZAR_VIATURAS_DISPONIVEIS-":
-                    window["-COMBO-MATRICULA-"].update(values=self.listarMatriculaViaturas(),value=self.tela_usuario_comum.minhas_viaturas[0] if self.tela_usuario_comum.minhas_viaturas else '')
-                        
+                    self.listaViaturasDTO=values["-ATUALIZAR_VIATURAS_DISPONIVEIS-"]
+                    listaMatricula=self.listarMatriculaViaturas()
+                    self.tela_reserva_vaga.window["-COMBO-MATRICULA-"].update(values=listaMatricula,value=listaMatricula[0] if listaMatricula else '')
+                    listaMatricula=None"""
             
             
              #---Eventos da tela de administrador---
