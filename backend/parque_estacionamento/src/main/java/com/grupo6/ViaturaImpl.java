@@ -59,7 +59,7 @@ public class ViaturaImpl
     }
 
 
-            @Override
+    @Override
     public int registarObservador(int id_usuario,Observador obs){
         //int total;
         synchronized (lock){

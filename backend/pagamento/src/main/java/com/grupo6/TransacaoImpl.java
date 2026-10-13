@@ -25,6 +25,13 @@ public class TransacaoImpl
         if (transacao.valor>0 && transacao.id_conta>0){
             resultado=transacaoDAO.efetuarTransacao(transacao);
         }
+        if (resultado){
+            int id_conta=transacao.id_conta;
+            TransacaoDTO[] listaTransacoes= listarTransacoes(id_conta);
+            notificarTodos(id_conta,listaTransacoes);
+
+       
+        }
 
         return resultado;
     }
@@ -32,16 +39,54 @@ public class TransacaoImpl
 
 
     @Override
-    public TransacaoDTO[] listarTransacoes(int id_usuario) {
+    public TransacaoDTO[] listarTransacoes(int id_conta) {
         transacaoDAO = new TransacaoDAO();
-        ContaDAO contaDAO = new ContaDAO();
-        int id_conta=contaDAO.buscarIDConta(id_usuario);//Busca o ID da conta do usuario. 
+        //ContaDAO contaDAO = new ContaDAO();
+        //int id_conta=contaDAO.buscarIDConta(id_usuario);//Busca o ID da conta do usuario. 
         
        TransacaoDTO[] listaTransacoes=  transacaoDAO.listarTransacoes(id_conta);
 
         return listaTransacoes;
     }
     
+
+        @Override
+    public int registarObservador(int id_conta,Observador obs){
+        synchronized (lock){
+            // se o utilizador ainda não tem lista, cria uma; depois adiciona o observador
+            List<Observador> lista = observadores.computeIfAbsent(id_conta, k -> new ArrayList<>());
+            lista.add(obs);
+        }
+
+       // System.out.println("Observador "+id_usuario +"registado (" +total+" no total)");
+        return id_usuario;
+    }
+
+    @Override 
+    public void removerObservador(int id_conta){
+        synchronized (lock){
+            observadores.remove(id_conta);
+        }
+       System.out.println("Observador "+id_conta + " removido");
+    }
+
+
+    private void notificarTodos(int id_conta, TransacaoDTO[] listaTransacoes) {
+        List<Observador> lista = observadores.get(id_conta);
+        if (lista!=null){
+            Iterator<Observador> it=lista.iterator();
+            while (it.hasNext()){
+                Observador obs = it.next();
+                
+                try{
+                obs.notificarActualizacaoTransacao(listaTransacoes); // callback para o cliente
+                }catch (org.omg.CORBA.SystemException ex) {
+            System.out.println("Observador " + ex + " inacessível ("+ ex.getClass().getSimpleName() + "); a remover");
+            it.remove();
+        }
+            }
+        }
+}
 
    
 

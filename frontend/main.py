@@ -24,7 +24,8 @@ import CosNaming
 import ParqueamentoApp
 import PagamentoApp
 
-from ObservadorImpl import ObservadorImpl
+from ObservadorParqueamentoImpl import ObservadorParqueamentoImpl
+from ObservadorPagamentoImpl import ObservadorPagamentoImpl
 import threading
 
 
@@ -100,7 +101,7 @@ class GerenciadorJanelas:
         poa._get_the_POAManager().activate() # passa a atender callbacks
         
         # Criar e activar o observador no cliente
-        self.observador = ObservadorImpl()
+        self.observador = ObservadorParqueamentoImpl()
         self.referencia_observador = poa.servant_to_reference(self.observador)
 
         # Registar o observador de Parque no servidor
@@ -142,7 +143,7 @@ class GerenciadorJanelas:
             self.tela_administrador.fechar()
    
     def listarTransacoes(self):
-        self.listaTransacoesDTO= self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)
+        #self.listaTransacoesDTO= self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)
         listaTransacoes=[]
         for transacaoDTO in self.listaTransacoesDTO:
             listaTransacoes.append([transacaoDTO.id_transacao,transacaoDTO.tipo,transacaoDTO.valor,transacaoDTO.estado,transacaoDTO.data,transacaoDTO.hora])
@@ -250,7 +251,10 @@ class GerenciadorJanelas:
         self.listaViaturasDTO=values["-ATUALIZAR_VIATURAS_DISPONIVEIS-"]
         self.tela_usuario_comum.minhas_viaturas=self.listarViaturas()
         window["-TABELA_VIATURAS-"].update(values=self.tela_usuario_comum.minhas_viaturas)
-        
+    
+    def notificarActualizacaoReservas(self,window,values):
+        self.listaReservasVagaDTO=values["-ATUALIZAR_TABELA_RESERVAS-"]
+        window["-TABELA_RESERVAS-"].update(self.listarReservasVaga())
         
                            
     
@@ -302,7 +306,7 @@ class GerenciadorJanelas:
                         window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes())          
                             
                         #Actualizar o historico de reservas
-                        window['-TABELA_RESERVAS-'].update(values=self.listarReservasVaga())   
+                      #  window['-TABELA_RESERVAS-'].update(values=self.listarReservasVaga())   
                         
                                 
                         #sg.popup('Sucesso', 'O debito foi efectuado com sucesso.')
@@ -491,7 +495,7 @@ class GerenciadorJanelas:
     
     def listarReservasVaga(self):
         """Lista as reservas de vagas que o usuario ja efectuou."""
-        self.listaReservasVagaDTO=self.servico_reserva.listarReservas(self.usuario_logado.id_usuario)
+        #self.listaReservasVagaDTO=self.servico_reserva.listarReservas(self.usuario_logado.id_usuario)
         listaReservaVagas=[]
         if self.listaReservasVagaDTO:
             for reservaDTO in self.listaReservasVagaDTO:
@@ -651,10 +655,13 @@ class GerenciadorJanelas:
                                     #Verificar se ele ja possui uma conta bancaria
                                     self.verificarContaBancaria()
                                     self.saldoActual =self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
+                                    self.idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
                                     
                                     #Pesquisar os dados que o usuario vai precisar usando as funcoes listarParques, listarViaturas, listarTransacoes.
                                     self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
                                     self.listaViaturasDTO=self.servico_viatura.listarViaturas(self.usuario_logado.id_usuario)
+                                    self.listaTransacoesDTO=self.servico_transacao.listarTransacoes(self.idConta)
+                                    self.listaReservasVagaDTO=self.servico_reserva.listarReservas(self.usuario_logado.id_usuario)
                                     self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.listarReservasVaga(),self.saldoActual)
                                     self.tela_usuario_comum.minhas_reservas=self.listarReservasVaga()
                                     self.observador.janelaUsuarioComum=self.tela_usuario_comum.window
@@ -767,6 +774,10 @@ class GerenciadorJanelas:
                 #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DE UMA VIATURA
                 if event == "-ATUALIZAR_VIATURAS_DISPONIVEIS-":
                     self.notificarActualizacaoViaturas(self.tela_usuario_comum.window,values)
+                    
+                #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DE UMA RESERVA
+                if event == "-ATUALIZAR_TABELA_RESERVAS-":
+                    self.notificarActualizacaoReservas(self.tela_usuario_comum.window,values)
                     
         
                    

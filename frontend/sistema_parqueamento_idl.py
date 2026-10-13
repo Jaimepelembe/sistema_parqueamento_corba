@@ -190,6 +190,7 @@ Observador._d_notificarParquesActualizados = ((omniORB.typeMapping["IDL:Parqueam
 Observador._d_notificarActualizacaoDadosUsuario = ((omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), None, None)
 Observador._d_notificarActualizacaoVaga = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None, None)
 Observador._d_notificarActualizacaoViaturas = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaViaturaDTO:1.0"], ), None, None)
+Observador._d_notificarActualizacaoReservas = ((omniORB.typeMapping["IDL:ParqueamentoApp/listaReservaDTO:1.0"], ), None, None)
 
 # Observador object reference
 class _objref_Observador (CORBA.Object):
@@ -210,6 +211,9 @@ class _objref_Observador (CORBA.Object):
     def notificarActualizacaoViaturas(self, *args):
         return self._obj.invoke("notificarActualizacaoViaturas", _0_ParqueamentoApp.Observador._d_notificarActualizacaoViaturas, args)
 
+    def notificarActualizacaoReservas(self, *args):
+        return self._obj.invoke("notificarActualizacaoReservas", _0_ParqueamentoApp.Observador._d_notificarActualizacaoReservas, args)
+
 omniORB.registerObjref(Observador._NP_RepositoryId, _objref_Observador)
 _0_ParqueamentoApp._objref_Observador = _objref_Observador
 del Observador, _objref_Observador
@@ -220,7 +224,7 @@ class Observador (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Observador._NP_RepositoryId
 
 
-    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, "notificarActualizacaoDadosUsuario": _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario, "notificarActualizacaoVaga": _0_ParqueamentoApp.Observador._d_notificarActualizacaoVaga, "notificarActualizacaoViaturas": _0_ParqueamentoApp.Observador._d_notificarActualizacaoViaturas}
+    _omni_op_d = {"notificarParquesActualizados": _0_ParqueamentoApp.Observador._d_notificarParquesActualizados, "notificarActualizacaoDadosUsuario": _0_ParqueamentoApp.Observador._d_notificarActualizacaoDadosUsuario, "notificarActualizacaoVaga": _0_ParqueamentoApp.Observador._d_notificarActualizacaoVaga, "notificarActualizacaoViaturas": _0_ParqueamentoApp.Observador._d_notificarActualizacaoViaturas, "notificarActualizacaoReservas": _0_ParqueamentoApp.Observador._d_notificarActualizacaoReservas}
 
 Observador._omni_skeleton = Observador
 _0_ParqueamentoApp__POA.Observador = Observador
@@ -517,6 +521,8 @@ omniORB.registerType(Reserva._NP_RepositoryId, _0_ParqueamentoApp._d_Reserva, _0
 Reserva._d_criarReserva = ((omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
 Reserva._d_obterReserva = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), None)
 Reserva._d_listarReservas = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaReservaDTO:1.0"], ), None)
+Reserva._d_registarObservador = ((omniORB.tcInternal.tv_long, omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"]), (omniORB.tcInternal.tv_long, ), None)
+Reserva._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
 # Reserva object reference
 class _objref_Reserva (CORBA.Object):
@@ -534,6 +540,12 @@ class _objref_Reserva (CORBA.Object):
     def listarReservas(self, *args):
         return self._obj.invoke("listarReservas", _0_ParqueamentoApp.Reserva._d_listarReservas, args)
 
+    def registarObservador(self, *args):
+        return self._obj.invoke("registarObservador", _0_ParqueamentoApp.Reserva._d_registarObservador, args)
+
+    def removerObservador(self, *args):
+        return self._obj.invoke("removerObservador", _0_ParqueamentoApp.Reserva._d_removerObservador, args)
+
 omniORB.registerObjref(Reserva._NP_RepositoryId, _objref_Reserva)
 _0_ParqueamentoApp._objref_Reserva = _objref_Reserva
 del Reserva, _objref_Reserva
@@ -544,7 +556,7 @@ class Reserva (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Reserva._NP_RepositoryId
 
 
-    _omni_op_d = {"criarReserva": _0_ParqueamentoApp.Reserva._d_criarReserva, "obterReserva": _0_ParqueamentoApp.Reserva._d_obterReserva, "listarReservas": _0_ParqueamentoApp.Reserva._d_listarReservas}
+    _omni_op_d = {"criarReserva": _0_ParqueamentoApp.Reserva._d_criarReserva, "obterReserva": _0_ParqueamentoApp.Reserva._d_obterReserva, "listarReservas": _0_ParqueamentoApp.Reserva._d_listarReservas, "registarObservador": _0_ParqueamentoApp.Reserva._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Reserva._d_removerObservador}
 
 Reserva._omni_skeleton = Reserva
 _0_ParqueamentoApp__POA.Reserva = Reserva

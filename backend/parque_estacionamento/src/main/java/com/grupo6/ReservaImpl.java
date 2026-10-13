@@ -31,8 +31,17 @@ public class ReservaImpl
 
         //reserva.preco_total=precoApagar;
         //System.out.println("Preco vou pagar"+reserva.preco_total);
+
+        boolean resultado=reservaDAO.criarReserva(reserva);
         
-       return  reservaDAO.criarReserva(reserva);
+        if (resultado){
+            int id_usuario=reserva.id_usuario;
+            ReservaDTO[] listaReservas= listarReservas(id_usuario);
+            notificarTodos(id_usuario,listaReservas);
+        }
+
+
+       return resultado;
     }
 
 
@@ -53,6 +62,47 @@ public class ReservaImpl
         ReservaDTO reserva=  reservaDAO.obterReserva(id_reserva);
 
         return reserva;}
+
+    
+
+
+    @Override
+    public int registarObservador(int id_usuario,Observador obs){
+        synchronized (lock){
+            // se o utilizador ainda não tem lista, cria uma; depois adiciona o observador
+            List<Observador> lista = observadores.computeIfAbsent(id_usuario, k -> new ArrayList<>());
+            lista.add(obs);
+        }
+
+       // System.out.println("Observador "+id_usuario +"registado (" +total+" no total)");
+        return id_usuario;
+    }
+
+    @Override 
+    public void removerObservador(int id){
+        synchronized (lock){
+            observadores.remove(id);
+        }
+       System.out.println("Observador "+id + " removido");
+    }
+
+
+    private void notificarTodos(int id_usuario, ReservaDTO[] reservas) {
+        List<Observador> lista = observadores.get(id_usuario);
+        if (lista!=null){
+            Iterator<Observador> it=lista.iterator();
+            while (it.hasNext()){
+                Observador obs = it.next();
+                
+                try{
+                obs.notificarActualizacaoReservas(reservas); // callback para o cliente
+                }catch (org.omg.CORBA.SystemException ex) {
+            System.out.println("Observador " + ex + " inacessível ("+ ex.getClass().getSimpleName() + "); a remover");
+            it.remove();
+        }
+            }
+        }
+}
 
     
     public long calcularTempoReserva(String data_entrada,String hora_entrada,String data_saida,String hora_saida){

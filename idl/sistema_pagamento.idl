@@ -20,6 +20,24 @@ module PagamentoApp {
 //Sequencia de elementos: Sintaxe:  sequence<ParqueEstacionamento> ParqueEstacionamentoSeq;
 typedef sequence<TransacaoDTO> listaTransacaoDTO;
 
+//Interfaces
+
+// ==========================
+// OBSERVADOR
+// ==========================
+
+    interface Observador {
+    oneway void notificarActualizacaoSaldo(
+        in float saldo
+    );
+
+    oneway void notificarActualizacaoTransacao(in listaTransacaoDTO transacoes);
+
+
+    
+};
+
+
 interface Conta{
 
     //Criar uma conta
@@ -48,6 +66,14 @@ interface Conta{
         );
 
 
+    // Registar o cliente para receber callbacks
+    long registarObservador(in long id_usuario, in Observador obs); // Retorna o Id do observador, que é Id do Observador
+
+
+    // Deixar de receber callbacks
+    void removerObservador(in long id);
+
+
 };
 
 
@@ -62,6 +88,15 @@ interface Transacao {
         listaTransacaoDTO listarTransacoes(
             in long id_conta
         );
+
+        // Registar o cliente para receber callbacks
+        long registarObservador(in long id_conta, in Observador obs); // Retorna o Id do observador, que é Id do Observador
+
+
+        // Deixar de receber callbacks
+        void removerObservador(in long id);
+
+
 
         // Consultar transacao
         //Transacao obterTransacao(

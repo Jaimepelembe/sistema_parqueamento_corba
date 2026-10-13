@@ -1,7 +1,7 @@
 from ParqueamentoApp__POA import Observador
 
 # O cliente implementa a interface Observador; é o servidor que a chama
-class ObservadorImpl(Observador):
+class ObservadorParqueamentoImpl(Observador):
     def __init__(self):
         #self.valorActualizado=None
         self.janelaAdmin=None
@@ -31,3 +31,10 @@ class ObservadorImpl(Observador):
     def notificarActualizacaoViaturas(self,listaViaturas):
         if self.janelaUsuarioComum:
             self.janelaUsuarioComum.write_event_value("-ATUALIZAR_VIATURAS_DISPONIVEIS-", listaViaturas)
+   
+    def notificarActualizacaoReservas(self,listaReservas):
+        if self.janelaUsuarioComum:
+            self.janelaUsuarioComum.write_event_value("-ATUALIZAR_TABELA_RESERVAS-", listaReservas)
+            
+    
+            

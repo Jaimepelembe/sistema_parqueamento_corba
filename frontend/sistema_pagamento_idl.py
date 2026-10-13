@@ -71,6 +71,58 @@ _0_PagamentoApp._tc_listaTransacaoDTO = omniORB.tcInternal.createTypeCode(_0_Pag
 omniORB.registerType(listaTransacaoDTO._NP_RepositoryId, _0_PagamentoApp._ad_listaTransacaoDTO, _0_PagamentoApp._tc_listaTransacaoDTO)
 del listaTransacaoDTO
 
+# interface Observador
+_0_PagamentoApp._d_Observador = (omniORB.tcInternal.tv_objref, "IDL:PagamentoApp/Observador:1.0", "Observador")
+omniORB.typeMapping["IDL:PagamentoApp/Observador:1.0"] = _0_PagamentoApp._d_Observador
+_0_PagamentoApp.Observador = omniORB.newEmptyClass()
+class Observador :
+    _NP_RepositoryId = _0_PagamentoApp._d_Observador[1]
+
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+
+    _nil = CORBA.Object._nil
+
+
+_0_PagamentoApp.Observador = Observador
+_0_PagamentoApp._tc_Observador = omniORB.tcInternal.createTypeCode(_0_PagamentoApp._d_Observador)
+omniORB.registerType(Observador._NP_RepositoryId, _0_PagamentoApp._d_Observador, _0_PagamentoApp._tc_Observador)
+
+# Observador operations and attributes
+Observador._d_notificarActualizacaoSaldo = ((omniORB.tcInternal.tv_float, ), None, None)
+Observador._d_notificarActualizacaoTransacao = ((omniORB.typeMapping["IDL:PagamentoApp/listaTransacaoDTO:1.0"], ), None, None)
+
+# Observador object reference
+class _objref_Observador (CORBA.Object):
+    _NP_RepositoryId = Observador._NP_RepositoryId
+
+    def __init__(self, obj):
+        CORBA.Object.__init__(self, obj)
+
+    def notificarActualizacaoSaldo(self, *args):
+        return self._obj.invoke("notificarActualizacaoSaldo", _0_PagamentoApp.Observador._d_notificarActualizacaoSaldo, args)
+
+    def notificarActualizacaoTransacao(self, *args):
+        return self._obj.invoke("notificarActualizacaoTransacao", _0_PagamentoApp.Observador._d_notificarActualizacaoTransacao, args)
+
+omniORB.registerObjref(Observador._NP_RepositoryId, _objref_Observador)
+_0_PagamentoApp._objref_Observador = _objref_Observador
+del Observador, _objref_Observador
+
+# Observador skeleton
+__name__ = "PagamentoApp__POA"
+class Observador (PortableServer.Servant):
+    _NP_RepositoryId = _0_PagamentoApp.Observador._NP_RepositoryId
+
+
+    _omni_op_d = {"notificarActualizacaoSaldo": _0_PagamentoApp.Observador._d_notificarActualizacaoSaldo, "notificarActualizacaoTransacao": _0_PagamentoApp.Observador._d_notificarActualizacaoTransacao}
+
+Observador._omni_skeleton = Observador
+_0_PagamentoApp__POA.Observador = Observador
+omniORB.registerSkeleton(Observador._NP_RepositoryId, Observador)
+del Observador
+__name__ = "PagamentoApp"
+
 # interface Conta
 _0_PagamentoApp._d_Conta = (omniORB.tcInternal.tv_objref, "IDL:PagamentoApp/Conta:1.0", "Conta")
 omniORB.typeMapping["IDL:PagamentoApp/Conta:1.0"] = _0_PagamentoApp._d_Conta
@@ -94,6 +146,8 @@ Conta._d_consultarSaldo = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.t
 Conta._d_buscarIDConta = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.tv_long, ), None)
 Conta._d_depositar = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.tv_float), (omniORB.tcInternal.tv_boolean, ), None)
 Conta._d_debitar = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.tv_float), (omniORB.tcInternal.tv_boolean, ), None)
+Conta._d_registarObservador = ((omniORB.tcInternal.tv_long, omniORB.typeMapping["IDL:PagamentoApp/Observador:1.0"]), (omniORB.tcInternal.tv_long, ), None)
+Conta._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
 # Conta object reference
 class _objref_Conta (CORBA.Object):
@@ -117,6 +171,12 @@ class _objref_Conta (CORBA.Object):
     def debitar(self, *args):
         return self._obj.invoke("debitar", _0_PagamentoApp.Conta._d_debitar, args)
 
+    def registarObservador(self, *args):
+        return self._obj.invoke("registarObservador", _0_PagamentoApp.Conta._d_registarObservador, args)
+
+    def removerObservador(self, *args):
+        return self._obj.invoke("removerObservador", _0_PagamentoApp.Conta._d_removerObservador, args)
+
 omniORB.registerObjref(Conta._NP_RepositoryId, _objref_Conta)
 _0_PagamentoApp._objref_Conta = _objref_Conta
 del Conta, _objref_Conta
@@ -127,7 +187,7 @@ class Conta (PortableServer.Servant):
     _NP_RepositoryId = _0_PagamentoApp.Conta._NP_RepositoryId
 
 
-    _omni_op_d = {"criarConta": _0_PagamentoApp.Conta._d_criarConta, "consultarSaldo": _0_PagamentoApp.Conta._d_consultarSaldo, "buscarIDConta": _0_PagamentoApp.Conta._d_buscarIDConta, "depositar": _0_PagamentoApp.Conta._d_depositar, "debitar": _0_PagamentoApp.Conta._d_debitar}
+    _omni_op_d = {"criarConta": _0_PagamentoApp.Conta._d_criarConta, "consultarSaldo": _0_PagamentoApp.Conta._d_consultarSaldo, "buscarIDConta": _0_PagamentoApp.Conta._d_buscarIDConta, "depositar": _0_PagamentoApp.Conta._d_depositar, "debitar": _0_PagamentoApp.Conta._d_debitar, "registarObservador": _0_PagamentoApp.Conta._d_registarObservador, "removerObservador": _0_PagamentoApp.Conta._d_removerObservador}
 
 Conta._omni_skeleton = Conta
 _0_PagamentoApp__POA.Conta = Conta
@@ -155,6 +215,8 @@ omniORB.registerType(Transacao._NP_RepositoryId, _0_PagamentoApp._d_Transacao, _
 # Transacao operations and attributes
 Transacao._d_efetuarTransacao = ((omniORB.typeMapping["IDL:PagamentoApp/TransacaoDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
 Transacao._d_listarTransacoes = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:PagamentoApp/listaTransacaoDTO:1.0"], ), None)
+Transacao._d_registarObservador = ((omniORB.tcInternal.tv_long, omniORB.typeMapping["IDL:PagamentoApp/Observador:1.0"]), (omniORB.tcInternal.tv_long, ), None)
+Transacao._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
 # Transacao object reference
 class _objref_Transacao (CORBA.Object):
@@ -169,6 +231,12 @@ class _objref_Transacao (CORBA.Object):
     def listarTransacoes(self, *args):
         return self._obj.invoke("listarTransacoes", _0_PagamentoApp.Transacao._d_listarTransacoes, args)
 
+    def registarObservador(self, *args):
+        return self._obj.invoke("registarObservador", _0_PagamentoApp.Transacao._d_registarObservador, args)
+
+    def removerObservador(self, *args):
+        return self._obj.invoke("removerObservador", _0_PagamentoApp.Transacao._d_removerObservador, args)
+
 omniORB.registerObjref(Transacao._NP_RepositoryId, _objref_Transacao)
 _0_PagamentoApp._objref_Transacao = _objref_Transacao
 del Transacao, _objref_Transacao
@@ -179,7 +247,7 @@ class Transacao (PortableServer.Servant):
     _NP_RepositoryId = _0_PagamentoApp.Transacao._NP_RepositoryId
 
 
-    _omni_op_d = {"efetuarTransacao": _0_PagamentoApp.Transacao._d_efetuarTransacao, "listarTransacoes": _0_PagamentoApp.Transacao._d_listarTransacoes}
+    _omni_op_d = {"efetuarTransacao": _0_PagamentoApp.Transacao._d_efetuarTransacao, "listarTransacoes": _0_PagamentoApp.Transacao._d_listarTransacoes, "registarObservador": _0_PagamentoApp.Transacao._d_registarObservador, "removerObservador": _0_PagamentoApp.Transacao._d_removerObservador}
 
 Transacao._omni_skeleton = Transacao
 _0_PagamentoApp__POA.Transacao = Transacao
