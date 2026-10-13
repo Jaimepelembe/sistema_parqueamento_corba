@@ -245,7 +245,7 @@ omniORB.registerType(Usuario._NP_RepositoryId, _0_ParqueamentoApp._d_Usuario, _0
 Usuario._d_login = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), None)
 Usuario._d_cadastrar = ((omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), (), None)
 Usuario._d_actualizarDados = ((omniORB.typeMapping["IDL:ParqueamentoApp/UsuarioDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
-Usuario._d_registarObservador = ((omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"], ), (omniORB.tcInternal.tv_long, ), None)
+Usuario._d_registarObservador = ((omniORB.tcInternal.tv_long, omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"]), (omniORB.tcInternal.tv_long, ), None)
 Usuario._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
 # Usuario object reference

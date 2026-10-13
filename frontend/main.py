@@ -101,19 +101,19 @@ class GerenciadorJanelas:
         
         # Criar e activar o observador no cliente
         self.observador = ObservadorImpl()
-        referencia_observador = poa.servant_to_reference(self.observador)
+        self.referencia_observador = poa.servant_to_reference(self.observador)
 
-        # Registar o observador de numero no servidor
-        self.idObsParque = self.servico_parque.registarObservador(referencia_observador)
-        print(f"Observador Numero registado. ID: {self.idObsParque}")
+        # Registar o observador de Parque no servidor
+        self.idObsParque = self.servico_parque.registarObservador(self.referencia_observador)
+        print(f"Observador de Parque registado. ID: {self.idObsParque}")
         
-        
+        """
         self.idObsUsuario = self.servico_usuario.registarObservador(referencia_observador)
-        print(f"Observador usuario registado. ID: {self.idObsUsuario}")
+        print(f"Observador usuario registado. ID: {self.idObsUsuario}")"""
         
         #self.observador = ObservadorImpl()
         #referencia_observador = poa.servant_to_reference(self.observador)
-        self.idObsVaga = self.servico_vaga.registarObservador(referencia_observador)
+        self.idObsVaga = self.servico_vaga.registarObservador(self.referencia_observador)
         print(f"Observador vaga registado. ID: {self.idObsVaga}")
         
         """
@@ -230,14 +230,14 @@ class GerenciadorJanelas:
     
     def notificarActualizacaoDadosUsuario(self,window,values):
         usuarioActualizado=values["-ATUALIZAR_PERFIL_UM_USUARIO-"]
-        if usuarioActualizado.id_usuario==self.usuario_logado.id_usuario:
-            self.usuario_logado=usuarioActualizado
-            
-            # Actualiza a janela dos usuarios comum que estao conectados ao servidor
-            window["-PERFIL_NOME-"].update(self.usuario_logado.nome)
-            window["-PERFIL_TEL-"].update(self.usuario_logado.telefone)
-            window["-PERFIL_SENHA-"].update(self.usuario_logado.senha)
-            #sg.popup(f"Usuario {self.usuario_logado.id_usuario} actualizado com sucesso")
+        #if usuarioActualizado.id_usuario==self.usuario_logado.id_usuario:
+        self.usuario_logado=usuarioActualizado
+        
+        # Actualiza a janela dos usuarios comum que estao conectados ao servidor
+        window["-PERFIL_NOME-"].update(self.usuario_logado.nome)
+        window["-PERFIL_TEL-"].update(self.usuario_logado.telefone)
+        window["-PERFIL_SENHA-"].update(self.usuario_logado.senha)
+        sg.popup(f"Usuario {self.usuario_logado.id_usuario} actualizado com sucesso")
     
     def notificarActualizacaoVagas(self,window,values):
         self.listaVagasDTO=values["-ATUALIZAR_VAGAS_DISPONIVEIS-"]
@@ -624,6 +624,11 @@ class GerenciadorJanelas:
                                 self.usuario_logado = user_dto
                                 #print(user_dto.nome)
                                 self.tela_login.ocultar()
+                                
+                                #Registar o observador de usuario
+                                idObsUsuario = self.servico_usuario.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador)
+                                sg.popup(f"ID do usuario registado {idObsUsuario}")
+                                
                                 
                                 if self.usuario_logado.tipo==0: #Mostra a tela do usuario comum
                                     #self.tela_usuario_comum.usuario_logado=user_dto
