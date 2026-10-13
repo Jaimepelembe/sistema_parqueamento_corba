@@ -245,7 +245,7 @@ class GerenciadorJanelas:
     
         # Actualiza a janela dos usuarios comum que estao conecetados ao servidor
         window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
-        #sg.popup("Vagas actualizadas com sucesso.")
+        # sg.popup("Vagas actualizadas com sucesso.")
 
     
     def depositar(self,window,values):
