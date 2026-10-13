@@ -254,7 +254,7 @@ class GerenciadorJanelas:
     
     def notificarActualizacaoReservas(self,window,values):
         self.listaReservasVagaDTO=values["-ATUALIZAR_TABELA_RESERVAS-"]
-        window["-TABELA_RESERVAS-"].update(self.listarReservasVaga())
+        window["-TABELA_RESERVAS-"].update(values=self.listarReservasVaga())
         
                            
     
@@ -649,7 +649,10 @@ class GerenciadorJanelas:
                                     
                                     #Registar o observador de viatura
                                     self.servico_viatura.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador)#Retorna o id do usuario
-                                                                  
+                                    
+                                     #Registar o observador de reserva
+                                    self.servico_reserva.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador)#Retorna o id do usuario
+                                                                                                         
                                      
                                     
                                     #Verificar se ele ja possui uma conta bancaria
@@ -663,7 +666,7 @@ class GerenciadorJanelas:
                                     self.listaTransacoesDTO=self.servico_transacao.listarTransacoes(self.idConta)
                                     self.listaReservasVagaDTO=self.servico_reserva.listarReservas(self.usuario_logado.id_usuario)
                                     self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.listarReservasVaga(),self.saldoActual)
-                                    self.tela_usuario_comum.minhas_reservas=self.listarReservasVaga()
+                                    #self.tela_usuario_comum.minhas_reservas=self.listarReservasVaga()
                                     self.observador.janelaUsuarioComum=self.tela_usuario_comum.window
                                     #listaParques=None
      
