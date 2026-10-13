@@ -4,9 +4,21 @@ import com.grupo6.PagamentoApp.ContaDTO;
 import com.grupo6.PagamentoApp.ContaPOA;
 import com.grupo6.dao.ContaDAO;
 
+import com.grupo6.PagamentoApp.Observador;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ContaImpl
         extends ContaPOA {
+    private final Object lock = new Object();
+    private final Map<Integer, List<Observador>> observadores = new HashMap<Integer, List<Observador>>();
+   
 
     private ContaDAO contaDAO;
 
@@ -67,13 +79,12 @@ public class ContaImpl
     @Override
     public boolean depositar(int id_usuario, float valor){
         boolean resultado=false;
-
         contaDAO = new ContaDAO();
         if (id_usuario>0 && valor > 0){
             resultado= contaDAO.depositar(id_usuario,valor);}
             
         if (resultado){
-            saldoActual=consultarSaldo(id_usuario);
+            float saldoActual=consultarSaldo(id_usuario);
             notificarTodos(id_usuario,saldoActual);
         }
   

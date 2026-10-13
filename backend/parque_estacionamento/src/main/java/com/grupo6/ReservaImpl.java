@@ -8,10 +8,20 @@ import java.time.Duration;
 import com.grupo6.ParqueamentoApp.ReservaDTO;
 import com.grupo6.dao.ReservaDAO;
 
+import com.grupo6.ParqueamentoApp.Observador;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ReservaImpl
         extends ReservaPOA {
-    
+    private final Object lock = new Object();
+    private final Map<Integer, List<Observador>> observadores = new HashMap<Integer, List<Observador>>();
     private ReservaDAO reservaDAO;
 
 

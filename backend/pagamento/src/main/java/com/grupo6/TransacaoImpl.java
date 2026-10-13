@@ -6,10 +6,19 @@ import com.grupo6.PagamentoApp.TransacaoDTO;
 import com.grupo6.dao.TransacaoDAO;
 import com.grupo6.dao.ContaDAO;
 
+import com.grupo6.PagamentoApp.Observador;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransacaoImpl
         extends TransacaoPOA {
-    
+    private final Object lock = new Object();
+    private final Map<Integer, List<Observador>> observadores = new HashMap<Integer, List<Observador>>();
     private TransacaoDAO transacaoDAO;
 
 
@@ -59,7 +68,7 @@ public class TransacaoImpl
         }
 
        // System.out.println("Observador "+id_usuario +"registado (" +total+" no total)");
-        return id_usuario;
+        return id_conta;
     }
 
     @Override 

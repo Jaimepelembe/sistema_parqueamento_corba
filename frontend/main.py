@@ -123,6 +123,9 @@ class GerenciadorJanelas:
         self.idObsPotencia = self.servico_potencia.registarObservador(referencia_observador_potencia)
         print(f"Observador Potencia registado. ID: {self.idObsPotencia}")
          """
+         
+        self.observadorPagamento= ObservadorPagamentoImpl()
+        self.referencia_observador_pagamento = poa.servant_to_reference(self.observadorPagamento)
         
         # Manter o ORB activo para receber callbacks.
         thread_orb = threading.Thread(
@@ -256,6 +259,17 @@ class GerenciadorJanelas:
         self.listaReservasVagaDTO=values["-ATUALIZAR_TABELA_RESERVAS-"]
         window["-TABELA_RESERVAS-"].update(values=self.listarReservasVaga())
         
+    
+    def notificarActualizacaoSaldo(self,window,values):
+        self.saldoActual=values["-ATUALIZAR_SALDO_UM_USUARIO-"]
+        window['-TXT_SALDO-'].update(f'Saldo Atual: {self.saldoActual:.2f} MT') 
+       # window["-TABELA_RESERVAS-"].update(values=self.listarReservasVaga())
+
+    def notificarActualizacaoTransacao(self,window,values):    
+        self.listaTransacoesDTO=values["-ATUALIZAR_TABELA_TRANSACOES-"]    
+        window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes()) 
+        #sg.popup("Actualizou a tabela de transacoes")
+        
                            
     
     def depositar(self,window,values):
@@ -303,7 +317,7 @@ class GerenciadorJanelas:
                         #self.listaTransacoesDTO=self.servico_transacao.listarTransacoes(self.usuario_logado.id_usuario)  
                         self.saldoActual= self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
                         window['-TXT_SALDO-'].update(f'Saldo Atual: {self.saldoActual:.2f} MT')        
-                        window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes())          
+                        #window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes())          
                             
                         #Actualizar o historico de reservas
                       #  window['-TABELA_RESERVAS-'].update(values=self.listarReservasVaga())   
@@ -652,7 +666,12 @@ class GerenciadorJanelas:
                                     
                                      #Registar o observador de reserva
                                     self.servico_reserva.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador)#Retorna o id do usuario
-                                                                                                         
+                                    
+                                    # Observador de pagamento
+                                     #Registar o observador de Conta
+                                    self.servico_conta.registarObservador(self.usuario_logado.id_usuario,self.referencia_observador_pagamento)#Retorna o id do usuario
+                                    
+                                                                                        
                                      
                                     
                                     #Verificar se ele ja possui uma conta bancaria
@@ -660,6 +679,10 @@ class GerenciadorJanelas:
                                     self.saldoActual =self.servico_conta.consultarSaldo(self.usuario_logado.id_usuario)
                                     self.idConta=self.servico_conta.buscarIDConta(self.usuario_logado.id_usuario)
                                     
+                                    #Registar o observador de Conta
+                                    self.servico_transacao.registarObservador(self.idConta,self.referencia_observador_pagamento)#Retorna o id do usuario
+                                              
+                                                                                                       
                                     #Pesquisar os dados que o usuario vai precisar usando as funcoes listarParques, listarViaturas, listarTransacoes.
                                     self.listaParquesDTO=self.servico_parque.pesquisarPorCategoria("nome")
                                     self.listaViaturasDTO=self.servico_viatura.listarViaturas(self.usuario_logado.id_usuario)
@@ -668,6 +691,7 @@ class GerenciadorJanelas:
                                     self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.listarReservasVaga(),self.saldoActual)
                                     #self.tela_usuario_comum.minhas_reservas=self.listarReservasVaga()
                                     self.observador.janelaUsuarioComum=self.tela_usuario_comum.window
+                                    self.observadorPagamento.janelaUsuarioComum=self.tela_usuario_comum.window
                                     #listaParques=None
      
                                     
@@ -782,7 +806,15 @@ class GerenciadorJanelas:
                 if event == "-ATUALIZAR_TABELA_RESERVAS-":
                     self.notificarActualizacaoReservas(self.tela_usuario_comum.window,values)
                     
-        
+                #  EVENTO DE NOTIFICACAO DE SALDO
+                if event == "-ATUALIZAR_SALDO_UM_USUARIO-":
+                    self.notificarActualizacaoSaldo(self.tela_usuario_comum.window,values)
+                    
+
+                #  EVENTO DE NOTIFICACAO DE TRANSACAO
+                if event == "-ATUALIZAR_TABELA_TRANSACOES-":
+                    self.notificarActualizacaoTransacao(self.tela_usuario_comum.window,values)      
+
                    
             #---Eventos da tela de Reserva de vaga ---
             elif self.tela_reserva_vaga !=None  and window==self.tela_reserva_vaga.window:   

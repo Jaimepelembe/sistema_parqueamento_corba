@@ -14,7 +14,9 @@ class ObservadorPagamentoImpl(Observador):
     
     
     def notificarActualizacaoTransacao(self,listaTransacoes):
+        import PySimpleGUI as sg
         if self.janelaUsuarioComum:
             self.janelaUsuarioComum.write_event_value("-ATUALIZAR_TABELA_TRANSACOES-", listaTransacoes)
+            
     
             
