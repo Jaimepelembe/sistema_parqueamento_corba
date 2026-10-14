@@ -7,6 +7,7 @@ class ObservadorParqueamentoImpl(Observador):
         self.janelaAdmin=None
         self.janelaUsuarioComum=None
         self.janelaReservaVaga=None
+        self.contador=1
     
     def notificarParquesActualizados(self,parquesActualizados):
         if self.janelaAdmin:
@@ -26,8 +27,10 @@ class ObservadorParqueamentoImpl(Observador):
     
     def notificarActualizacaoVaga(self,listaVagas):
         if self.janelaReservaVaga and self.janelaReservaVaga!=None:
-            pass
-            #self.janelaReservaVaga.write_event_value("-ATUALIZAR_VAGAS_DISPONIVEIS-", listaVagas)
+            print(f"Lista vagas Disponiveis {listaVagas}")
+            print(f"-------{self.contador}---------")
+            #pass
+            self.janelaReservaVaga.write_event_value("-ATUALIZAR_VAGAS_DISPONIVEIS-", listaVagas)
         
     def notificarActualizacaoViaturas(self,listaViaturas):
         if self.janelaUsuarioComum:

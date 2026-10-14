@@ -251,7 +251,7 @@ class GerenciadorJanelas:
         window["-TXT-VAGAS-DISPONIVEIS-"].update(f'Vagas Disponiveis: {len(self.tela_reserva_vaga.vagas_disponiveis)}')
     
         # Actualiza a janela dos usuarios comum que estao conecetados ao servidor
-        #window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
+        window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
         # sg.popup("Vagas actualizadas com sucesso.")
 
     def notificarActualizacaoViaturas(self,window,values):
@@ -276,7 +276,7 @@ class GerenciadorJanelas:
     
     def actualizarStatusReserva(self):
         self.tela_usuario_comum.window["-TABELA_RESERVAS-"].update(values=self.listarReservasVaga())
-        sg.popup("Actualizou as reservas")
+        #sg.popup("Actualizou as reservas")
                   
     
     def depositar(self,window,values):
@@ -521,12 +521,14 @@ class GerenciadorJanelas:
         if self.listaReservasVagaDTO:
             for reservaDTO in self.listaReservasVagaDTO:
                 #Verificar o status Reserva
-                if verificarStatusReserva(reservaDTO.data_saida,reservaDTO.hora_saida):
+                if verificarStatusReserva(reservaDTO.data_saida,reservaDTO.hora_saida)==True:
                     status="ACTIVA"
                 else:
                     status="INACTIVA"
+                    #self.permitirnotificacaoActualizacaoVaga=False
                     #Mudar o estado da vaga na tabela de vagas para livre: 0
-                    self.servico_vaga.actualizarEstadoVaga(reservaDTO.id_vaga, 0)   
+                    #self.servico_vaga.actualizarEstadoVaga(reservaDTO.id_vaga, 0)   
+                    #sg.popup("Tem uma vaga inactiva")
                     
   
                 matriculaViatura=self.buscarMatriculaViaturaReservada(reservaDTO.id_viatura)
@@ -637,7 +639,7 @@ class GerenciadorJanelas:
         #Executar a verificacao do status das reservas
         # Agenda a função para rodar de 5 em 5 minutos
         #schedule.every(1).minutes.do(self.actualizarStatusReserva)
-        INTERVALO_VERIFICACAO=10000
+        INTERVALO_VERIFICACAO=60000 # 1 minuto
         
         while True:
             # Loop infinito para manter o script a correr e verificar o relógio
@@ -860,8 +862,8 @@ class GerenciadorJanelas:
                 # EVENTO DO OBSERVADOR
                 #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DE VAGAS, OCORRE QUANDO UMA VAGA É OCUPADA
                 if event == "-ATUALIZAR_VAGAS_DISPONIVEIS-":
-                    #self.notificarActualizacaoVagas(self.tela_reserva_vaga.window,values)
-                    pass
+                    self.notificarActualizacaoVagas(self.tela_reserva_vaga.window,values)
+                   
                 
                 """
                 if event =="-ATUALIZAR_VIATURAS_DISPONIVEIS-":
@@ -929,6 +931,7 @@ class GerenciadorJanelas:
             #Evento de Timeout 
             elif event == sg.TIMEOUT_EVENT and self.tela_usuario_comum:
                 self.actualizarStatusReserva()
+                self.permitirnotificacaoActualizacaoVaga=True
                     
                 
                     
