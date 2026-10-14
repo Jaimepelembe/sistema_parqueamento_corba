@@ -102,8 +102,8 @@ class TelaUsuarioComum:
             [
                 sg.Table(
                     values=self.minhas_reservas,
-                    headings=['ID','Data Entrada', 'Hora Entrada','Data Saida','Hora Saida', 'Preco','ID Vaga','Matricula Viatura'],
-                    col_widths=[5, 12, 12, 12,12,10,10,15],
+                    headings=['ID','Data Entrada', 'Hora Entrada','Data Saida','Hora Saida', 'Preco','ID Vaga','Matricula Viatura',"Status"],
+                    col_widths=[5, 12, 12, 12,12,10,10,15,10],
                     justification="center",
                     auto_size_columns=False,
                     num_rows=10,

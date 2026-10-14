@@ -11,6 +11,7 @@ from utils.validacoes import validarNome
 from utils.validacoes import validar_dinheiro_string
 from utils.validacoes import validar_dinheiro
 from utils.validacoes import validarMatricula
+from utils.verificarStatusReserva import verificarStatusReserva
 
 from datetime import datetime
 #from datetime import 
@@ -468,7 +469,7 @@ class GerenciadorJanelas:
             #print(f"Tens que pagar {precoPagar}")
             if self.saldoActual >=precoPagar:
 
-                resposta = sg.popup_yes_no(f"Confirma o pagamento de {precoPagar}mts para a reserva da vaga?", title="Confirmar")
+                resposta = sg.popup_yes_no(f"Confirma o pagamento de {precoPagar:.2f}mts para a reserva da vaga?", title="Confirmar")
                 if resposta == "Yes":
                     #print("Confirmado")
                     dataEntrada= values["-DT-ENTRADA-"]    
@@ -514,11 +515,18 @@ class GerenciadorJanelas:
         listaReservaVagas=[]
         if self.listaReservasVagaDTO:
             for reservaDTO in self.listaReservasVagaDTO:
+                #Verificar o status Reserva
+                if verificarStatusReserva(reservaDTO.data_saida,reservaDTO.hora_saida):
+                    status="ACTIVA"
+                else:
+                    status="INACTIVA"
+                    #Mudar o estado da vaga na tabela de vagas para livre: 0
+                    self.servico_vaga.actualizarEstadoVaga(reservaDTO.id_vaga, 0)   
+                    
+  
                 matriculaViatura=self.buscarMatriculaViaturaReservada(reservaDTO.id_viatura)
-         #      print(f"Matricula: {matriculaViatura}")
-                listaReservaVagas.append([reservaDTO.id_reserva,reservaDTO.data_entrada,reservaDTO.hora_entrada,reservaDTO.data_saida,reservaDTO.hora_saida,reservaDTO.preco_total,reservaDTO.id_vaga,matriculaViatura])
+                listaReservaVagas.append([reservaDTO.id_reserva,reservaDTO.data_entrada,reservaDTO.hora_entrada,reservaDTO.data_saida,reservaDTO.hora_saida,reservaDTO.preco_total,reservaDTO.id_vaga,matriculaViatura,status])
             
-        #print(f"lista: {listaReservaVagas}")
         
         return listaReservaVagas              
             
