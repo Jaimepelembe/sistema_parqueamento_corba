@@ -11,7 +11,8 @@ class TelaReservaVaga:
 
         # Gerar opções de horas (00 a 23) e minutos (00, 15, 30, 45)
         horas = [f'{h:02d}' for h in range(24)]
-        minutos = ['00', '01','05', '10','15', '20', '25', '30', '35', '40', '45', '50', '55']
+        minutos = [f'{m:02d}' for m in range(60)]
+        #minutos = ['00', '01','05', '10','15', '20', '25', '30', '35', '40', '45', '50', '55']
 
         layout_reserva = [
             [sg.Text(f'Reservar Vaga - {self.parque_selecionado.nome}', font=('Helvetica', 13, 'bold'))],

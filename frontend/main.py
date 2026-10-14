@@ -14,7 +14,9 @@ from utils.validacoes import validarMatricula
 from utils.verificarStatusReserva import verificarStatusReserva
 
 from datetime import datetime
-#from datetime import 
+
+
+
 
 #Importacoes de corba
 import sys
@@ -249,7 +251,7 @@ class GerenciadorJanelas:
         window["-TXT-VAGAS-DISPONIVEIS-"].update(f'Vagas Disponiveis: {len(self.tela_reserva_vaga.vagas_disponiveis)}')
     
         # Actualiza a janela dos usuarios comum que estao conecetados ao servidor
-        window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
+        #window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
         # sg.popup("Vagas actualizadas com sucesso.")
 
     def notificarActualizacaoViaturas(self,window,values):
@@ -271,8 +273,11 @@ class GerenciadorJanelas:
         self.listaTransacoesDTO=values["-ATUALIZAR_TABELA_TRANSACOES-"]    
         window['-TABELA_TRANSACOES-'].update(values=self.listarTransacoes()) 
         #sg.popup("Actualizou a tabela de transacoes")
-        
-                           
+    
+    def actualizarStatusReserva(self):
+        self.tela_usuario_comum.window["-TABELA_RESERVAS-"].update(values=self.listarReservasVaga())
+        sg.popup("Actualizou as reservas")
+                  
     
     def depositar(self,window,values):
         valorDeposito=values["-VALOR_DEPOSITO-"]
@@ -629,9 +634,16 @@ class GerenciadorJanelas:
 
     def executar(self):
         self.numeroCliques=0
+        #Executar a verificacao do status das reservas
+        # Agenda a função para rodar de 5 em 5 minutos
+        #schedule.every(1).minutes.do(self.actualizarStatusReserva)
+        INTERVALO_VERIFICACAO=10000
+        
         while True:
+            # Loop infinito para manter o script a correr e verificar o relógio
+            #time.sleep(0.5) 
             # Captura eventos de TODAS as janelas abertas
-            window, event, values = sg.read_all_windows()
+            window, event, values = sg.read_all_windows(timeout=INTERVALO_VERIFICACAO)
             
 
             # --- EVENTOS DA TELA DE LOGIN ---
@@ -695,6 +707,8 @@ class GerenciadorJanelas:
                                     self.listaTransacoesDTO=self.servico_transacao.listarTransacoes(self.idConta)
                                     self.listaReservasVagaDTO=self.servico_reserva.listarReservas(self.usuario_logado.id_usuario)
                                     self.tela_usuario_comum= TelaUsuarioComum(user_dto,self.listarParques(),self.listarViaturas(),self.listarTransacoes(),self.listarReservasVaga(),self.saldoActual)
+                                    
+                               
                                     #self.tela_usuario_comum.minhas_reservas=self.listarReservasVaga()
                                     self.observador.janelaUsuarioComum=self.tela_usuario_comum.window
                                     self.observadorPagamento.janelaUsuarioComum=self.tela_usuario_comum.window
@@ -790,6 +804,9 @@ class GerenciadorJanelas:
                # EVENTOS DA TABELA Minhas Viaturas
                 if event == "-BTN_ADD_VIATURA-":
                    self.adicionarViatura(self.tela_usuario_comum.window,values)
+                
+  
+                    
                    
                    
                 #EVENTOS DO OBSERVADOR
@@ -827,6 +844,8 @@ class GerenciadorJanelas:
                 # EVENTO DE CANCELAR A RESERVA
                 if event == "-CANCELAR_RESERVA-" or event==sg.WIN_CLOSED:
                     self.tela_reserva_vaga.fechar()
+                    self.tela_reserva_vaga=None
+                    self.observador.janelaReservaVaga=None
                     self.tela_usuario_comum.exibir()
                 
                 if event == "-BTN-DATA-ENTRADA-":
@@ -841,7 +860,8 @@ class GerenciadorJanelas:
                 # EVENTO DO OBSERVADOR
                 #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DE VAGAS, OCORRE QUANDO UMA VAGA É OCUPADA
                 if event == "-ATUALIZAR_VAGAS_DISPONIVEIS-":
-                    self.notificarActualizacaoVagas(self.tela_reserva_vaga.window,values)
+                    #self.notificarActualizacaoVagas(self.tela_reserva_vaga.window,values)
+                    pass
                 
                 """
                 if event =="-ATUALIZAR_VIATURAS_DISPONIVEIS-":
@@ -904,7 +924,11 @@ class GerenciadorJanelas:
                 #  EVENTO DE NOTIFICACAO DE ACTUALIZACAO DO DADO DE UM USUARIO
                 if event == "-ATUALIZAR_PERFIL_UM_USUARIO-":
                     self.notificarActualizacaoDadosUsuario(window,values)
-                    
+            
+            
+            #Evento de Timeout 
+            elif event == sg.TIMEOUT_EVENT and self.tela_usuario_comum:
+                self.actualizarStatusReserva()
                     
                 
                     
