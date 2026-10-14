@@ -16,6 +16,7 @@ class TelaReservaVaga:
         layout_reserva = [
             [sg.Text(f'Reservar Vaga - {self.parque_selecionado.nome}', font=('Helvetica', 13, 'bold'))],
             [sg.Text(f'Preço por Hora: {self.parque_selecionado.preco:.2f} MT')],
+            [sg.Text(f'Vagas Disponiveis: {len(self.vagas_disponiveis)}', key="-TXT-VAGAS-DISPONIVEIS-")],
             [
                 sg.Text('Selecionar Vaga:    '),
                 sg.Combo(

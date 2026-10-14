@@ -245,6 +245,7 @@ class GerenciadorJanelas:
     def notificarActualizacaoVagas(self,window,values):
         self.listaVagasDTO=values["-ATUALIZAR_VAGAS_DISPONIVEIS-"]
         self.tela_reserva_vaga.vagas_disponiveis=self.listarVagasDisponiveis()
+        window["-TXT-VAGAS-DISPONIVEIS-"].update(f'Vagas Disponiveis: {len(self.tela_reserva_vaga.vagas_disponiveis)}')
     
         # Actualiza a janela dos usuarios comum que estao conecetados ao servidor
         window["-COMBO-VAGA-"].update(values=self.tela_reserva_vaga.vagas_disponiveis,value=self.tela_reserva_vaga.vagas_disponiveis[0] if self.tela_reserva_vaga.vagas_disponiveis else '')
@@ -513,9 +514,6 @@ class GerenciadorJanelas:
         listaReservaVagas=[]
         if self.listaReservasVagaDTO:
             for reservaDTO in self.listaReservasVagaDTO:
-                #print("-------------")
-               # numeroVaga=self.buscarNumeroVagaReservada(reservaDTO.id_vaga)
-                #print(f"Vaga: {numeroVaga}")
                 matriculaViatura=self.buscarMatriculaViaturaReservada(reservaDTO.id_viatura)
          #      print(f"Matricula: {matriculaViatura}")
                 listaReservaVagas.append([reservaDTO.id_reserva,reservaDTO.data_entrada,reservaDTO.hora_entrada,reservaDTO.data_saida,reservaDTO.hora_saida,reservaDTO.preco_total,reservaDTO.id_vaga,matriculaViatura])
