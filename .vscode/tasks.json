@@ -4,7 +4,7 @@
     {
       "label": "Nameserver",
       "type": "shell",
-      "command": "tnameserv -ORBInitialPort 1050 '-J-Dcom.sun.CORBA.ORBServerHost=localhost'",
+      "command": "tnameserv -ORBInitialPort 1050 '-J-Dcom.sun.CORBA.ORBServerHost=10.200.153.150'",
       "options": {
         "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-Command"] }
       },
