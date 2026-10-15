@@ -51,6 +51,11 @@ public class servidorPagamento {
             props.put("org.omg.CORBA.ORBInitialHost", Host); 
             // Define a porta (geralmente obrigatório em conjunto com o host)
             props.put("org.omg.CORBA.ORBInitialPort", Port); 
+            
+            //Novo codigo
+            props.put("org.omg.CORBA.ORBServerHost", Host); 
+            props.put("org.omg.CORBA.ORBServerPort", Port); 
+
 
             //Cria e inicializa o ORB
             ORB orb = ORB.init(args,props);

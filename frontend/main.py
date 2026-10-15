@@ -60,6 +60,16 @@ class GerenciadorJanelas:
 
         # Adiciona aos argumentos do sistema que serão lidos pelo ORB
         orb_args = sys.argv + ["-ORBInitRef", init_ref_arg]
+
+       # Defina aqui o seu próprio endereço IP local na rede (ex: '10.200.153.199')
+        # Dica: se quiser que ele descubra automaticamente, você pode usar uma função para pegar o IP da máquina, 
+        # mas aqui definimos explicitamente para garantir que a escuta ocorra na placa correta.
+        #meu_ip_local = "10.200.153.199"  
+
+        # Adiciona aos argumentos do sistema que serão lidos pelo ORB, incluindo o endpoint de escuta correto   
+        #orb_args = sys.argv + [ "-ORBInitRef", init_ref_arg,  "-ORBendPoint", f"giop:tcp:{meu_ip_local}:1050"]
+       
+       
         orb = CORBA.ORB_init(orb_args)
         
         naming_service = orb.resolve_initial_references("NameService")
@@ -90,6 +100,8 @@ class GerenciadorJanelas:
         
         # Guarda o utilizador autenticado após o login
         self.usuario_logado = None
+        
+        threading.Thead(target=orb.run,daemon=True).start()
     
     
     
@@ -119,13 +131,6 @@ class GerenciadorJanelas:
         #referencia_observador = poa.servant_to_reference(self.observador)
         self.idObsVaga = self.servico_vaga.registarObservador(self.referencia_observador)
         print(f"Observador vaga registado. ID: {self.idObsVaga}")
-        
-        """
-        # Registar o observador de potencia no servidor
-        referencia_observador_potencia = poa.servant_to_reference(observador)
-        self.idObsPotencia = self.servico_potencia.registarObservador(referencia_observador_potencia)
-        print(f"Observador Potencia registado. ID: {self.idObsPotencia}")
-         """
          
         self.observadorPagamento= ObservadorPagamentoImpl()
         self.referencia_observador_pagamento = poa.servant_to_reference(self.observadorPagamento)
