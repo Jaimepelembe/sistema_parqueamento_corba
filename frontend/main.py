@@ -511,7 +511,7 @@ class GerenciadorJanelas:
                         sg.popup_error('Erro', 'Falha ao ao reservar a vaga.')    
 
             else:
-                 sg.popup_error('Erro', f'Voce nao tem saldo suficiente na tua conta para poder reservar a vaga!\nA reserva custa {precoPagar}mts e voce so tem {self.saldoActual}mts\nPor favor recarregue a sua conta')    
+                 sg.popup_error('Erro', f'Voce nao tem saldo suficiente na tua conta para poder reservar a vaga!\nA reserva custa {precoPagar:.2f}mts e voce so tem {self.saldoActual:.2f}mts\nPor favor recarregue a sua conta')    
 
     
     def listarReservasVaga(self):
@@ -524,9 +524,9 @@ class GerenciadorJanelas:
                 if verificarStatusReserva(reservaDTO.data_saida,reservaDTO.hora_saida)==True:
                     status="ACTIVA"
                 else:
-                    # A reserva já não está activa e o status ainda continua como ACTIVA
+                    status="INACTIVA"
+                    # A reserva já não está activa e o status ainda continua como ACTIVA na BD
                     if reservaDTO.status== "ACTIVA":
-                        status="INACTIVA"
                         #Mudar o Status na tabela reserva para inactiva
                         reservaDTO.status=status
                         self.servico_reserva.actualizarStatusReserva(reservaDTO)
@@ -569,13 +569,14 @@ class GerenciadorJanelas:
         numeroVagas=values["-NUMERO_VAGAS-"]
         url=""
         
-        if validarNome(nome) and len(provincia)>3 and validarTelefone(telefone) and len(horario)>=2 and cobertura in ["BERTO", "NAO_COBERTO"] and validar_dinheiro_string(preco) and validarNumeroVagas(numeroVagas) :
+        if validarNome(nome) and len(provincia)>3 and validarTelefone(telefone) and len(horario)>=2 and cobertura in ["COBERTO", "NAO_COBERTO"] and validar_dinheiro_string(preco) and validarNumeroVagas(numeroVagas) :
             parqueDTO=ParqueamentoApp.ParqueDTO(-1,nome,provincia,localizacao,telefone,horario,cobertura,validar_dinheiro(preco),url)
             idParque=self.servico_parque.adicionarParque(parqueDTO)
             if idParque>0: 
                 #window["-TABELA_PARQUES-"].update(values=self.listarParques())
                 
                 #Criar vagas para o parque
+                numeroVagas=validarNumeroVagas(numeroVagas)
                 self.servico_vaga.adicionarVaga(idParque,numeroVagas)
                 
                 sg.popup("Sucesso","O parque foi adicionado com sucesso")
@@ -591,6 +592,7 @@ class GerenciadorJanelas:
         cobertura=values["-COMBO-COBERTURA-"]
         preco=values["-PARQUE_PRECO-"]
         url=""
+        
         
         if validarNome(nome) and len(provincia)>3 and validarTelefone(telefone) and len(horario)>=2 and cobertura in ["COBERTO", "NAO_COBERTO"] and validar_dinheiro_string(preco):
             if nome!= antigoParque.nome or provincia!= antigoParque.provincia or localizacao!=antigoParque.localizacao or telefone!= antigoParque.telefone or horario!= antigoParque.horario or cobertura!=antigoParque.cobertura or preco!= antigoParque.preco:
@@ -633,6 +635,7 @@ class GerenciadorJanelas:
         window["-PARQUE_PRECO-"].update("")
         window["-BTN_ADICIONAR_PARQUE-"].update(disabled=False)
         window["-BTN_ATUALIZAR_PARQUE-"].update(disabled=True)
+        window["-NUMERO_VAGAS-"].update(value="50",disabled=False)
         #window["-BTN_REMOVER_PARQUE-"].update(disabled=True)
         
 
@@ -889,7 +892,9 @@ class GerenciadorJanelas:
                     self.numeroCliques+=1
                     if self.numeroCliques==2:
                         self.numeroCliques=0
-                    
+                        #Desabilita o campo numero de vagas
+                        window["-NUMERO_VAGAS-"].update(value="",disabled=True)
+                
                         linhas_selecionadas = values['-TABELA_PARQUES-']
                         if linhas_selecionadas:
                             indice = linhas_selecionadas[0]
