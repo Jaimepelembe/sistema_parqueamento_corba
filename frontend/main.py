@@ -43,7 +43,7 @@ class GerenciadorJanelas:
         self.tela_administrador = None
         self.tela_cadastro = None
         self.tela_reserva_vaga=None
-        self.inicializarCORBA(initial_host="10.200.153.150", initial_port="1050") #"10.234.196.150"
+        self.inicializarCORBA(initial_host="192.168.31.20", initial_port="1050") #"10.234.196.150"
         self.listaParquesDTO=None
         self.listaVagasDTO=None
         self.listaVagasReservadasDTO=None
@@ -61,15 +61,6 @@ class GerenciadorJanelas:
         # Adiciona aos argumentos do sistema que serão lidos pelo ORB
         orb_args = sys.argv + ["-ORBInitRef", init_ref_arg]
 
-       # Defina aqui o seu próprio endereço IP local na rede (ex: '10.200.153.199')
-        # Dica: se quiser que ele descubra automaticamente, você pode usar uma função para pegar o IP da máquina, 
-        # mas aqui definimos explicitamente para garantir que a escuta ocorra na placa correta.
-        #meu_ip_local = "10.200.153.199"  
-
-        # Adiciona aos argumentos do sistema que serão lidos pelo ORB, incluindo o endpoint de escuta correto   
-        #orb_args = sys.argv + [ "-ORBInitRef", init_ref_arg,  "-ORBendPoint", f"giop:tcp:{meu_ip_local}:1050"]
-       
-       
         orb = CORBA.ORB_init(orb_args)
         
         naming_service = orb.resolve_initial_references("NameService")
@@ -96,12 +87,14 @@ class GerenciadorJanelas:
         self.servico_conta= self.obter_servico("Conta",PagamentoApp.Conta)
         self.servico_transacao= self.obter_servico("Transacao",PagamentoApp.Transacao)
 
+        #Criar Observadores
         self.criarObservadores(orb)
         
         # Guarda o utilizador autenticado após o login
         self.usuario_logado = None
         
-        threading.Thead(target=orb.run,daemon=True).start()
+        thread_orb=threading.Thread(target=orb.run,daemon=True)
+        thread_orb.start()
     
     
     

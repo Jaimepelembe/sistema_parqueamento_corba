@@ -51,7 +51,7 @@ public class servidorParqueamento {
         try{
             //Criar e inicializa o ORB
            // ORB orb = ORB.init(args,null);
-           String Host= "10.200.153.150";   // "10.234.196.150";//"localhost";
+           String Host= "192.168.31.20";   // "10.234.196.150";//"localhost";
            String Port ="1050";
 
             //Propreidades
@@ -62,8 +62,8 @@ public class servidorParqueamento {
             props.put("org.omg.CORBA.ORBInitialPort", Port); 
 
             //Novo codigo
-            props.put("org.omg.CORBA.ORBServerHost", Host); 
-            props.put("org.omg.CORBA.ORBServerPort", Port); 
+            //props.put("org.omg.CORBA.ORBServerHost", Host); 
+            //props.put("org.omg.CORBA.ORBServerPort", Port); 
 
             //Criar e inicializa o ORB
             ORB orb = ORB.init(args,props);
