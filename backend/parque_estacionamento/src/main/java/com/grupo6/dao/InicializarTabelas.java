@@ -138,9 +138,8 @@ public static void inserirDadosExemplo(Connection conn){
 
     try{
         String[] inserts = {
-        "INSERT INTO usuario (nome, telefone, senha, tipo) VALUES ('Carlos Mucavele', '841234567', 'senha123', 1), ('Anabela Sitoe', '829876543', 'senha123', 0), ('Mateus Langa', '855554433', 'senha123', 0);",
-        "INSERT INTO viatura (marca, modelo, matricula, id_usuario) VALUES ('Toyota', 'Corolla', 'ABC-123-MC', 1), ('Nissan', 'Hardbody', 'AFG-456-MC', 2), ('Hyundai', 'Elantra', 'AIA-789-MC', 3);"
-    
+        "INSERT INTO usuario (nome, telefone, senha, tipo) VALUES ('Carlos Mucavele', '841234567', 'senha123', 1), ('Anabela Sitoe', '829876543', 'senha123', 1), ('Mateus Langa', '855554433', 'senha123', 0), ('Tony Maia', '840000007', 'senha123', 0);",
+        "INSERT INTO viatura (marca, modelo, matricula, id_usuario) VALUES ('Toyota', 'Corolla', 'ABC 123 MC', 3), ('Nissan', 'Hardbody', 'AFG 456 MC', 3), ('Hyundai', 'Elantra', 'AIA 789 MC', 4);"
 
         };
 
@@ -163,11 +162,13 @@ public static void inserirDadosExemplo(Connection conn){
 
         String[] selectSql={
             "SELECT EXISTS (SELECT 1 FROM usuario) AS resultado;",
-            "SELECT EXISTS (SELECT 1 FROM parque_estacionamento) AS resultado;",
-            "SELECT EXISTS (SELECT 1 FROM viatura) AS resultado;",
-            "SELECT EXISTS (SELECT 1 FROM vaga_estacionamento) AS resultado;",
-            "SELECT EXISTS (SELECT 1 FROM reserva_vaga) AS resultado;"
+            "SELECT EXISTS (SELECT 1 FROM viatura) AS resultado;"
+
         };
+        //   "SELECT EXISTS (SELECT 1 FROM parque_estacionamento) AS resultado;",
+        //  "SELECT EXISTS (SELECT 1 FROM parque_estacionamento) AS resultado;",
+        //     "SELECT EXISTS (SELECT 1 FROM vaga_estacionamento) AS resultado;",
+        //   "SELECT EXISTS (SELECT 1 FROM reserva_vaga) AS resultado;"
 
 
     Statement stmt = conn.createStatement();

@@ -34,14 +34,6 @@ public class ReservaImpl
     @Override
     public boolean criarReserva(ReservaDTO reserva){
         reservaDAO = new ReservaDAO();
-
-        //float precoHoraParque=reservaDAO.obterPrecoHoraParque(reserva.id_vaga);
-        //long tempoTotal=calcularTempoReserva(reserva.data_entrada, reserva.hora_entrada, reserva.data_saida, reserva.hora_saida);
-        //float precoApagar=tempoTotal*precoHoraParque;
-
-        //reserva.preco_total=precoApagar;
-        //System.out.println("Preco vou pagar"+reserva.preco_total);
-
         boolean resultado=reservaDAO.criarReserva(reserva);
         
         if (resultado){
@@ -64,6 +56,32 @@ public class ReservaImpl
 
         return listaReservas;}
     
+    @Override
+     public boolean actualizarStatusReserva(ReservaDTO reserva ){
+        reservaDAO = new ReservaDAO();
+        boolean resultado=reservaDAO.actualizarStatusReserva(reserva );
+       return resultado;
+
+
+     }
+
+
+     @Override
+     public boolean actualizarStatusReservaNotificacao(ReservaDTO reserva ){
+        reservaDAO = new ReservaDAO();
+        boolean resultado=reservaDAO.actualizarStatusReserva(reserva );
+        
+        if (resultado){
+            ReservaDTO[] listaReservas= listarReservas(reserva.id_usuario);
+            notificarTodos(reserva.id_usuario,listaReservas);
+        }
+
+
+       return resultado;
+
+
+     }
+
 
     @Override
     public ReservaDTO obterReserva(int id_reserva) {

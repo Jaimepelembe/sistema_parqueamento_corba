@@ -485,7 +485,8 @@ class GerenciadorJanelas:
                     horaSaida=values["-RESERVA-HORA-SAIDA-"]
                     minutosSaida=values["-RESERVA-MINUTO-SAIDA-"]
                     tempoSaida= f"{horaSaida}:{minutosSaida}:00"
-                    reservaDTO =ParqueamentoApp.ReservaDTO(-1,dataEntrada,tempoEntrada,dataSaida,tempoSaida,precoPagar,id_vaga,id_usuario,id_viatura)
+                    status="ACTIVA"
+                    reservaDTO =ParqueamentoApp.ReservaDTO(-1,dataEntrada,tempoEntrada,dataSaida,tempoSaida,precoPagar,status,id_vaga,id_usuario,id_viatura)
                     sucesso=self.servico_reserva.criarReserva(reservaDTO)       
                     
                     if sucesso:
@@ -522,10 +523,13 @@ class GerenciadorJanelas:
                 if verificarStatusReserva(reservaDTO.data_saida,reservaDTO.hora_saida)==True:
                     status="ACTIVA"
                 else:
-                    status="INACTIVA"
+                    # A reserva já não está activa e o status ainda continua como ACTIVA
+                    if reservaDTO.status== "ACTIVA":
+                        status="INACTIVA"
                     #self.permitirnotificacaoActualizacaoVaga=False
-                    #Mudar o estado da vaga na tabela de vagas para livre: 0
-                    #self.servico_vaga.actualizarEstadoVaga(reservaDTO.id_vaga, 0)   
+                        #Mudar o Status na tabela reserva para inactiva
+                        #Mudar o estado da vaga na tabela de vagas para livre: 0
+                        self.servico_vaga.actualizarEstadoVaga(reservaDTO.id_vaga, 0)   
                     #sg.popup("Tem uma vaga inactiva")
                     
   

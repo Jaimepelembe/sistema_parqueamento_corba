@@ -174,6 +174,11 @@ typedef sequence<ReservaDTO> listaReservaDTO;
             in long estado
         );
 
+        boolean actualizarEstadoVagaNotificacao(
+            in long id_vaga,
+            in long estado
+        );
+
         listaVagaDTO listarVagas(
             in long id_parque
         );
@@ -248,6 +253,10 @@ typedef sequence<ReservaDTO> listaReservaDTO;
         listaReservaDTO listarReservas(
             in long id_usuario
         );
+
+        boolean actualizarStatusReserva(in ReservaDTO reserva );
+
+        boolean actualizarStatusReservaNotificacao(in ReservaDTO reserva );
 
         // Registar o cliente para receber callbacks
         long registarObservador(in long id_usuario, in Observador obs); // Retorna o Id do observador, que é Id do Observador

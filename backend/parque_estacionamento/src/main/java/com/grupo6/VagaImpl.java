@@ -28,7 +28,7 @@ public class VagaImpl extends VagaPOA {
     }
 
 
-
+    @Override
     public void adicionarVaga(int id_parque, int numero_de_vagas){
         synchronized (lock){
         vagaDAO= new VagaDAO();
@@ -47,7 +47,19 @@ public class VagaImpl extends VagaPOA {
     }
     }
 
+    @Override
     public boolean actualizarEstadoVaga(int id_vaga, int estadoVaga){
+        synchronized (lock){
+        vagaDAO= new VagaDAO();
+        boolean resultado=false;
+        resultado=vagaDAO.actualizarEstadoVaga(id_vaga, estadoVaga);
+
+        return resultado;
+    }          
+    }
+
+    @Override
+    public boolean actualizarEstadoVagaNotificacao(int id_vaga, int estadoVaga){
         synchronized (lock){
         vagaDAO= new VagaDAO();
         boolean resultado=false;
@@ -67,6 +79,8 @@ public class VagaImpl extends VagaPOA {
     }          
     }
 
+
+
     /**
     private int buscarIdParque(int id_vaga){
         synchronized (lock){
@@ -76,7 +90,7 @@ public class VagaImpl extends VagaPOA {
 
     }* */
 
-    
+    @Override
     public VagaDTO[] listarVagas(int id_parque) {
         vagaDAO = new VagaDAO();
         VagaDTO[] listaVagas=   vagaDAO.listarVagas(id_parque);
