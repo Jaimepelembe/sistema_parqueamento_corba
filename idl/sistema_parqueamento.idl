@@ -44,6 +44,7 @@ module ParqueamentoApp {
         string data_saida;
         string hora_saida;
         float preco_total;
+        string status;
         long id_vaga;
         long id_usuario;
         long id_viatura;

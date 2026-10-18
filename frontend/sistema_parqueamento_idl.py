@@ -103,19 +103,20 @@ _0_ParqueamentoApp.ReservaDTO = omniORB.newEmptyClass()
 class ReservaDTO (omniORB.StructBase):
     _NP_RepositoryId = "IDL:ParqueamentoApp/ReservaDTO:1.0"
 
-    def __init__(self, id_reserva, data_entrada, hora_entrada, data_saida, hora_saida, preco_total, id_vaga, id_usuario, id_viatura):
+    def __init__(self, id_reserva, data_entrada, hora_entrada, data_saida, hora_saida, preco_total, status, id_vaga, id_usuario, id_viatura):
         self.id_reserva = id_reserva
         self.data_entrada = data_entrada
         self.hora_entrada = hora_entrada
         self.data_saida = data_saida
         self.hora_saida = hora_saida
         self.preco_total = preco_total
+        self.status = status
         self.id_vaga = id_vaga
         self.id_usuario = id_usuario
         self.id_viatura = id_viatura
 
 _0_ParqueamentoApp.ReservaDTO = ReservaDTO
-_0_ParqueamentoApp._d_ReservaDTO  = (omniORB.tcInternal.tv_struct, ReservaDTO, ReservaDTO._NP_RepositoryId, "ReservaDTO", "id_reserva", omniORB.tcInternal.tv_long, "data_entrada", (omniORB.tcInternal.tv_string,0), "hora_entrada", (omniORB.tcInternal.tv_string,0), "data_saida", (omniORB.tcInternal.tv_string,0), "hora_saida", (omniORB.tcInternal.tv_string,0), "preco_total", omniORB.tcInternal.tv_float, "id_vaga", omniORB.tcInternal.tv_long, "id_usuario", omniORB.tcInternal.tv_long, "id_viatura", omniORB.tcInternal.tv_long)
+_0_ParqueamentoApp._d_ReservaDTO  = (omniORB.tcInternal.tv_struct, ReservaDTO, ReservaDTO._NP_RepositoryId, "ReservaDTO", "id_reserva", omniORB.tcInternal.tv_long, "data_entrada", (omniORB.tcInternal.tv_string,0), "hora_entrada", (omniORB.tcInternal.tv_string,0), "data_saida", (omniORB.tcInternal.tv_string,0), "hora_saida", (omniORB.tcInternal.tv_string,0), "preco_total", omniORB.tcInternal.tv_float, "status", (omniORB.tcInternal.tv_string,0), "id_vaga", omniORB.tcInternal.tv_long, "id_usuario", omniORB.tcInternal.tv_long, "id_viatura", omniORB.tcInternal.tv_long)
 _0_ParqueamentoApp._tc_ReservaDTO = omniORB.tcInternal.createTypeCode(_0_ParqueamentoApp._d_ReservaDTO)
 omniORB.registerType(ReservaDTO._NP_RepositoryId, _0_ParqueamentoApp._d_ReservaDTO, _0_ParqueamentoApp._tc_ReservaDTO)
 del ReservaDTO
