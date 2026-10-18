@@ -27,8 +27,8 @@ class ObservadorParqueamentoImpl(Observador):
     
     def notificarActualizacaoVaga(self,listaVagas):
         if self.janelaReservaVaga and self.janelaReservaVaga!=None:
-            print(f"Lista vagas Disponiveis {listaVagas}")
-            print(f"-------{self.contador}---------")
+            #print(f"Lista vagas Disponiveis {listaVagas}")
+            #print(f"-------{self.contador}---------")
             #pass
             self.janelaReservaVaga.write_event_value("-ATUALIZAR_VAGAS_DISPONIVEIS-", listaVagas)
         

@@ -15,6 +15,7 @@ from utils.validacoes import validarNumeroVagas
 from utils.verificarStatusReserva import verificarStatusReserva
 
 from datetime import datetime
+import time
 
 
 
@@ -469,8 +470,6 @@ class GerenciadorJanelas:
         self.dataTempoSaida=None
         if id_vaga>0 and id_usuario>0 and id_viatura >0 and self.validarPeriodoEscolhido(values):
             precoPagar=self.calcularPrecoPagar(self.dataTempoEntrada,self.dataTempoSaida,self.tela_reserva_vaga.parque_selecionado.preco)
-            #print(f"Saldo actual {self.saldoActual}")
-            #print(f"Tens que pagar {precoPagar}")
             if self.saldoActual >=precoPagar:
 
                 resposta = sg.popup_yes_no(f"Confirma o pagamento de {precoPagar:.2f}mts para a reserva da vaga?", title="Confirmar")
@@ -492,7 +491,8 @@ class GerenciadorJanelas:
                     
                     if sucesso:
                         #Mudar o estado da vaga para ocupado: 1
-                        self.servico_vaga.actualizarEstadoVaga(id_vaga, 1)                  
+                        self.servico_vaga.actualizarEstadoVagaNotificacao(id_vaga, 1) 
+                        #time.sleep(0.02)                 
                         self.tela_reserva_vaga.vagas_disponiveis=self.listarVagasDisponiveis()
                         
                         #Debitar o valor
