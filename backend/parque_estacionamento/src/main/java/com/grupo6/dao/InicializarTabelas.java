@@ -95,6 +95,8 @@ public static void criarTabelas(Connection conn){
 
             +"preco_total REAL NOT NULL, "
 
+            +"status TEXT NOT NULL, "
+
            + "id_vaga INTEGER NOT NULL, "
             +"id_usuario INTEGER NOT NULL, "
             +"id_viatura INTEGER NOT NULL, "
@@ -115,41 +117,7 @@ public static void criarTabelas(Connection conn){
                 +"ON UPDATE CASCADE);";
         stmt.execute(sql);
 
-        /**
-  
-        //Criar tabela  transacao
-        sql = "CREATE TABLE IF NOT EXISTS transacao (id_transacao INTEGER PRIMARY KEY AUTOINCREMENT, "
-            +"tipo TEXT NOT NULL, "
-            +"valor REAL NOT NULL, "
-            +"estado TEXT NOT NULL, "
-           +"data TEXT NOT NULL, "
-           + "hora TEXT NOT NULL, "
-
-            +"id_conta INTEGER NOT NULL, "
-
-            +"FOREIGN KEY (id_conta) "
-                +"REFERENCES conta(id_conta) "
-                +"ON DELETE RESTRICT "
-                +"ON UPDATE CASCADE);";
-        stmt.execute(sql);
-
-
-
-              //Criar tabela  conta
-
-        sql= "CREATE TABLE IF NOT EXISTS conta (id_conta INTEGER PRIMARY KEY AUTOINCREMENT,  "
-                +"saldo REAL NOT NULL DEFAULT 0,  "
-                +"id_usuario INTEGER NOT NULL UNIQUE,  "
-
-                +"FOREIGN KEY (id_usuario)  "
-                    +"REFERENCES usuario(id_usuario)  "
-                    +"ON DELETE CASCADE  "
-                    +"ON UPDATE CASCADE);";
-
-            stmt.execute(sql);
-
-                    * */
-
+ 
        
     
     }
@@ -171,16 +139,20 @@ public static void inserirDadosExemplo(Connection conn){
     try{
         String[] inserts = {
         "INSERT INTO usuario (nome, telefone, senha, tipo) VALUES ('Carlos Mucavele', '841234567', 'senha123', 1), ('Anabela Sitoe', '829876543', 'senha123', 0), ('Mateus Langa', '855554433', 'senha123', 0);",
-        
-        "INSERT INTO parque_estacionamento (nome, provincia, localizacao, telefone, horario, cobertura, preco, foto_url) VALUES ('Parque Central', 'Maputo', 'Av. 25 de Setembro', '840001122', '07:00-22:00', 'COBERTO', 50.0, 'https://fotos.com/p1.jpg'), ('Parque Matola Plaza', 'Maputo', 'Av. das Industrias', '820003344', '08:00-20:00', 'NAO_COBERTO', 30.0, 'https://fotos.com/p2.jpg'), ('Parque Beira Mar', 'Sofala', 'Av. das Mambas', '850005566', '24 Horas', 'COBERTO', 40.0, 'https://fotos.com/p3.jpg');",
-        
-        "INSERT INTO viatura (marca, modelo, matricula, id_usuario) VALUES ('Toyota', 'Corolla', 'ABC-123-MC', 1), ('Nissan', 'Hardbody', 'AFG-456-MC', 2), ('Hyundai', 'Elantra', 'AIA-789-MC', 3);",
+        "INSERT INTO viatura (marca, modelo, matricula, id_usuario) VALUES ('Toyota', 'Corolla', 'ABC-123-MC', 1), ('Nissan', 'Hardbody', 'AFG-456-MC', 2), ('Hyundai', 'Elantra', 'AIA-789-MC', 3);"
     
-        "INSERT INTO vaga_estacionamento (numero_vaga, estado, id_parque) VALUES ('A-01', 1, 1), ('A-02', 0, 2), ('A-01', 0, 3);",
-        
-        "INSERT INTO reserva_vaga (data_entrada, hora_entrada, data_saida, hora_saida, preco_total, id_vaga, id_usuario, id_viatura) VALUES ('2026-09-27', '08:00', '2026-09-27', '12:00', 200.0, 1, 1, 1), ('2026-09-28', '10:00', '2026-09-28', '14:00', 120.0, 3, 2, 2), ('2026-09-29', '14:00', '2026-09-29', '18:00', 160.0, 2, 3, 3);",
-        
+
         };
+
+
+         //"INSERT INTO parque_estacionamento (nome, provincia, localizacao, telefone, horario, cobertura, preco, foto_url) VALUES ('Parque Central', 'Maputo', 'Av. 25 de Setembro', '840001122', '07:00-22:00', 'COBERTO', 50.0, 'https://fotos.com/p1.jpg'), ('Parque Matola Plaza', 'Maputo', 'Av. das Industrias', '820003344', '08:00-20:00', 'NAO_COBERTO', 30.0, 'https://fotos.com/p2.jpg'), ('Parque Beira Mar', 'Sofala', 'Av. das Mambas', '850005566', '24 Horas', 'COBERTO', 40.0, 'https://fotos.com/p3.jpg');",
+        //"INSERT INTO vaga_estacionamento (numero_vaga, estado, id_parque) VALUES ('A-01', 1, 1), ('A-02', 0, 2), ('A-01', 0, 3);",
+        //"INSERT INTO reserva_vaga (data_entrada, hora_entrada, data_saida, hora_saida, preco_total, id_vaga, id_usuario, id_viatura) VALUES ('2026-09-27', '08:00', '2026-09-27', '12:00', 200.0, 1, 1, 1), ('2026-09-28', '10:00', '2026-09-28', '14:00', 120.0, 3, 2, 2), ('2026-09-29', '14:00', '2026-09-29', '18:00', 160.0, 2, 3, 3);",
+        
+
+
+
+
 
         //Tabelas da base de dados Transacao
         // "INSERT INTO conta (saldo, id_usuario) VALUES (1500.00, 1), (500.00, 2), (250.50, 3);",
