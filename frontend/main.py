@@ -11,6 +11,7 @@ from utils.validacoes import validarNome
 from utils.validacoes import validar_dinheiro_string
 from utils.validacoes import validar_dinheiro
 from utils.validacoes import validarMatricula
+from utils.validacoes import validarNumeroVagas
 from utils.verificarStatusReserva import verificarStatusReserva
 
 from datetime import datetime
@@ -526,8 +527,10 @@ class GerenciadorJanelas:
                     # A reserva já não está activa e o status ainda continua como ACTIVA
                     if reservaDTO.status== "ACTIVA":
                         status="INACTIVA"
-                    #self.permitirnotificacaoActualizacaoVaga=False
                         #Mudar o Status na tabela reserva para inactiva
+                        reservaDTO.status=status
+                        self.servico_reserva.actualizarStatusReserva(reservaDTO)
+                        
                         #Mudar o estado da vaga na tabela de vagas para livre: 0
                         self.servico_vaga.actualizarEstadoVaga(reservaDTO.id_vaga, 0)   
                     #sg.popup("Tem uma vaga inactiva")
@@ -563,16 +566,16 @@ class GerenciadorJanelas:
         horario=values["-PARQUE_HORARIO-"]
         cobertura=values["-COMBO-COBERTURA-"]
         preco=values["-PARQUE_PRECO-"]
+        numeroVagas=values["-NUMERO_VAGAS-"]
         url=""
         
-        if validarNome(nome) and len(provincia)>3 and validarTelefone(telefone) and len(horario)>=2 and cobertura in ["COBERTO", "NAO_COBERTO"] and validar_dinheiro_string(preco):
+        if validarNome(nome) and len(provincia)>3 and validarTelefone(telefone) and len(horario)>=2 and cobertura in ["BERTO", "NAO_COBERTO"] and validar_dinheiro_string(preco) and validarNumeroVagas(numeroVagas) :
             parqueDTO=ParqueamentoApp.ParqueDTO(-1,nome,provincia,localizacao,telefone,horario,cobertura,validar_dinheiro(preco),url)
             idParque=self.servico_parque.adicionarParque(parqueDTO)
             if idParque>0: 
                 #window["-TABELA_PARQUES-"].update(values=self.listarParques())
                 
                 #Criar vagas para o parque
-                numeroVagas=50
                 self.servico_vaga.adicionarVaga(idParque,numeroVagas)
                 
                 sg.popup("Sucesso","O parque foi adicionado com sucesso")

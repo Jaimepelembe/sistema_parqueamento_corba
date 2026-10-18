@@ -384,6 +384,7 @@ omniORB.registerType(Vaga._NP_RepositoryId, _0_ParqueamentoApp._d_Vaga, _0_Parqu
 # Vaga operations and attributes
 Vaga._d_adicionarVaga = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.tv_long), (), None)
 Vaga._d_actualizarEstadoVaga = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.tv_long), (omniORB.tcInternal.tv_boolean, ), None)
+Vaga._d_actualizarEstadoVagaNotificacao = ((omniORB.tcInternal.tv_long, omniORB.tcInternal.tv_long), (omniORB.tcInternal.tv_boolean, ), None)
 Vaga._d_listarVagas = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None)
 Vaga._d_numeroTotalVagas = ((omniORB.tcInternal.tv_long, ), (omniORB.tcInternal.tv_long, ), None)
 Vaga._d_listarVagasDisponiveis = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaVagaDTO:1.0"], ), None)
@@ -402,6 +403,9 @@ class _objref_Vaga (CORBA.Object):
 
     def actualizarEstadoVaga(self, *args):
         return self._obj.invoke("actualizarEstadoVaga", _0_ParqueamentoApp.Vaga._d_actualizarEstadoVaga, args)
+
+    def actualizarEstadoVagaNotificacao(self, *args):
+        return self._obj.invoke("actualizarEstadoVagaNotificacao", _0_ParqueamentoApp.Vaga._d_actualizarEstadoVagaNotificacao, args)
 
     def listarVagas(self, *args):
         return self._obj.invoke("listarVagas", _0_ParqueamentoApp.Vaga._d_listarVagas, args)
@@ -428,7 +432,7 @@ class Vaga (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Vaga._NP_RepositoryId
 
 
-    _omni_op_d = {"adicionarVaga": _0_ParqueamentoApp.Vaga._d_adicionarVaga, "actualizarEstadoVaga": _0_ParqueamentoApp.Vaga._d_actualizarEstadoVaga, "listarVagas": _0_ParqueamentoApp.Vaga._d_listarVagas, "numeroTotalVagas": _0_ParqueamentoApp.Vaga._d_numeroTotalVagas, "listarVagasDisponiveis": _0_ParqueamentoApp.Vaga._d_listarVagasDisponiveis, "registarObservador": _0_ParqueamentoApp.Vaga._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Vaga._d_removerObservador}
+    _omni_op_d = {"adicionarVaga": _0_ParqueamentoApp.Vaga._d_adicionarVaga, "actualizarEstadoVaga": _0_ParqueamentoApp.Vaga._d_actualizarEstadoVaga, "actualizarEstadoVagaNotificacao": _0_ParqueamentoApp.Vaga._d_actualizarEstadoVagaNotificacao, "listarVagas": _0_ParqueamentoApp.Vaga._d_listarVagas, "numeroTotalVagas": _0_ParqueamentoApp.Vaga._d_numeroTotalVagas, "listarVagasDisponiveis": _0_ParqueamentoApp.Vaga._d_listarVagasDisponiveis, "registarObservador": _0_ParqueamentoApp.Vaga._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Vaga._d_removerObservador}
 
 Vaga._omni_skeleton = Vaga
 _0_ParqueamentoApp__POA.Vaga = Vaga
@@ -521,6 +525,8 @@ omniORB.registerType(Reserva._NP_RepositoryId, _0_ParqueamentoApp._d_Reserva, _0
 Reserva._d_criarReserva = ((omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
 Reserva._d_obterReserva = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), None)
 Reserva._d_listarReservas = ((omniORB.tcInternal.tv_long, ), (omniORB.typeMapping["IDL:ParqueamentoApp/listaReservaDTO:1.0"], ), None)
+Reserva._d_actualizarStatusReserva = ((omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
+Reserva._d_actualizarStatusReservaNotificacao = ((omniORB.typeMapping["IDL:ParqueamentoApp/ReservaDTO:1.0"], ), (omniORB.tcInternal.tv_boolean, ), None)
 Reserva._d_registarObservador = ((omniORB.tcInternal.tv_long, omniORB.typeMapping["IDL:ParqueamentoApp/Observador:1.0"]), (omniORB.tcInternal.tv_long, ), None)
 Reserva._d_removerObservador = ((omniORB.tcInternal.tv_long, ), (), None)
 
@@ -540,6 +546,12 @@ class _objref_Reserva (CORBA.Object):
     def listarReservas(self, *args):
         return self._obj.invoke("listarReservas", _0_ParqueamentoApp.Reserva._d_listarReservas, args)
 
+    def actualizarStatusReserva(self, *args):
+        return self._obj.invoke("actualizarStatusReserva", _0_ParqueamentoApp.Reserva._d_actualizarStatusReserva, args)
+
+    def actualizarStatusReservaNotificacao(self, *args):
+        return self._obj.invoke("actualizarStatusReservaNotificacao", _0_ParqueamentoApp.Reserva._d_actualizarStatusReservaNotificacao, args)
+
     def registarObservador(self, *args):
         return self._obj.invoke("registarObservador", _0_ParqueamentoApp.Reserva._d_registarObservador, args)
 
@@ -556,7 +568,7 @@ class Reserva (PortableServer.Servant):
     _NP_RepositoryId = _0_ParqueamentoApp.Reserva._NP_RepositoryId
 
 
-    _omni_op_d = {"criarReserva": _0_ParqueamentoApp.Reserva._d_criarReserva, "obterReserva": _0_ParqueamentoApp.Reserva._d_obterReserva, "listarReservas": _0_ParqueamentoApp.Reserva._d_listarReservas, "registarObservador": _0_ParqueamentoApp.Reserva._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Reserva._d_removerObservador}
+    _omni_op_d = {"criarReserva": _0_ParqueamentoApp.Reserva._d_criarReserva, "obterReserva": _0_ParqueamentoApp.Reserva._d_obterReserva, "listarReservas": _0_ParqueamentoApp.Reserva._d_listarReservas, "actualizarStatusReserva": _0_ParqueamentoApp.Reserva._d_actualizarStatusReserva, "actualizarStatusReservaNotificacao": _0_ParqueamentoApp.Reserva._d_actualizarStatusReservaNotificacao, "registarObservador": _0_ParqueamentoApp.Reserva._d_registarObservador, "removerObservador": _0_ParqueamentoApp.Reserva._d_removerObservador}
 
 Reserva._omni_skeleton = Reserva
 _0_ParqueamentoApp__POA.Reserva = Reserva

@@ -31,6 +31,7 @@ class TelaAdministrador:
             [sg.Text('Horário:   '), sg.Input(default_text="", key='-PARQUE_HORARIO-', size=(30, 1))],
             [sg.Text('Cobertura:    '), sg.Combo(cobertura, default_value=cobertura[0], key='-COMBO-COBERTURA-', readonly=True, size=(15, 1))],
             [sg.Text('Preço (MT):    '), sg.Input(default_text="", key='-PARQUE_PRECO-', size=(30, 1))],
+            [sg.Text('Numero de vagas:    '), sg.Input(default_text="50", key='-NUMERO_VAGAS-', size=(30, 1))],
             [sg.Button('Adicionar', key='-BTN_ADICIONAR_PARQUE-',button_color=("white","#283B5B")),sg.Button('Atualizar Dados', key='-BTN_ATUALIZAR_PARQUE-',disabled=True, button_color=("white","#021a0d")),sg.Button('Limpar', key='-BTN_LIMPAR-', button_color=("white","#D5573B"))],
             
             [sg.HSeparator()],

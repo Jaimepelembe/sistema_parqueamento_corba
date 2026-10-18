@@ -120,7 +120,35 @@ def validarMatricula(matricula:str):
         )
     return resultado
         
-    
+
+
+
+def validarNumeroVagas(texto):
+  try:
+    # Tenta converter para float (aceita inteiros e decimais)
+    numero = int(texto)
+    if numero<10:
+        sg.popup_error(
+            'Error',
+            f'O parque deve ter pelo menos 10 vagas',
+            title='Erro do número de vagas'
+        )
+        
+        return None
+        
+    else:
+        return numero
+           
+  except ValueError:
+        sg.popup_error(
+            'Número Inválido',
+            f'{numero} não é um número válido',
+            title='Erro de Validação'
+        )
+        return False
+
+#print(validarNumeroVagas("10"))
+
 """
 testes = [
     "ABC 123 MC",      # Válido
