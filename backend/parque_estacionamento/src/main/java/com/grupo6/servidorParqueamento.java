@@ -51,7 +51,7 @@ public class servidorParqueamento {
         try{
             //Criar e inicializa o ORB
            // ORB orb = ORB.init(args,null);
-           String Host= "localhost";   // "10.234.196.150";//"localhost"; "192.168.31.20"
+           String Host= "10.234.196.150";   // "10.234.196.150";//"localhost"; "192.168.31.20"
            String Port ="1050";
 
             //Propreidades

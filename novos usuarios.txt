@@ -1,41 +1,53 @@
 #Admin
+Carlos Mucavele
 841234567 
+senha123
+
+Anabela Sitoe
+829876543 
 senha123
 
 
 
 #Comum
-829876543 
-senha123
-
 Mateus Langa
 855554433  
 senha123
 
 Tony Maia
 840000007
-********
+senha123
 
-Gabriel
-840000008
-********
+
 
 Cristiano
 840000009
-********
+senha123
 
-Putin
-840000010
-********
-
-Trump 
-840000011
-********
-
-Modi
-840000012
-********
+-------------------------- Ainda nao fora adicionados-------------
 
 Tyla
 840000013
-********
+senha123
+
+
+Putin
+840000010
+senha123
+
+Trump 
+840000011
+senha123
+
+Modi
+840000012
+senha123
+
+
+############# Parques ############# 
+
+Parque do Estadio de Zimpeto
+Bairro de Zimpeto
+820000003
+24h 
+5
