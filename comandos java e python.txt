@@ -1,0 +1,37 @@
+##Para rodar os servidores:
+Deves abrir um terminal para executar cada um dos comandos a baixo.
+
+1. Servidor de nomes. Deves rodar o comando a baixo:
+
+tnameserv -ORBInitialPort 1050 -J-Dcom.sun.CORBA.ORBServerHost=10.234.196.150
+
+2.Servidor de pagamento. Deves estar na pasta backend/pagamento e rodar o comando:
+java -cp "target/classes;target/dependency/*" com.grupo6.servidorPagamento   
+
+3.Servidor de parqueamento. Deves estar na pasta backend/parque_estacionamento e rodar o comando:
+java -cp "target/classes;target/dependency/*" com.grupo6.servidorParqueamento      
+
+
+
+##Para rodar o frontend deves estar na pasta frontend e rodar o comando python main.py ou clicar no icone de play do vscode.
+
+
+#Compilacao de arquivos idl
+omniidl -bpython ../idl/sistema_parqueamento.idl   
+
+idlj -fall -pkgPrefix ParqueamentoApp com.grupo6  ../../../../../idl/sistema_parqueamento.idl   
+
+#Comando para verificar se o a porta esta sendo usada:
+netstat -ano | findstr "NUMERO_DA_PORTA"
+
+
+Tem que desativar o firewall -> windows Security _
+
+python main.py -ORBtraceLevel 25
+
+
+#Comando para encerar um processo:
+Stop-Process -Id 6264 -Force
+
+                                                  
+https://gemini.google.com/app/e2d2fedfc22d98d1
