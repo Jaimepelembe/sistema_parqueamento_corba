@@ -22,7 +22,7 @@ public class ConexaoBD {
             // Garante que as foreign keys são respeitadas (SQLite vem desativado por defeito)
             Statement stmt = conexao.createStatement();
             stmt.execute("PRAGMA foreign_keys = ON;");
-            System.out.println("Conexão com SQLite realizada com sucesso!");
+           // System.out.println("Conexão com SQLite realizada com sucesso!");
             
         } catch (SQLException e) {
             System.out.println("Erro ao conectar com o SQLite: " + e.getMessage());
